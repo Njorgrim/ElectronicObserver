@@ -3,7 +3,10 @@ using ElectronicObserver.Observer;
 using ElectronicObserver.Resource;
 using ElectronicObserver.Properties;
 using ElectronicObserver.Utility.Mathematics;
-using mshtml;
+// todo mshtml
+// using mshtml;
+// this one is new, same thing as above just renamed?
+// using MSHTML;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,11 +25,12 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace ElectronicObserver.Window
 {
 
-	/// <summary>
-	/// ブラウザのホスト側フォーム
-	/// </summary>
-	[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-	public partial class FormBrowserHost : DockContent, IBrowserHost
+    /// <summary>
+    /// ブラウザのホスト側フォーム
+    /// </summary>
+    // todo ServiceBehavior
+    // [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    public partial class FormBrowserHost : DockContent, IBrowserHost
 	{
 
 
@@ -103,6 +107,7 @@ namespace ElectronicObserver.Window
 
 		private void LaunchBrowserProcess()
 		{
+
 			// 通信サーバ起動
 			Browser = new PipeCommunicator<IBrowser>(
 				this, typeof(IBrowserHost), ServerUri, "BrowserHost");
