@@ -3,6 +3,7 @@ using ElectronicObserver.Data;
 using ElectronicObserver.Observer.kcsapi;
 using ElectronicObserver.Utility;
 using ElectronicObserver.Utility.Mathematics;
+using ElectronicObserver.WPFEO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using System.Windows.Controls;
 using Titanium.Web.Proxy;
 using Titanium.Web.Proxy.EventArguments;
 using Titanium.Web.Proxy.Models;
@@ -47,7 +49,9 @@ namespace ElectronicObserver.Observer
 		public delegate void ProxyStartedEventHandler();
 		public event ProxyStartedEventHandler ProxyStarted = delegate { };
 
-		private Control UIControl;
+		private bool isWPFMode;
+		private System.Windows.Forms.Control UIControl;
+		private System.Windows.Controls.Control WPFControl;
 
 
 		public event APIReceivedEventHandler RequestReceived = delegate { };
@@ -171,10 +175,11 @@ namespace ElectronicObserver.Observer
 		/// <param name="portID">受信に使用するポート番号。</param>
 		/// <param name="UIControl">GUI スレッドで実行するためのオブジェクト。中身は何でもいい</param>
 		/// <returns>実際に使用されるポート番号。</returns>
-		public int Start(int portID, Control UIControl)
+		public int Start(int portID, System.Windows.Forms.Control UIControl)
 		{
 			Utility.Configuration.ConfigurationData.ConfigConnection c = Utility.Configuration.Config.Connection;
 
+			isWPFMode = false;
 			this.UIControl = UIControl;
 
 			if(Proxy.ProxyRunning) Proxy.Stop();
@@ -212,6 +217,50 @@ namespace ElectronicObserver.Observer
 
 			return ProxyPort;
 		}
+
+		public int Start(int portID, System.Windows.Controls.Control WPFControl)
+		{
+			Utility.Configuration.ConfigurationData.ConfigConnection c = Utility.Configuration.Config.Connection;
+
+			isWPFMode = true;
+			this.WPFControl = WPFControl;
+
+			if (Proxy.ProxyRunning) Proxy.Stop();
+
+			try
+			{
+				Endpoint = new ExplicitProxyEndPoint(IPAddress.Any, portID, false);
+				Proxy.AddEndPoint(Endpoint);
+
+				if (c.UseUpstreamProxy)
+				{
+					Proxy.UpStreamHttpProxy = new ExternalProxy(c.UpstreamProxyAddress, c.UpstreamProxyPort);
+				}
+				else if (c.UseSystemProxy)
+				{
+					// todo system proxy
+					// HttpProxy.UpstreamProxyConfig = new ProxyConfig(ProxyConfigType.SystemProxy);
+				}
+
+				Proxy.Start();
+				ProxyPort = portID;
+
+				ProxyStarted();
+
+				Utility.Logger.Add(1, string.Format(LoggerRes.APIObserverStarted, portID));
+
+			}
+			catch (Exception ex)
+			{
+
+				Utility.Logger.Add(3, "APIObserver: Failed to start observation. " + ex.Message);
+				ProxyPort = 0;
+			}
+
+
+			return ProxyPort;
+		}
+
 
 		/// <summary>
 		/// 通信の受信を停止します。
@@ -255,8 +304,13 @@ namespace ElectronicObserver.Observer
 					}));
 				}
 
-
-				UIControl.BeginInvoke((Action)(() => { LoadRequest(url, body); }));
+				if(!isWPFMode)
+				{
+					UIControl.BeginInvoke((Action)(() => { LoadRequest(url, body); }));
+				} else
+				{
+					WPFControl.Dispatcher.BeginInvoke((Action)(() => { LoadRequest(url, body); }));
+				}
 			}
 		}
 
@@ -388,7 +442,14 @@ namespace ElectronicObserver.Observer
 				// stringはイミュータブルなのでOK
 				string url = baseurl;
 				string body = await e.GetResponseBodyAsString();
-				UIControl.BeginInvoke((Action)(() => { LoadResponse(url, body); }));
+
+				if (!isWPFMode)
+				{
+					UIControl.BeginInvoke((Action)(() => { LoadResponse(url, body); }));
+				} else
+				{
+					WPFControl.Dispatcher.BeginInvoke((Action)(() => { LoadResponse(url, body); }));
+				}
 			}
 
 
@@ -438,7 +499,6 @@ namespace ElectronicObserver.Observer
 			}
 
 		}
-
 
 		public void LoadResponse(string path, string data)
 		{

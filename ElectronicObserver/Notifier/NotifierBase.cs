@@ -1,6 +1,6 @@
 ﻿using ElectronicObserver.Utility;
-using ElectronicObserver.Window;
-using ElectronicObserver.Window.Dialog;
+using ElectronicObserver.WinFormsEO;
+using ElectronicObserver.WinFormsEO.Dialog;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

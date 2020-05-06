@@ -1,6 +1,6 @@
 ﻿using ElectronicObserver.Data;
 using ElectronicObserver.Observer;
-using ElectronicObserver.Window;
+using ElectronicObserver.WinFormsEO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

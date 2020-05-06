@@ -32,6 +32,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
+    <StartupObject>ElectronicObserver.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <OutputPath>bin\x64\Debug\</OutputPath>
@@ -54,27 +55,23 @@
     <Reference Include="System.Windows.Forms.DataVisualization" /-->
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Window\Control\FleetState.cs">
-      <SubType>UserControl</SubType>
+    <Compile Update="LoggerRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LoggerRes.resx</DependentUpon>
     </Compile>
-    <Compile Update="Window\Control\ImageLabel.cs">
-      <SubType>Component</SubType>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Window\Control\ShipStatusEquipment.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Window\Control\ShipStatusHP.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Window\Control\ShipStatusLevel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Window\Control\ShipStatusResource.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Window\Control\WindowCaptureButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Update="WinFormsEO\Control\FleetState.cs" />
+    <Compile Update="WinFormsEO\Control\ImageLabel.cs" />
+    <Compile Update="WinFormsEO\Control\ShipStatusEquipment.cs" />
+    <Compile Update="WinFormsEO\Control\ShipStatusHP.cs" />
+    <Compile Update="WinFormsEO\Control\ShipStatusLevel.cs" />
+    <Compile Update="WinFormsEO\Control\ShipStatusResource.cs" />
+    <Compile Update="WinFormsEO\Control\WindowCaptureButton.cs" />
     <None Include=".editorconfig" />
     <None Update="Assets.zip">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -88,6 +85,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="74eo.ico" />
+    <Content Include="Assets\*.png" />
+    <Content Include="Assets\Battle\*.png" />
+    <Content Include="Assets\Browser\*.png" />
+    <Content Include="Assets\Condition\*.png" />
+    <Content Include="Assets\Equipment\*.png" />
+    <Content Include="Assets\Fairy\*.png" />
+    <Content Include="Assets\Fleet\*.png" />
+    <Content Include="Assets\Form\*.png" />
+    <Content Include="Assets\Headquarters\*.png" />
+    <Content Include="Assets\Item\*.png" />
+    <Content Include="Assets\Level\*.png" />
+    <Content Include="Assets\Parameter\*.png" />
+    <Content Include="Assets\Rarity\*.png" />
+    <Content Include="Assets\Resource\*.png" />
+    <Content Include="Assets\Unused\*.png" />
     <Content Include="Other\Information\apilist.txt" />
     <Content Include="Other\Information\todo.txt" />
   </ItemGroup>
@@ -118,6 +130,9 @@
     <ProjectReference Include="..\ElectronicObserverTypes\ElectronicObserverTypes.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Dirkster.AvalonDock" Version="4.10.0" />
+    <PackageReference Include="MaterialDesignColors" Version="1.2.4" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.1.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
@@ -187,6 +202,22 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>false</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="LoggerRes.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="LoggerRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoggerRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 	<ItemGroup>

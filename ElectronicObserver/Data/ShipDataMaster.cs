@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ElectronicObserverTypes;
+using ElectronicObserver.Utility;
 
 namespace ElectronicObserver.Data
 {
@@ -431,7 +432,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 名前
 		/// </summary>
-		public string Name => Window.FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Ships);
+		public string Name => DynamicTranslator.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Ships);
 
 		/// <summary>
 		/// 読み
@@ -1038,7 +1039,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 艦種名
 		/// </summary>
-		public string ShipTypeName => Window.FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)ShipType].Name, Utility.TranslationType.ShipTypes);
+		public string ShipTypeName => DynamicTranslator.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[(int)ShipType].Name, Utility.TranslationType.ShipTypes);
 
 
 		/// <summary>

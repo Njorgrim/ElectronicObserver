@@ -5,7 +5,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElectronicObserver.Window;
+using ElectronicObserver.Utility;
+using ElectronicObserver.WinFormsEO;
 
 namespace ElectronicObserver.Data
 {
@@ -259,7 +260,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 名前
 		/// </summary>
-		public string Name => FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Equipment);
+		public string Name => DynamicTranslator.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.Equipment);
 
 
 		/// <summary>

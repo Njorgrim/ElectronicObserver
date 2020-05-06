@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ElectronicObserverTypes;
+using ElectronicObserver.Utility;
 
 namespace ElectronicObserver.Data
 {
@@ -31,7 +32,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 艦種名
 		/// </summary>
-		public string Name => Window.FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.ShipTypes);
+		public string Name => DynamicTranslator.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.ShipTypes);
 
 		/// <summary>
 		/// 入渠時間係数

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicObserver.Utility;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace ElectronicObserver.Data
 		/// </summary>
 		public int Destination => (int)RawData.api_no;
 
-		public string DestinationID => Window.FormMain.Instance.Translator.GetMapNodes(MapAreaID, MapInfoID, Destination);
+		public string DestinationID => DynamicTranslator.Translator.GetMapNodes(MapAreaID, MapInfoID, Destination);
 
 		/// <summary>
 		/// 次のセルのグラフィック

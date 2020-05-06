@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicObserver.Utility;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 名前
 		/// </summary>
-		public string Name => Window.FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.EquipmentType);
+		public string Name => DynamicTranslator.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.EquipmentType);
 
 		//show_flg
 

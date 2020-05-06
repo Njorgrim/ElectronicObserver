@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using ElectronicObserver.Utility;
 using ElectronicObserverTypes;
 
 namespace ElectronicObserver.Data.Quest
@@ -43,7 +44,7 @@ namespace ElectronicObserver.Data.Quest
 		{
 			StringBuilder sb = new StringBuilder();
 			if ( TargetShipType != null ) {
-				sb.Append( string.Join( "・", TargetShipType.OrderBy( s => s ).Select( s => Window.FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[s].Name, Utility.TranslationType.ShipTypes)) ) );
+				sb.Append( string.Join( "・", TargetShipType.OrderBy( s => s ).Select( s => DynamicTranslator.Translator.GetTranslation(KCDatabase.Instance.ShipTypes[s].Name, Utility.TranslationType.ShipTypes)) ) );
 			}
 
 			sb.Append( QuestTracking.Sunk );

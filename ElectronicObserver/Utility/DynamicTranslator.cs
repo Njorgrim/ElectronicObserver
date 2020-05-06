@@ -9,6 +9,9 @@ namespace ElectronicObserver.Utility
 {
 	public class DynamicTranslator
 	{
+
+		public static DynamicTranslator Translator { get; private set; }
+
 		private readonly string workingDirectory = SoftwareUpdater.TranslationFolder;
 
 		private XDocument shipsXml;
@@ -24,6 +27,10 @@ namespace ElectronicObserver.Utility
 			CheckUpdate();
 		    LoadFile();
 
+			if (Translator == null)
+			{
+				Translator = this;
+			} 
 		}
 
         private void LoadFile()

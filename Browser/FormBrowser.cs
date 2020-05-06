@@ -108,7 +108,7 @@ namespace Browser
 		/// <param name="serverUri">ホストプロセスとの通信用URL</param>
 		public FormBrowser(string host, int port)
 		{
-			// Debugger.Launch();
+			//Debugger.Launch();
 
 			Host = host;
 			Port = port;

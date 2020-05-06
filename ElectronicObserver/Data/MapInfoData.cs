@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicObserver.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,13 +30,13 @@ namespace ElectronicObserver.Data
 		public int MapInfoID => (int)RawData.api_no;
 
 		public string MapInfoID2 {
-			get { return Window.FormMain.Instance.Translator.GetMapNodes(MapID, MapAreaID, MapInfoID); }
+			get { return DynamicTranslator.Translator.GetMapNodes(MapID, MapAreaID, MapInfoID); }
 		}
 
 		/// <summary>
 		/// 海域名
 		/// </summary>
-		public string Name => Window.FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.OperationMaps);
+		public string Name => DynamicTranslator.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.OperationMaps);
 
 		/// <summary>
 		/// 難易度

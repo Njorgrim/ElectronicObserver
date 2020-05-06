@@ -20,7 +20,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_member
 			// 🎃
 			if (data["api_cmt"].ToLower() == "jackolantern")
 			{
-				new Window.Dialog.DialogHalloween().Show();
+				new WinFormsEO.Dialog.DialogHalloween().Show();
 			}
 
 			KCDatabase.Instance.Admiral.LoadFromRequest(APIName, data);

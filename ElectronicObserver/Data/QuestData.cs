@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElectronicObserver.Utility;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -43,12 +44,12 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 任務名
 		/// </summary>
-		public string Name => Window.FormMain.Instance.Translator.GetTranslation((string)RawData.api_title, Utility.TranslationType.QuestTitle);
+		public string Name => DynamicTranslator.Translator.GetTranslation((string)RawData.api_title, Utility.TranslationType.QuestTitle);
 
 		/// <summary>
 		/// 説明
 		/// </summary>
-		public string Description => Window.FormMain.Instance.Translator.GetTranslation((string)RawData.api_detail, Utility.TranslationType.QuestDetail).Replace("<br>", "\r\n");
+		public string Description => DynamicTranslator.Translator.GetTranslation((string)RawData.api_detail, Utility.TranslationType.QuestDetail).Replace("<br>", "\r\n");
 
 		//undone:api_bonus_flag
 

@@ -1,0 +1,287 @@
+﻿<Window x:Class="ElectronicObserver.WPFEO.WPFMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+		xmlns:avalonDock="clr-namespace:AvalonDock;assembly=AvalonDock"
+        xmlns:avalonDockControls="clr-namespace:AvalonDock.Controls;assembly=AvalonDock"
+        xmlns:avalonDockLayout="clr-namespace:AvalonDock.Layout;assembly=AvalonDock"
+        xmlns:local="clr-namespace:ElectronicObserver.WPFEO"
+        xmlns:KancolleProgress="clr-namespace:ElectronicObserver.WinFormsEO.Dialog.KancolleProgress"
+        mc:Ignorable="d"
+		xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        Title="Electronic Observer" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Closed="Window_Closed">
+
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/ElectronicObserver;component/Properties/Icons.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	
+	<Grid x:Name="layoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Menu Grid.Row="0">
+			<MenuItem Header="File">
+				<MenuItem Name="MI_File_Record" Header="Record">
+					<MenuItem Name="MI_File_Record_Save"  Header="Save"/>
+					<MenuItem Name="MI_File_Record_Load" Header="Load" />
+				</MenuItem>
+				<MenuItem Header="Layout">
+					<MenuItem Name="MI_File_Layout_Load" Header="Load" Click="MI_File_Layout_Load_Click"/>
+					<MenuItem Name="MI_File_Layout_Save" Header="Save" Click="MI_File_Layout_Save_Click"/>
+					<MenuItem Name="MI_File_Layout_Open" Header="Open..."/>
+					<MenuItem Name="MI_File_Layout_SaveAs" Header="Save As..."/>
+					<Separator/>
+					<MenuItem Name="MI_File_Layout_LockLayout" Header="Lock Layout"/>
+					<Separator/>
+					<MenuItem Name="MI_File_Layout_AlwaysOnTop" Header="Always on Top"/>
+				</MenuItem>
+				<MenuItem Name="MI_File_Notification" Header="Notification">
+					<MenuItem Name="MI_File_Notification_Disable" Header="Disable" />
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_File_Settings" Header="Settings">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Configuration}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_File_Exit" Header="Exit"/>
+			</MenuItem>
+			<MenuItem Header="View">
+				<MenuItem Name="MI_View_Fleet" Header="Fleet">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Fleet}"/>
+					</MenuItem.Icon>
+					<MenuItem Name="MI_View_Fleet1" Header="Fleet #1" Click="MI_View_Fleet1_Click">
+						<MenuItem.Icon>
+							<Image Source="{StaticResource Icon_Form_Fleet}"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Name="MI_View_Fleet2" Header="Fleet #2" Click="MI_View_Fleet2_Click">
+						<MenuItem.Icon>
+							<Image Source="{StaticResource Icon_Form_Fleet}"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Name="MI_View_Fleet3" Header="Fleet #3" Click="MI_View_Fleet3_Click">
+						<MenuItem.Icon>
+							<Image Source="{StaticResource Icon_Form_Fleet}"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Name="MI_View_Fleet4" Header="Fleet #4" Click="MI_View_Fleet4_Click">
+						<MenuItem.Icon>
+							<Image Source="{StaticResource Icon_Form_Fleet}"/>
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+				<MenuItem Name="MI_View_FleetList" Header="Fleet List">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Fleet}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_ShipGroup" Header="Ship Group">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_ShipGroup}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_ExpCalculator" Header="Exp Calculator">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_ExpCalc}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_View_Dock" Header="Dock">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Dock}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_Arsenal" Header="Arsenal">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Arsenal}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_LBAS" Header="LBAS">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_BaseAirCorps}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_View_HQ" Header="HQ">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Headquarters}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_Quest" Header="Quest">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Quest}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_Information" Header="Information">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Information}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_View_Compass" Header="Compass">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Compass}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_Battle" Header="Battle">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Battle}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_View_Browser" Header="Browser" Click="MI_View_Browser_Click">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Browser}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_Log" Header="Log" Click="MI_View_Log_Click">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Log}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_View_WindowCapture" Header="Window capture">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_WindowCapture}"/>
+					</MenuItem.Icon>
+					<MenuItem Name="MI_View_WindowCapture_WindowCapture" Header="Window Capture">
+						<MenuItem.Icon>
+							<Image Source="{StaticResource Icon_Form_WindowCapture}"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Name="MI_View_WindowCapture_Reattach" Header="Reattach all captured windows (S)"/>
+					<MenuItem Name="MI_View_WindowCapture_Detach" Header="Detach all captured windows (R)"/>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="Tools">
+				<MenuItem Name="MI_Tools_EquipmentList" Header="Equipment List">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_EquipmentList}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_Tools_DropRecord" Header="Drop Record">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_DropRecord}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_DevelopmentRecord" Header="Development Record">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_DevelopmentRecord}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_ConstructionRecord" Header="Construction Record">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_ConstructionRecord}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_ResourceChart" Header="Resource Chart">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_ResourceChart}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_Tools_ShipEncyclopedia" Header="Ship Encyclopedia">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_AlbumShip}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_EquipmentEncyclopedia" Header="Equipment Encyclopedia">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_AlbumEquipment}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Name="MI_Tools_AADefense" Header="AA Defense">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_AntiAirDefense}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_ExportFleetImage" Header="Export Fleet Image...">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_FleetImageGenerator}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_LBASSimulator" Header="LBAS Simulator">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_BaseAirCorps}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_ExpCalculator" Header="Exp Calculator">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_ExpCalc}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_ExpeditionCheck" Header="Expedition Check (M)">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_ExpeditionCheck}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_ShipProgressionList" Header="Ship Progression List">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Fleet}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Tools_ExtraBrowser" Header="Extra Browser">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Browser}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Name="MI_Help" Header="Help">
+				<MenuItem Name="MI_Help_ViewHelp" Header="View Help">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Information}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Name="MI_Help_Report" Header="Report a Problem..."/>
+				<Separator/>
+				<MenuItem Name="MI_Help_CheckForUpdate" Header="Check for Update"/>
+				<MenuItem Name="MI_Help_About" Header="About Electronic Observer">
+					<MenuItem.Icon>
+						<Image Source="{StaticResource Icon_Form_Browser}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+		</Menu>
+
+		<avalonDock:DockingManager
+			x:Name="dockManager"
+			Grid.Row="1"
+			AllowMixedOrientation="True"
+			DocumentClosing="dockManager_DocumentClosing"
+			IsVirtualizingAnchorable="True"
+			IsVirtualizingDocument="True">
+			<!-- avalonDock:DockingManager.Theme>
+                <avalonDock:Vs2013DarkTheme/>
+            </avalonDock:DockingManager.Theme-->
+			<avalonDock:DockingManager.DocumentHeaderTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<Image Margin="0,0,4,0" Source="{Binding IconSource}" />
+						<TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+					</StackPanel>
+				</DataTemplate>
+			</avalonDock:DockingManager.DocumentHeaderTemplate>
+			<avalonDockLayout:LayoutRoot x:Name="dockLayoutRoot" PropertyChanged="OnLayoutRootPropertyChanged">
+				<avalonDockLayout:LayoutPanel Orientation="Horizontal">
+					<avalonDockLayout:LayoutAnchorablePaneGroup DockWidth="50">
+						<avalonDockLayout:LayoutAnchorablePane>
+						</avalonDockLayout:LayoutAnchorablePane>
+					</avalonDockLayout:LayoutAnchorablePaneGroup>
+				</avalonDockLayout:LayoutPanel>
+			</avalonDockLayout:LayoutRoot>
+		</avalonDock:DockingManager>
+	</Grid>
+</Window>

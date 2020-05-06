@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElectronicObserver.Window;
+using ElectronicObserver.Utility;
+using ElectronicObserver.WinFormsEO;
 
 namespace ElectronicObserver.Data
 {
@@ -32,12 +33,12 @@ namespace ElectronicObserver.Data
 		/// <summary>
 		/// 遠征名
 		/// </summary>
-		public string Name => FormMain.Instance.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.ExpeditionTitle);
+		public string Name => DynamicTranslator.Translator.GetTranslation(RawData.api_name, Utility.TranslationType.ExpeditionTitle);
 
 		/// <summary>
 		/// 説明文
 		/// </summary>
-		public string Detail => FormMain.Instance.Translator.GetTranslation(RawData.api_details, Utility.TranslationType.ExpeditionDetail);
+		public string Detail => DynamicTranslator.Translator.GetTranslation(RawData.api_details, Utility.TranslationType.ExpeditionDetail);
 
 		/// <summary>
 		/// 遠征時間(分単位)

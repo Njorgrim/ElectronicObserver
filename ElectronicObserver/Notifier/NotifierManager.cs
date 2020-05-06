@@ -1,4 +1,4 @@
-﻿using ElectronicObserver.Window;
+﻿using ElectronicObserver.WinFormsEO;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -67,7 +67,7 @@ namespace ElectronicObserver.Notifier
 			BaseAirCorps.ApplyToConfiguration(c.NotifierBaseAirCorps);
 		}
 
-		public void ShowNotifier(ElectronicObserver.Window.Dialog.DialogNotifier form)
+		public void ShowNotifier(ElectronicObserver.WinFormsEO.Dialog.DialogNotifier form)
 		{
 
 			if (form.DialogData.Alignment == NotifierDialogAlignment.CustomRelative)

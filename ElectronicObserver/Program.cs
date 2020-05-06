@@ -1,10 +1,12 @@
-﻿using ElectronicObserver.Window;
+﻿//using ElectronicObserver.Window;
+using ElectronicObserver.WPFEO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using ElectronicObserver.WinFormsEO;
 
 namespace ElectronicObserver
 {
@@ -45,11 +47,15 @@ namespace ElectronicObserver
 
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
+				new Utility.DynamicTranslator();
+				
 				try
 				{
 					// todo why does this exception happen?
 					// observed first after I added the wpf version of KC progress
-					Application.Run(new FormMain());
+					//Application.Run(new FormMain());
+					WPFMain mainWindow = new WPFMain();
+					mainWindow.ShowDialog();
 				}
 				catch (System.Runtime.InteropServices.SEHException e)
 				{

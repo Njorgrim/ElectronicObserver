@@ -1,4 +1,5 @@
 ﻿using ElectronicObserver.Data;
+using ElectronicObserver.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_mission
 				fleet.FleetID,
 				fleet.Name,
 				fleet.ExpeditionDestination,
-				Window.FormMain.Instance.Translator.GetTranslation(data.api_quest_name, Utility.TranslationType.ExpeditionTitle)));
+				DynamicTranslator.Translator.GetTranslation(data.api_quest_name, Utility.TranslationType.ExpeditionTitle)));
 
 
 			// 獲得資源表示

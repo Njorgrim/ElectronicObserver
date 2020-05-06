@@ -5,7 +5,7 @@ using ElectronicObserver.Properties;
 using ElectronicObserver.Resource.Record;
 using ElectronicObserver.Utility.Mathematics;
 using ElectronicObserver.Utility.Storage;
-using ElectronicObserver.Window.Dialog;
+using ElectronicObserver.WinFormsEO.Dialog;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -932,7 +932,7 @@ namespace ElectronicObserver.Utility
 				/// <summary>
 				/// 装備の改修レベル・艦載機熟練度の表示フラグ
 				/// </summary>
-				public Window.Control.ShipStatusEquipment.LevelVisibilityFlag EquipmentLevelVisibility { get; set; }
+				public WinFormsEO.Control.ShipStatusEquipment.LevelVisibilityFlag EquipmentLevelVisibility { get; set; }
 
 				/// <summary>
 				/// 艦載機熟練度を数字で表示するフラグ
@@ -1020,7 +1020,7 @@ namespace ElectronicObserver.Utility
 					FixShipNameWidth = false;
 					ShortenHPBar = false;
 					ShowNextExp = true;
-					EquipmentLevelVisibility = Window.Control.ShipStatusEquipment.LevelVisibilityFlag.Both;
+					EquipmentLevelVisibility = WinFormsEO.Control.ShipStatusEquipment.LevelVisibilityFlag.Both;
 					ShowAircraftLevelByNumber = false;
 					AirSuperiorityMethod = 1;
 					ShowAnchorageRepairingTimer = true;
@@ -2729,10 +2729,10 @@ namespace ElectronicObserver.Utility
 			try
 			{
 				using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathBrowserVersion, true))
-					reg.DeleteValue(Window.FormBrowserHost.BrowserExeName);
+					reg.DeleteValue(WinFormsEO.FormBrowserHost.BrowserExeName);
 
 				using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathGPURendering, true))
-					reg.DeleteValue(Window.FormBrowserHost.BrowserExeName);
+					reg.DeleteValue(WinFormsEO.FormBrowserHost.BrowserExeName);
 
 			}
 			catch (Exception ex)

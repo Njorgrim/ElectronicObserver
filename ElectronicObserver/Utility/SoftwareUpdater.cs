@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Codeplex.Data;
 using ElectronicObserver.Utility.Mathematics;
-using ElectronicObserver.Window;
+using ElectronicObserver.WinFormsEO;
 using AppSettings = ElectronicObserver.Properties.Settings;
 
 namespace ElectronicObserver.Utility

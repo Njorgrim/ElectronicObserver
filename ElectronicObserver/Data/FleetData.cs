@@ -2,7 +2,7 @@
 using ElectronicObserver.Utility;
 using ElectronicObserver.Utility.Data;
 using ElectronicObserver.Utility.Mathematics;
-using ElectronicObserver.Window.Control;
+using ElectronicObserver.WinFormsEO.Control;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

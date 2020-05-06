@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using ElectronicObserver.Utility;
 using ElectronicObserverTypes;
 
 namespace ElectronicObserver.Data.Quest
@@ -123,11 +124,11 @@ namespace ElectronicObserver.Data.Quest
 				switch (CategoryIndex)
 				{
 					case -1:
-						return Window.FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.MasterEquipments[s].Name, Utility.TranslationType.Equipment);
+						return DynamicTranslator.Translator.GetTranslation(KCDatabase.Instance.MasterEquipments[s].Name, Utility.TranslationType.Equipment);
 					case 1:
 						return $"Illust[{s}]";
 					case 2:
-						return Window.FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.EquipmentTypes[s].Name, Utility.TranslationType.EquipmentType);
+						return DynamicTranslator.Translator.GetTranslation(KCDatabase.Instance.EquipmentTypes[s].Name, Utility.TranslationType.EquipmentType);
 					case 3:
 						return $"Icon[{s}]";
 					default:

@@ -167,13 +167,13 @@ namespace ElectronicObserver.Notifier
 					if (corps.Squadrons.Values.Any(sq => sq.State == 0))
 						messages.AddLast(NotifierBaseAirCorpsResources.Unorganized);
 					if (corps.Squadrons.Values.Any(sq => sq.State == 2))
-						messages.AddLast(Window.GeneralRes.BaseRedeployment);
+						messages.AddLast(WinFormsEO.GeneralRes.BaseRedeployment);
 				}
 
 				if (NotifiesStandby && corps.ActionKind == 0)
 					messages.AddLast(NotifierBaseAirCorpsResources.Standby);
 				if (NotifiesRetreat && corps.ActionKind == 3)
-					messages.AddLast(Window.GeneralRes.Retreating);
+					messages.AddLast(WinFormsEO.GeneralRes.Retreating);
 				if (NotifiesRest && corps.ActionKind == 4)
 					messages.AddLast(NotifierBaseAirCorpsResources.Resting);
 
