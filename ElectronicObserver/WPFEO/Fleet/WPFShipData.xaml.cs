@@ -245,11 +245,11 @@ namespace ElectronicObserver.WPFEO.Fleet
 			//Get Equip Improvement Levels
 			switch (equippedSlotAmount)
 			{
-				case 5:	WriteImprovementLevel(OTB_Equip5_Level, ship.SlotInstance[4].Level); goto case 4;
+				case 5: WriteImprovementLevel(OTB_Equip5_Level, ship.SlotInstance[4].Level); goto case 4;
 				case 4: WriteImprovementLevel(OTB_Equip4_Level, ship.SlotInstance[3].Level); goto case 3;
-				case 3:	WriteImprovementLevel(OTB_Equip3_Level, ship.SlotInstance[2].Level); goto case 2;
-				case 2:	WriteImprovementLevel(OTB_Equip2_Level, ship.SlotInstance[1].Level); goto case 1;
-				case 1:	WriteImprovementLevel(OTB_Equip1_Level, ship.SlotInstance[0].Level); goto case 0;
+				case 3: WriteImprovementLevel(OTB_Equip3_Level, ship.SlotInstance[2].Level); goto case 2;
+				case 2: WriteImprovementLevel(OTB_Equip2_Level, ship.SlotInstance[1].Level); goto case 1;
+				case 1: WriteImprovementLevel(OTB_Equip1_Level, ship.SlotInstance[0].Level); goto case 0;
 				case 0: break;
 				default: break;
 			}
@@ -273,11 +273,11 @@ namespace ElectronicObserver.WPFEO.Fleet
 
 			switch (equippedSlotAmount)
 			{
-				case 5:	WritePlaneRank(Img_Equip5_PlaneRank, ship.SlotInstance[4].AircraftLevel); goto case 4;
-				case 4:	WritePlaneRank(Img_Equip4_PlaneRank, ship.SlotInstance[3].AircraftLevel); goto case 3;
-				case 3:	WritePlaneRank(Img_Equip3_PlaneRank, ship.SlotInstance[2].AircraftLevel); goto case 2;
-				case 2:	WritePlaneRank(Img_Equip2_PlaneRank, ship.SlotInstance[1].AircraftLevel); goto case 1;
-				case 1:	WritePlaneRank(Img_Equip1_PlaneRank, ship.SlotInstance[0].AircraftLevel); goto case 0;
+				case 5: WritePlaneRank(Img_Equip5_PlaneRank, ship.SlotInstance[4].AircraftLevel); goto case 4;
+				case 4: WritePlaneRank(Img_Equip4_PlaneRank, ship.SlotInstance[3].AircraftLevel); goto case 3;
+				case 3: WritePlaneRank(Img_Equip3_PlaneRank, ship.SlotInstance[2].AircraftLevel); goto case 2;
+				case 2: WritePlaneRank(Img_Equip2_PlaneRank, ship.SlotInstance[1].AircraftLevel); goto case 1;
+				case 1: WritePlaneRank(Img_Equip1_PlaneRank, ship.SlotInstance[0].AircraftLevel); goto case 0;
 				case 0: break;
 				default: break;
 			}
@@ -304,57 +304,57 @@ namespace ElectronicObserver.WPFEO.Fleet
 		{
 			var icon = type switch
 			{
-				1 => Resources["Icon_Equipment_MainGunS"],
-				2 => Resources["Icon_Equipment_MainGunM"],
-				3 => Resources["Icon_Equipment_MainGunL"],
-				4 => Resources["Icon_Equipment_SecondaryGun"],
-				5 => Resources["Icon_Equipment_Torpedo"],
-				6 => Resources["Icon_Equipment_CarrierBasedFighter"],
-				7 => Resources["Icon_Equipment_CarrierBasedBomber"],
-				8 => Resources["Icon_Equipment_CarrierBasedTorpedo"],
-				9 => Resources["Icon_Equipment_CarrierBasedRecon"],
-				10 => Resources["Icon_Equipment_Seaplane"],
-				11 => Resources["Icon_Equipment_RADAR"],
-				12 => Resources["Icon_Equipment_AAShell"],
-				13 => Resources["Icon_Equipment_APShell"],
-				14 => Resources["Icon_Equipment_DamageControl"],
-				15 => Resources["Icon_Equipment_AAGun"],
-				16 => Resources["Icon_Equipment_HighAngleGun"],
-				17 => Resources["Icon_Equipment_DepthCharge"],
-				18 => Resources["Icon_Equipment_SONAR"],
-				19 => Resources["Icon_Equipment_Engine"],
-				20 => Resources["Icon_Equipment_LandingCraft"],
-				21 => Resources["Icon_Equipment_Autogyro"],
-				22 => Resources["Icon_Equipment_ASWPatrol"],
-				23 => Resources["Icon_Equipment_Bulge"],
-				24 => Resources["Icon_Equipment_Searchlight"],
-				25 => Resources["Icon_Equipment_DrumCanister"],
-				26 => Resources["Icon_Equipment_RepairFacility"],
-				27 => Resources["Icon_Equipment_Flare"],
-				28 => Resources["Icon_Equipment_CommandFacility"],
-				29 => Resources["Icon_Equipment_MaintenanceTeam"],
-				30 => Resources["Icon_Equipment_AADirector"],
-				31 => Resources["Icon_Equipment_RocketArtillery"],
-				32 => Resources["Icon_Equipment_PicketCrew"],
-				33 => Resources["Icon_Equipment_FlyingBoat"],
-				34 => Resources["Icon_Equipment_Ration"],
-				35 => Resources["Icon_Equipment_Supplies"],
-				36 => Resources["Icon_Equipment_AmpibiousVehicle"],
-				37 => Resources["Icon_Equipment_LandAttacker"],
-				38 => Resources["Icon_Equipment_Interceptor"],
-				39 => Resources["Icon_Equipment_JetFightingBomberKeiun"],
-				40 => Resources["Icon_Equipment_JetFightingBomberKikka"],
-				41 => Resources["Icon_Equipment_TransportMaterial"],
-				42 => Resources["Icon_Equipment_SubmarineEquipment"],
-				43 => Resources["Icon_Equipment_SeaplaneFighter"],
-				44 => Resources["Icon_Equipment_ArmyInterceptor"],
-				45 => Resources["Icon_Equipment_NightFighter"],
-				46 => Resources["Icon_Equipment_NightAttacker"],
-				47 => Resources["Icon_Equipment_LandASPatrol"],
-				_ => Resources["Icon_Equipment_Unknown"],
+				1 => Application.Current.Resources["Icon_Equipment_MainGunS"],
+				2 => Application.Current.Resources["Icon_Equipment_MainGunM"],
+				3 => Application.Current.Resources["Icon_Equipment_MainGunL"],
+				4 => Application.Current.Resources["Icon_Equipment_SecondaryGun"],
+				5 => Application.Current.Resources["Icon_Equipment_Torpedo"],
+				6 => Application.Current.Resources["Icon_Equipment_CarrierBasedFighter"],
+				7 => Application.Current.Resources["Icon_Equipment_CarrierBasedBomber"],
+				8 => Application.Current.Resources["Icon_Equipment_CarrierBasedTorpedo"],
+				9 => Application.Current.Resources["Icon_Equipment_CarrierBasedRecon"],
+				10 => Application.Current.Resources["Icon_Equipment_Seaplane"],
+				11 => Application.Current.Resources["Icon_Equipment_RADAR"],
+				12 => Application.Current.Resources["Icon_Equipment_AAShell"],
+				13 => Application.Current.Resources["Icon_Equipment_APShell"],
+				14 => Application.Current.Resources["Icon_Equipment_DamageControl"],
+				15 => Application.Current.Resources["Icon_Equipment_AAGun"],
+				16 => Application.Current.Resources["Icon_Equipment_HighAngleGun"],
+				17 => Application.Current.Resources["Icon_Equipment_DepthCharge"],
+				18 => Application.Current.Resources["Icon_Equipment_SONAR"],
+				19 => Application.Current.Resources["Icon_Equipment_Engine"],
+				20 => Application.Current.Resources["Icon_Equipment_LandingCraft"],
+				21 => Application.Current.Resources["Icon_Equipment_Autogyro"],
+				22 => Application.Current.Resources["Icon_Equipment_ASWPatrol"],
+				23 => Application.Current.Resources["Icon_Equipment_Bulge"],
+				24 => Application.Current.Resources["Icon_Equipment_Searchlight"],
+				25 => Application.Current.Resources["Icon_Equipment_DrumCanister"],
+				26 => Application.Current.Resources["Icon_Equipment_RepairFacility"],
+				27 => Application.Current.Resources["Icon_Equipment_Flare"],
+				28 => Application.Current.Resources["Icon_Equipment_CommandFacility"],
+				29 => Application.Current.Resources["Icon_Equipment_MaintenanceTeam"],
+				30 => Application.Current.Resources["Icon_Equipment_AADirector"],
+				31 => Application.Current.Resources["Icon_Equipment_RocketArtillery"],
+				32 => Application.Current.Resources["Icon_Equipment_PicketCrew"],
+				33 => Application.Current.Resources["Icon_Equipment_FlyingBoat"],
+				34 => Application.Current.Resources["Icon_Equipment_Ration"],
+				35 => Application.Current.Resources["Icon_Equipment_Supplies"],
+				36 => Application.Current.Resources["Icon_Equipment_AmpibiousVehicle"],
+				37 => Application.Current.Resources["Icon_Equipment_LandAttacker"],
+				38 => Application.Current.Resources["Icon_Equipment_Interceptor"],
+				39 => Application.Current.Resources["Icon_Equipment_JetFightingBomberKeiun"],
+				40 => Application.Current.Resources["Icon_Equipment_JetFightingBomberKikka"],
+				41 => Application.Current.Resources["Icon_Equipment_TransportMaterial"],
+				42 => Application.Current.Resources["Icon_Equipment_SubmarineEquipment"],
+				43 => Application.Current.Resources["Icon_Equipment_SeaplaneFighter"],
+				44 => Application.Current.Resources["Icon_Equipment_ArmyInterceptor"],
+				45 => Application.Current.Resources["Icon_Equipment_NightFighter"],
+				46 => Application.Current.Resources["Icon_Equipment_NightAttacker"],
+				47 => Application.Current.Resources["Icon_Equipment_LandASPatrol"],
+				_ => Application.Current.Resources["Icon_Equipment_Unknown"],
 			};
 
-			img.Source = (ImageSource) icon;
+			img.Source = (ImageSource)icon;
 		}
 
 		private void WritePlaneCount(OutlinedTextBlock otb, int count)
@@ -383,16 +383,16 @@ namespace ElectronicObserver.WPFEO.Fleet
 			{
 				var icon = rank switch
 				{
-					1 => Resources["Icon_Level_AircraftLevelTop1"],
-					2 => Resources["Icon_Level_AircraftLevelTop2"],
-					3 => Resources["Icon_Level_AircraftLevelTop3"],
-					4 => Resources["Icon_Level_AircraftLevelTop4"],
-					5 => Resources["Icon_Level_AircraftLevelTop5"],
-					6 => Resources["Icon_Level_AircraftLevelTop6"],
-					7 => Resources["Icon_Level_AircraftLevelTop7"],
-					_ => Resources["Icon_Level_AircraftLevelTop0"],
+					1 => Application.Current.Resources["Icon_Level_AircraftLevelTop1"],
+					2 => Application.Current.Resources["Icon_Level_AircraftLevelTop2"],
+					3 => Application.Current.Resources["Icon_Level_AircraftLevelTop3"],
+					4 => Application.Current.Resources["Icon_Level_AircraftLevelTop4"],
+					5 => Application.Current.Resources["Icon_Level_AircraftLevelTop5"],
+					6 => Application.Current.Resources["Icon_Level_AircraftLevelTop6"],
+					7 => Application.Current.Resources["Icon_Level_AircraftLevelTop7"],
+					_ => Application.Current.Resources["Icon_Level_AircraftLevelTop0"],
 				};
-				img.Source = (ImageSource) icon;
+				img.Source = (ImageSource)icon;
 			}
 		}
 

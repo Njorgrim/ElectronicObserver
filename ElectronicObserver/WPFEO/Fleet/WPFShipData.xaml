@@ -14,14 +14,6 @@
 			 MaxHeight="75" MaxWidth="266"
              d:DesignHeight="75" d:DesignWidth="265">
 
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="pack://application:,,,/ElectronicObserver;component/Properties/Icons.xaml"/>
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
-	</UserControl.Resources>
-
 	<Grid>
 		<Grid Background="PaleVioletRed" Width="74" HorizontalAlignment="Left"/>
 		<misc:OutlinedTextBlock x:Name="OTB_Level" Text="175" Fill="Gold" Stroke="Black" FontSize="25" StrokeThickness="4" Width="50" Height="34" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,-3" TextAlignment="Right"/>

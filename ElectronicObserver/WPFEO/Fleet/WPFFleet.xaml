@@ -13,14 +13,6 @@
              FontFamily="{materialDesign:MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
 
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="pack://application:,,,/ElectronicObserver;component/Properties/Icons.xaml"/>
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
-	</UserControl.Resources>
-
 	<Grid>
 		<StackPanel Orientation="Vertical">
 			<Grid Background="{DynamicResource MaterialDesignShadowBrush}" Height="30" Width="266" HorizontalAlignment="Left" VerticalAlignment="Top">

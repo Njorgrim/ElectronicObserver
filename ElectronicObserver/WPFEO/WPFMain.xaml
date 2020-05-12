@@ -15,14 +15,6 @@
         FontFamily="{materialDesign:MaterialDesignFont}"
         Title="Electronic Observer" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Closed="Window_Closed">
 
-	<Window.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="pack://application:,,,/ElectronicObserver;component/Properties/Icons.xaml"/>
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
-	</Window.Resources>
-	
 	<Grid x:Name="layoutRoot">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -114,7 +106,7 @@
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_View_HQ" Header="HQ">
+				<MenuItem Name="MI_View_HQ" Header="HQ" Click="MI_View_HQ_Click">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Headquarters}"/>
 					</MenuItem.Icon>
@@ -135,7 +127,7 @@
 						<Image Source="{StaticResource Icon_Form_Compass}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_Battle" Header="Battle">
+				<MenuItem Name="MI_View_Battle" Header="Battle" Click="MI_View_Battle_Click">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Battle}"/>
 					</MenuItem.Icon>

@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="ElectronicObserver.WPFEO.WPFHQ"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ElectronicObserver.WPFEO"
+			 xmlns:data="clr-namespace:ElectronicObserver.Data"
+			 xmlns:misc="clr-namespace:ElectronicObserver.WPFEO.MiscControls"
+             mc:Ignorable="d" 
+			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+			 TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+			 Background="{DynamicResource MaterialDesignPaper}"
+			 FontFamily="{materialDesign:MaterialDesignFont}"
+             d:DesignHeight="250" d:DesignWidth="350" Loaded="UserControl_Loaded">
+	<Grid>
+		<WrapPanel Orientation="Vertical">
+			<WrapPanel Orientation="Horizontal">
+				<misc:OutlinedTextBlock x:Name="OTB_PlayerName" Text="風嶋風鈴" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="10"/>
+				<misc:OutlinedTextBlock x:Name="OTB_PlayerRank" Text="Admiral" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="10" Margin="5,0"/>
+				<misc:OutlinedTextBlock x:Name="OTB_PlayerMessage" Text="Maxおめでとう響ちゃん" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="10" Margin="5,0"/>
+			</WrapPanel>
+			<WrapPanel Orientation="Horizontal">
+				<misc:OutlinedTextBlock Text="Lv" Fill="White" Stroke="Black" FontSize="8" VerticalAlignment="Bottom" Margin="0,2"/>
+				<misc:OutlinedTextBlock x:Name="OTB_PlayerLevel" Text="120" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center"/>
+				<StackPanel Orientation="Vertical" Margin="5,0">
+					<misc:OutlinedTextBlock Text="exp:" Fill="White" Stroke="Black" FontSize="8" Margin="0,-2"/>
+					<misc:OutlinedTextBlock x:Name="OTB_PlayerExp" Text="248149847" Fill="White" Stroke="Black" FontSize="10" Margin="0,-2"/>
+				</StackPanel>
+				<Image Source="{StaticResource Icon_Headquarters_Ship}" Width="16" Height="16" VerticalAlignment="Center"/>
+				<misc:OutlinedTextBlock x:Name="OTB_PlayerShips" Text="300/300" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+				<Image Source="{StaticResource Icon_Headquarters_Equipment}" Width="16" Height="16" VerticalAlignment="Center" Margin="1,0"/>
+				<misc:OutlinedTextBlock x:Name="OTB_PlayerEquips" Text="1289/1337" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="0,0"/>
+			</WrapPanel>
+			<WrapPanel Orientation="Horizontal">
+				<Image Source="{StaticResource Icon_Item_InstantRepair}" Width="16" Height="16" VerticalAlignment="Center"/>
+				<misc:OutlinedTextBlock x:Name="OTB_Buckets" Text="437" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+				<Image Source="{StaticResource Icon_Item_InstantConstruction}" Width="16" Height="16" VerticalAlignment="Center" Margin="2,0"/>
+				<misc:OutlinedTextBlock x:Name="OTB_Flamethrowers" Text="60" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+				<Image Source="{StaticResource Icon_Item_DevelopmentMaterial}" Width="16" Height="16" VerticalAlignment="Center" Margin="2,0"/>
+				<misc:OutlinedTextBlock x:Name="OTB_Devmats" Text="39" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+				<Image Source="{StaticResource Icon_Item_ModdingMaterial}" Width="16" Height="16" VerticalAlignment="Center" Margin="2,0"/>
+				<misc:OutlinedTextBlock x:Name="OTB_Screws" Text="2" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+				<Image Source="{StaticResource Icon_Item_FurnitureCoin}" Width="16" Height="16" VerticalAlignment="Center" Margin="2,0"/>
+				<misc:OutlinedTextBlock x:Name="OTB_Coins" Text="20862" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+				<Image Source="{StaticResource Icon_Item_PresentBox}" Width="16" Height="16" VerticalAlignment="Center" Margin="2,0"/>
+				<misc:OutlinedTextBlock x:Name="OTB_Seasonal" Text="0" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+			</WrapPanel>
+			<WrapPanel Orientation="Horizontal">
+				<WrapPanel Orientation="Vertical">
+					<WrapPanel Orientation="Horizontal">
+						<Image Source="{StaticResource Icon_Resource_Fuel}" Width="16" Height="16" VerticalAlignment="Center"/>
+						<misc:OutlinedTextBlock x:Name="OTB_Fuel" Text="45975" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+					</WrapPanel>
+					<WrapPanel Orientation="Horizontal">
+						<Image Source="{StaticResource Icon_Resource_Ammo}" Width="16" Height="16" VerticalAlignment="Center"/>
+						<misc:OutlinedTextBlock x:Name="OTB_Ammo" Text="61474" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+					</WrapPanel>
+				</WrapPanel>
+				<WrapPanel Orientation="Vertical">
+					<WrapPanel Orientation="Horizontal">
+						<Image Source="{StaticResource Icon_Resource_Steel}" Width="16" Height="16" VerticalAlignment="Center"/>
+						<misc:OutlinedTextBlock x:Name="OTB_Steel" Text="20862" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+					</WrapPanel>
+					<WrapPanel Orientation="Horizontal">
+						<Image Source="{StaticResource Icon_Resource_Bauxite}" Width="16" Height="16" VerticalAlignment="Center"/>
+						<misc:OutlinedTextBlock x:Name="OTB_Bauxite" Text="28154" Fill="White" Stroke="Black" StrokeThickness="0" FontSize="12" VerticalAlignment="Center" Margin="1,0"/>
+					</WrapPanel>
+				</WrapPanel>
+			</WrapPanel>
+		</WrapPanel>
+	</Grid>
+</UserControl>

@@ -65,6 +65,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="WinFormsEO\GeneralRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GeneralRes.en.resx</DependentUpon>
+    </Compile>
     <Compile Update="WinFormsEO\Control\FleetState.cs" />
     <Compile Update="WinFormsEO\Control\ImageLabel.cs" />
     <Compile Update="WinFormsEO\Control\ShipStatusEquipment.cs" />

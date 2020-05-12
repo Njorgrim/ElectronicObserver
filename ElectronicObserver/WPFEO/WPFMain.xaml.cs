@@ -54,12 +54,12 @@ namespace ElectronicObserver.WPFEO
 		public WPFFleet[] ucFleet;
 		//public FormDock ucDock;
 		//public FormArsenal ucArsenal;
-		//public FormHeadquarters ucHeadquarters;
+		public WPFHQ ucHeadquarters;
 		//public FormInformation ucInformation;
 		//public FormCompass ucCompass;
 		public WPFLog ucLog;
 		//public FormQuest ucQuest;
-		//public FormBattle ucBattle;
+		public WPFBattle ucBattle;
 		//public FormFleetOverview ucFleetOverview;
 		//public FormShipGroup ucShipGroup;
 		public WPFBrowserHost ucBrowser;
@@ -180,6 +180,16 @@ namespace ElectronicObserver.WPFEO
 								lc.Content = ucFleet[3];
 								break;
 							}
+						case "hq":
+							{
+								lc.Content = ucHeadquarters;
+								break;
+							}
+						case "battle":
+							{
+								lc.Content = ucBattle;
+								break;
+							}
 						default: break;
 					};
 				}
@@ -250,12 +260,12 @@ namespace ElectronicObserver.WPFEO
 
 			//SubUCs.Add(ucDock = new FormDock(this));
 			//SubUCs.Add(ucArsenal = new FormArsenal(this));
-			//SubUCs.Add(ucHeadquarters = new FormHeadquarters(this));
+			SubUCs.Add(ucHeadquarters = new WPFHQ(this));
 			//SubUCs.Add(ucInformation = new FormInformation(this));
 			//SubUCs.Add(ucCompass = new FormCompass(this));
 			SubUCs.Add(ucLog = new WPFLog(this));
 			//SubUCs.Add(ucQuest = new FormQuest(this));
-			//SubUCs.Add(ucBattle = new FormBattle(this));
+			SubUCs.Add(ucBattle = new WPFBattle(this));
 			//SubUCs.Add(ucFleetOverview = new FormFleetOverview(this));
 			//SubUCs.Add(ucShipGroup = new FormShipGroup(this));
 			SubUCs.Add(ucBrowser = new WPFBrowserHost(this));
@@ -607,6 +617,30 @@ namespace ElectronicObserver.WPFEO
 				Title = "Fleet4",
 				Content = ucFleet[3],
 				ContentId = "fleet4"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_HQ_Click(object sender, RoutedEventArgs e)
+		{
+			var anchorable = new LayoutAnchorable()
+			{
+				Title = "HQ",
+				Content = ucHeadquarters,
+				ContentId = "hq"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_Battle_Click(object sender, RoutedEventArgs e)
+		{
+			var anchorable = new LayoutAnchorable()
+			{
+				Title = "Battle",
+				Content = ucBattle,
+				ContentId = "battle"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();

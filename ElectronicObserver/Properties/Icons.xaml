@@ -221,5 +221,7 @@
 		<BitmapImage x:Key="Icon_Unused_ShipState_repair" UriSource="pack://application:,,,/ElectronicObserver;component/Assets/Unused/ShipState/repair.png"/>
 		<BitmapImage x:Key="Icon_Unused_ShipState_sunk" UriSource="pack://application:,,,/ElectronicObserver;component/Assets/Unused/ShipState/sunk.png"/>
 
+	<!--Root-->
+	<BitmapImage x:Key="Icon_Nothing" UriSource="pack://application:,,,/ElectronicObserver;component/Assets/Nothing.png"/>
 
 </ResourceDictionary>

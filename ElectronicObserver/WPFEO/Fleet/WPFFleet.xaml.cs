@@ -34,7 +34,7 @@ namespace ElectronicObserver.WPFEO
 
 		}
 
-		
+
 
 		public void Update(FleetData fleet)
 		{
@@ -108,32 +108,32 @@ namespace ElectronicObserver.WPFEO
 
 			if (fleetnum == 1 && ((double)ShipList[0].hpCurrent / ShipList[0].hpMax <= 0.5) && KCDatabase.Instance.Fleet.CombinedFlag != 0)
 			{
-				Img_FleetCondition.Source = (ImageSource)Resources["Icon_Unused_ShipState_damageM"];
+				Img_FleetCondition.Source = (ImageSource)Application.Current.Resources["Icon_Unused_ShipState_damageM"];
 				OTB_FleetCondition.Text = "Flag Damaged!";
 			}
 			else if (isHeavilyDamaged && !isOnExpedition)
 			{
-				Img_FleetCondition.Source = (ImageSource)Resources["Icon_Fleet_Damaged"];
+				Img_FleetCondition.Source = (ImageSource)Application.Current.Resources["Icon_Fleet_Damaged"];
 				OTB_FleetCondition.Text = "Heavy Damage!";
 			}
 			else if (!isResupplied && !isHeavilyDamaged && !isOnExpedition && !isOnSortie)
 			{
-				Img_FleetCondition.Source = (ImageSource)Resources["Icon_Fleet_NotReplenished"];
+				Img_FleetCondition.Source = (ImageSource)Application.Current.Resources["Icon_Fleet_NotReplenished"];
 				OTB_FleetCondition.Text = "Need Supplies!";
 			}
 			else if (isResupplied && !isHeavilyDamaged && isSparkled && !isOnExpedition)
 			{
-				Img_FleetCondition.Source = (ImageSource)Resources["Icon_Condition_Sparkle"];
+				Img_FleetCondition.Source = (ImageSource)Application.Current.Resources["Icon_Condition_Sparkle"];
 				OTB_FleetCondition.Text = "Sparkled!";
 			}
 			else if (isResupplied && !isHeavilyDamaged && !isSparkled && !isOnExpedition)
 			{
-				Img_FleetCondition.Source = (ImageSource)Resources["Icon_Fleet_Ready"];
+				Img_FleetCondition.Source = (ImageSource)Application.Current.Resources["Icon_Fleet_Ready"];
 				OTB_FleetCondition.Text = "Idle";
 			}
 			else if (isOnExpedition)
 			{
-				Img_FleetCondition.Source = (ImageSource)Resources["Icon_Fleet_Expedition"];
+				Img_FleetCondition.Source = (ImageSource)Application.Current.Resources["Icon_Fleet_Expedition"];
 				switch (KCDatabase.Instance.Fleet[fleetnum].ExpeditionState)
 				{
 					case 3:
@@ -150,7 +150,7 @@ namespace ElectronicObserver.WPFEO
 			}
 			else if (isOnSortie && !isHeavilyDamaged)
 			{
-				Img_FleetCondition.Source = (ImageSource)Resources["Icon_Fleet_Sortie"];
+				Img_FleetCondition.Source = (ImageSource)Application.Current.Resources["Icon_Fleet_Sortie"];
 				OTB_FleetCondition.Text = "Good Luck!";
 			}
 		}
