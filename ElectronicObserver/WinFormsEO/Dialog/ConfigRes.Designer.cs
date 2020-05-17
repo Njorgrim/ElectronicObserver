@@ -39,7 +39,7 @@ namespace ElectronicObserver.WinFormsEO.Dialog {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ElectronicObserver.Window.Dialog.ConfigRes", typeof(ConfigRes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ElectronicObserver.WinFormsEO.Dialog.ConfigRes", typeof(ConfigRes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

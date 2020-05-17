@@ -39,7 +39,7 @@ namespace ElectronicObserver.WinFormsEO {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ElectronicObserver.Window.GeneralRes", typeof(GeneralRes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ElectronicObserver.WinFormsEO.GeneralRes", typeof(GeneralRes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

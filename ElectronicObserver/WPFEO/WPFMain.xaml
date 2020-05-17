@@ -48,7 +48,7 @@
 					<MenuItem Name="MI_File_Notification_Disable" Header="Disable" />
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_File_Settings" Header="Settings">
+				<MenuItem Name="MI_File_Settings" Header="Settings" Click="MI_File_Settings_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Configuration}"/>
 					</MenuItem.Icon>

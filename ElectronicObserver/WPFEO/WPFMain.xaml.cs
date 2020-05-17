@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Interop;
+using ElectronicObserver.WinFormsEO.Dialog;
 using Titanium.Web.Proxy.StreamExtended;
 
 namespace ElectronicObserver.WPFEO
@@ -200,7 +201,7 @@ namespace ElectronicObserver.WPFEO
 				Directory.CreateDirectory("Settings");
 
 
-			//Utility.Configuration.Instance.Load(this);
+			Configuration.Instance.Load();
 
 			/*
 			this.MainDockPanel.Styles = Configuration.Config.UI.DockPanelSuiteStyles;
@@ -233,7 +234,7 @@ namespace ElectronicObserver.WPFEO
 			ResourceManager.Instance.Load();
 			RecordManager.Instance.Load();
 			KCDatabase.Instance.Load();
-			//NotifierManager.Instance.Initialize(this);
+			NotifierManager.Instance.Initialize(this);
 			SyncBGMPlayer.Instance.ConfigurationChanged();
 
 			APIObserver.Instance.Start(Utility.Configuration.Config.Connection.Port, this);
@@ -610,6 +611,16 @@ namespace ElectronicObserver.WPFEO
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();
+		}
+
+		private void MI_File_Settings_OnClick(object sender, RoutedEventArgs e)
+		{
+			using var dialog = new DialogConfiguration(Configuration.Config);
+
+			if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+
+			dialog.ToConfiguration(Configuration.Config);
+			Configuration.Instance.OnConfigurationChanged();
 		}
 	}
 }
