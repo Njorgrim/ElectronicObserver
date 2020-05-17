@@ -165,7 +165,7 @@
 				</MenuItem>
 			</MenuItem>
 			<MenuItem Header="Tools">
-				<MenuItem Name="MI_Tools_EquipmentList" Header="Equipment List">
+				<MenuItem Name="MI_Tools_EquipmentList" Header="Equipment List" Click="MI_Tools_EquipmentList_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_EquipmentList}"/>
 					</MenuItem.Icon>

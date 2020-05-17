@@ -622,5 +622,10 @@ namespace ElectronicObserver.WPFEO
 			dialog.ToConfiguration(Configuration.Config);
 			Configuration.Instance.OnConfigurationChanged();
 		}
+
+		private void MI_Tools_EquipmentList_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogEquipmentList().Show();
+		}
 	}
 }
