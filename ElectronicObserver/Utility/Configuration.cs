@@ -1825,13 +1825,13 @@ namespace ElectronicObserver.Utility
 		}
 
 
-		public void Load(Form mainForm)
+		public void Load()
 		{
 			var temp = (ConfigurationData)_config.Load(SaveFileName);
 			if (temp != null)
 			{
 				_config = temp;
-				CheckUpdate(mainForm);
+				CheckUpdate();
 				OnConfigurationChanged();
 			}
 			else
@@ -2322,7 +2322,7 @@ namespace ElectronicObserver.Utility
 
 
 
-		private void CheckUpdate(Form mainForm)
+		private void CheckUpdate()
 		{
 			DateTime dt = Config.VersionUpdateTime == null ? new DateTime(0) : DateTimeHelper.CSVStringToTime(Config.VersionUpdateTime);
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ElectronicObserver.WPFEO;
 
 namespace ElectronicObserver.Notifier
 {
@@ -21,7 +22,7 @@ namespace ElectronicObserver.Notifier
 
 		#endregion
 
-		private FormMain _parentForm;
+		private object ParentForm { get; set; }
 
 
 		public NotifierExpedition Expedition { get; private set; }
@@ -37,10 +38,10 @@ namespace ElectronicObserver.Notifier
 		}
 
 
-		public void Initialize(FormMain parent)
+		public void Initialize(object parent)
 		{
 
-			_parentForm = parent;
+			ParentForm = parent;
 
 			var c = Utility.Configuration.Config;
 
@@ -72,8 +73,20 @@ namespace ElectronicObserver.Notifier
 
 			if (form.DialogData.Alignment == NotifierDialogAlignment.CustomRelative)
 			{       //cloneしているから書き換えても問題ないはず
-				Point p = _parentForm.fBrowser.PointToScreen(new Point(_parentForm.fBrowser.ClientSize.Width / 2, _parentForm.fBrowser.ClientSize.Height / 2));
-				p.Offset(new Point(-form.Width / 2, -form.Height / 2));
+				static Point ToWinformsPoint(System.Windows.Point p) =>
+					new Point((int)p.X, (int)p.Y);
+
+				Point p = ParentForm switch
+				{
+					FormMain parentForm => parentForm.fBrowser.PointToScreen(
+						new Point(parentForm.fBrowser.ClientSize.Width / 2, parentForm.fBrowser.ClientSize.Height / 2)),
+
+					WPFMain parentForm => ToWinformsPoint(parentForm.PointToScreen(
+						new System.Windows.Point(parentForm.ucBrowser.RenderSize.Width / 2,
+							parentForm.ucBrowser.RenderSize.Height / 2))),
+
+					_ => new Point()
+				}; p.Offset(new Point(-form.Width / 2, -form.Height / 2));
 				p.Offset(form.DialogData.Location);
 
 				form.DialogData.Location = p;

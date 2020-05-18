@@ -104,7 +104,7 @@ namespace ElectronicObserver.WinFormsEO
 				Directory.CreateDirectory("Settings");
 
 
-			Utility.Configuration.Instance.Load(this);
+			Utility.Configuration.Instance.Load();
 
 			this.MainDockPanel.Styles = Configuration.Config.UI.DockPanelSuiteStyles;
 			this.MainDockPanel.Theme = new WeifenLuo.WinFormsUI.Docking.VS2012Theme();
