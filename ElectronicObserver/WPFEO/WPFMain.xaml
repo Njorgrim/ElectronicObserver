@@ -181,7 +181,7 @@
 						<Image Source="{StaticResource Icon_Form_DevelopmentRecord}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ConstructionRecord" Header="Construction Record">
+				<MenuItem Name="MI_Tools_ConstructionRecord" Header="Construction Record" Click="MI_Tools_ConstructionRecord_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ConstructionRecord}"/>
 					</MenuItem.Icon>

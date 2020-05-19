@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using ElectronicObserver.WinFormsEO;
 using ElectronicObserver.WinFormsEO.Dialog;
 using System.Windows.Controls;
+using System.Windows.Interop;
 
 namespace ElectronicObserver.WPFEO
 {
@@ -655,6 +656,23 @@ namespace ElectronicObserver.WPFEO
 			}
 
 			new DialogDevelopmentRecordViewer().Show();
+		}
+
+		private void MI_Tools_ConstructionRecord_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (KCDatabase.Instance.MasterShips.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			if (RecordManager.Instance.Construction.Record.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.NoBuildData, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogConstructionRecordViewer().Show();
 		}
 	}
 }
