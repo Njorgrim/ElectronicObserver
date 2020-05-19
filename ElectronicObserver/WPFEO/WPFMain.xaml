@@ -176,7 +176,7 @@
 						<Image Source="{StaticResource Icon_Form_DropRecord}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_DevelopmentRecord" Header="Development Record">
+				<MenuItem Name="MI_Tools_DevelopmentRecord" Header="Development Record" Click="MI_Tools_DevelopmentRecord_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_DevelopmentRecord}"/>
 					</MenuItem.Icon>

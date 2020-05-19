@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Threading;
-using ElectronicObserver.Properties;
 using ElectronicObserver.Data;
 using ElectronicObserver.Notifier;
 using ElectronicObserver.Observer;
@@ -17,14 +14,9 @@ using AvalonDock.Layout.Serialization;
 using AvalonDock;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Threading;
-using System.Windows.Forms;
-using System.Windows.Interop;
 using ElectronicObserver.WinFormsEO;
 using ElectronicObserver.WinFormsEO.Dialog;
-using Titanium.Web.Proxy.StreamExtended;
-using MessageBox = System.Windows.MessageBox;
-using UserControl = System.Windows.Controls.UserControl;
+using System.Windows.Controls;
 
 namespace ElectronicObserver.WPFEO
 {
@@ -635,17 +627,34 @@ namespace ElectronicObserver.WPFEO
 		{
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				System.Windows.Forms.MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
 
 			if (RecordManager.Instance.ShipDrop.Record.Count == 0)
 			{
-				System.Windows.Forms.MessageBox.Show(GeneralRes.NoDropData, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(GeneralRes.NoDropData, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 				return;
 			}
 
 			new DialogDropRecordViewer().Show();
+		}
+
+		private void MI_Tools_DevelopmentRecord_OnClick(object sender, RoutedEventArgs e)
+		{
+			if(KCDatabase.Instance.MasterShips.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			if (RecordManager.Instance.Development.Record.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.NoDevData, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogDevelopmentRecordViewer().Show();
 		}
 	}
 }
