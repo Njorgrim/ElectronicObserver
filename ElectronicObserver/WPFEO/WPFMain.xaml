@@ -203,7 +203,7 @@
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_Tools_AADefense" Header="AA Defense">
+				<MenuItem Name="MI_Tools_AADefense" Header="AA Defense" Click="MI_Tools_AADefense_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_AntiAirDefense}"/>
 					</MenuItem.Icon>

@@ -701,5 +701,10 @@ namespace ElectronicObserver.WPFEO
 
 			new DialogAlbumMasterEquipment().Show();
 		}
+
+		private void MI_Tools_AADefense_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogAntiAirDefense().Show();
+		}
 	}
 }
