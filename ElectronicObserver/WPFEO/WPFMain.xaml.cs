@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using ElectronicObserver.Properties;
@@ -19,9 +18,13 @@ using AvalonDock;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Forms;
 using System.Windows.Interop;
+using ElectronicObserver.WinFormsEO;
 using ElectronicObserver.WinFormsEO.Dialog;
 using Titanium.Web.Proxy.StreamExtended;
+using MessageBox = System.Windows.MessageBox;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace ElectronicObserver.WPFEO
 {
@@ -626,6 +629,23 @@ namespace ElectronicObserver.WPFEO
 		private void MI_Tools_EquipmentList_OnClick(object sender, RoutedEventArgs e)
 		{
 			new DialogEquipmentList().Show();
+		}
+
+		private void MI_Tools_DropRecord_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (KCDatabase.Instance.MasterShips.Count == 0)
+			{
+				System.Windows.Forms.MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			if (RecordManager.Instance.ShipDrop.Record.Count == 0)
+			{
+				System.Windows.Forms.MessageBox.Show(GeneralRes.NoDropData, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			new DialogDropRecordViewer().Show();
 		}
 	}
 }
