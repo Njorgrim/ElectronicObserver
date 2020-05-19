@@ -690,5 +690,16 @@ namespace ElectronicObserver.WPFEO
 
 			new DialogAlbumMasterShip().Show();
 		}
+
+		private void MI_Tools_EquipmentEncyclopedia_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (KCDatabase.Instance.MasterEquipments.Count == 0)
+			{
+				MessageBox.Show("Equipment data is not loaded.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogAlbumMasterEquipment().Show();
+		}
 	}
 }

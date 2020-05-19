@@ -197,7 +197,7 @@
 						<Image Source="{StaticResource Icon_Form_AlbumShip}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_EquipmentEncyclopedia" Header="Equipment Encyclopedia">
+				<MenuItem Name="MI_Tools_EquipmentEncyclopedia" Header="Equipment Encyclopedia" Click="MI_Tools_EquipmentEncyclopedia_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_AlbumEquipment}"/>
 					</MenuItem.Icon>
