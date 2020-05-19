@@ -679,5 +679,16 @@ namespace ElectronicObserver.WPFEO
 		{
 			new DialogResourceChart().Show();
 		}
+
+		private void MI_Tools_ShipEncyclopedia_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (KCDatabase.Instance.MasterShips.Count == 0)
+			{
+				MessageBox.Show("Ship data is not loaded.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogAlbumMasterShip().Show();
+		}
 	}
 }
