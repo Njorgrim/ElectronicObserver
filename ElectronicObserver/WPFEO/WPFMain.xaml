@@ -186,7 +186,7 @@
 						<Image Source="{StaticResource Icon_Form_ConstructionRecord}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ResourceChart" Header="Resource Chart">
+				<MenuItem Name="MI_Tools_ResourceChart" Header="Resource Chart" Click="MI_Tools_ResourceChart_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ResourceChart}"/>
 					</MenuItem.Icon>

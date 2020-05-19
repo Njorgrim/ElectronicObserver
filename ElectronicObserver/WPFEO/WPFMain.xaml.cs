@@ -674,5 +674,10 @@ namespace ElectronicObserver.WPFEO
 
 			new DialogConstructionRecordViewer().Show();
 		}
+
+		private void MI_Tools_ResourceChart_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogResourceChart().Show();
+		}
 	}
 }
