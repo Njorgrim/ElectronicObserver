@@ -233,7 +233,7 @@
 						<Image Source="{StaticResource Icon_Form_Fleet}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ExtraBrowser" Header="Extra Browser">
+				<MenuItem Name="MI_Tools_ExtraBrowser" Header="Extra Browser" Click="MI_Tools_ExtraBrowser_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Browser}"/>
 					</MenuItem.Icon>

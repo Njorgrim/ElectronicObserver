@@ -732,5 +732,10 @@ namespace ElectronicObserver.WPFEO
 		{
 			new DialogKancolleProgressWpf().Show();
 		}
+
+		private void MI_Tools_ExtraBrowser_OnClick(object sender, RoutedEventArgs e)
+		{
+			FormBrowserHost.Instance.Browser.OpenExtraBrowser();
+		}
 	}
 }
