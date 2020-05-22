@@ -716,5 +716,10 @@ namespace ElectronicObserver.WPFEO
 		{
 			new DialogBaseAirCorpsSimulation().Show();
 		}
+
+		private void MI_Tools_ExpCalculator_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogExpChecker().Show();
+		}
 	}
 }

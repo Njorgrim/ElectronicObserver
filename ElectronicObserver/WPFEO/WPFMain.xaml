@@ -218,7 +218,7 @@
 						<Image Source="{StaticResource Icon_Form_BaseAirCorps}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ExpCalculator" Header="Exp Calculator">
+				<MenuItem Name="MI_Tools_ExpCalculator" Header="Exp Calculator" Click="MI_Tools_ExpCalculator_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ExpCalc}"/>
 					</MenuItem.Icon>
