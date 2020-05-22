@@ -24,6 +24,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ElectronicObserver.Utility.Mathematics;
+using ElectronicObserver.WinFormsEO.Dialog.KancolleProgress;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace ElectronicObserver.WinFormsEO
@@ -104,7 +105,7 @@ namespace ElectronicObserver.WinFormsEO
 				Directory.CreateDirectory("Settings");
 
 
-			Utility.Configuration.Instance.Load(this);
+			Utility.Configuration.Instance.Load();
 
 			this.MainDockPanel.Styles = Configuration.Config.UI.DockPanelSuiteStyles;
 			this.MainDockPanel.Theme = new WeifenLuo.WinFormsUI.Docking.VS2012Theme();
@@ -1541,7 +1542,7 @@ namespace ElectronicObserver.WinFormsEO
 
         private void StripMenu_Tool_KancolleProgress_Click(object sender, EventArgs e)
         {
-            new Dialog.DialogKancolleProgress().Show(this);
+            new DialogKancolleProgressWpf().Show();
         }
 
         private void StripMenu_Tool_ExtraBrowser_Click(object sender, EventArgs e)
