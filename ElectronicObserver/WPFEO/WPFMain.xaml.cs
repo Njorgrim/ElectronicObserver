@@ -18,6 +18,7 @@ using ElectronicObserver.WinFormsEO;
 using ElectronicObserver.WinFormsEO.Dialog;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using ElectronicObserver.WinFormsEO.Dialog.KancolleProgress;
 
 namespace ElectronicObserver.WPFEO
 {
@@ -725,6 +726,11 @@ namespace ElectronicObserver.WPFEO
 		private void MI_Tools_ExpeditionCheck_OnClick(object sender, RoutedEventArgs e)
 		{
 			new DialogExpeditionCheck().Show();
+		}
+
+		private void MI_Tools_ShipProgressionList_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogKancolleProgressWpf().Show();
 		}
 	}
 }

@@ -228,7 +228,7 @@
 						<Image Source="{StaticResource Icon_Form_ExpeditionCheck}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ShipProgressionList" Header="Ship Progression List">
+				<MenuItem Name="MI_Tools_ShipProgressionList" Header="Ship Progression List" Click="MI_Tools_ShipProgressionList_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Fleet}"/>
 					</MenuItem.Icon>
