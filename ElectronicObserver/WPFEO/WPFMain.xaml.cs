@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Threading;
-using ElectronicObserver.Properties;
 using ElectronicObserver.Data;
 using ElectronicObserver.Notifier;
 using ElectronicObserver.Observer;
@@ -18,10 +14,11 @@ using AvalonDock.Layout.Serialization;
 using AvalonDock;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Threading;
-using System.Windows.Interop;
+using ElectronicObserver.WinFormsEO;
 using ElectronicObserver.WinFormsEO.Dialog;
-using Titanium.Web.Proxy.StreamExtended;
+using System.Windows.Controls;
+using System.Windows.Interop;
+using ElectronicObserver.WinFormsEO.Dialog.KancolleProgress;
 
 namespace ElectronicObserver.WPFEO
 {
@@ -626,6 +623,119 @@ namespace ElectronicObserver.WPFEO
 		private void MI_Tools_EquipmentList_OnClick(object sender, RoutedEventArgs e)
 		{
 			new DialogEquipmentList().Show();
+		}
+
+		private void MI_Tools_DropRecord_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (KCDatabase.Instance.MasterShips.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			if (RecordManager.Instance.ShipDrop.Record.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.NoDropData, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogDropRecordViewer().Show();
+		}
+
+		private void MI_Tools_DevelopmentRecord_OnClick(object sender, RoutedEventArgs e)
+		{
+			if(KCDatabase.Instance.MasterShips.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			if (RecordManager.Instance.Development.Record.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.NoDevData, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogDevelopmentRecordViewer().Show();
+		}
+
+		private void MI_Tools_ConstructionRecord_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (KCDatabase.Instance.MasterShips.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			if (RecordManager.Instance.Construction.Record.Count == 0)
+			{
+				MessageBox.Show(GeneralRes.NoBuildData, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogConstructionRecordViewer().Show();
+		}
+
+		private void MI_Tools_ResourceChart_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogResourceChart().Show();
+		}
+
+		private void MI_Tools_ShipEncyclopedia_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (KCDatabase.Instance.MasterShips.Count == 0)
+			{
+				MessageBox.Show("Ship data is not loaded.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogAlbumMasterShip().Show();
+		}
+
+		private void MI_Tools_EquipmentEncyclopedia_OnClick(object sender, RoutedEventArgs e)
+		{
+			if (KCDatabase.Instance.MasterEquipments.Count == 0)
+			{
+				MessageBox.Show("Equipment data is not loaded.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
+			new DialogAlbumMasterEquipment().Show();
+		}
+
+		private void MI_Tools_AADefense_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogAntiAirDefense().Show();
+		}
+
+		private void MI_Tools_ExportFleetImage_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogFleetImageGenerator(1).Show();
+		}
+
+		private void MI_Tools_LBASSimulator_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogBaseAirCorpsSimulation().Show();
+		}
+
+		private void MI_Tools_ExpCalculator_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogExpChecker().Show();
+		}
+
+		private void MI_Tools_ExpeditionCheck_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogExpeditionCheck().Show();
+		}
+
+		private void MI_Tools_ShipProgressionList_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogKancolleProgressWpf().Show();
+		}
+
+		private void MI_Tools_ExtraBrowser_OnClick(object sender, RoutedEventArgs e)
+		{
+			FormBrowserHost.Instance.Browser.OpenExtraBrowser();
 		}
 	}
 }

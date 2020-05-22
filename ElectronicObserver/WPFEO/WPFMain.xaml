@@ -171,69 +171,69 @@
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_Tools_DropRecord" Header="Drop Record">
+				<MenuItem Name="MI_Tools_DropRecord" Header="Drop Record" Click="MI_Tools_DropRecord_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_DropRecord}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_DevelopmentRecord" Header="Development Record">
+				<MenuItem Name="MI_Tools_DevelopmentRecord" Header="Development Record" Click="MI_Tools_DevelopmentRecord_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_DevelopmentRecord}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ConstructionRecord" Header="Construction Record">
+				<MenuItem Name="MI_Tools_ConstructionRecord" Header="Construction Record" Click="MI_Tools_ConstructionRecord_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ConstructionRecord}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ResourceChart" Header="Resource Chart">
+				<MenuItem Name="MI_Tools_ResourceChart" Header="Resource Chart" Click="MI_Tools_ResourceChart_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ResourceChart}"/>
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_Tools_ShipEncyclopedia" Header="Ship Encyclopedia">
+				<MenuItem Name="MI_Tools_ShipEncyclopedia" Header="Ship Encyclopedia" Click="MI_Tools_ShipEncyclopedia_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_AlbumShip}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_EquipmentEncyclopedia" Header="Equipment Encyclopedia">
+				<MenuItem Name="MI_Tools_EquipmentEncyclopedia" Header="Equipment Encyclopedia" Click="MI_Tools_EquipmentEncyclopedia_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_AlbumEquipment}"/>
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_Tools_AADefense" Header="AA Defense">
+				<MenuItem Name="MI_Tools_AADefense" Header="AA Defense" Click="MI_Tools_AADefense_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_AntiAirDefense}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ExportFleetImage" Header="Export Fleet Image...">
+				<MenuItem Name="MI_Tools_ExportFleetImage" Header="Export Fleet Image..." Click="MI_Tools_ExportFleetImage_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_FleetImageGenerator}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_LBASSimulator" Header="LBAS Simulator">
+				<MenuItem Name="MI_Tools_LBASSimulator" Header="LBAS Simulator" Click="MI_Tools_LBASSimulator_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_BaseAirCorps}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ExpCalculator" Header="Exp Calculator">
+				<MenuItem Name="MI_Tools_ExpCalculator" Header="Exp Calculator" Click="MI_Tools_ExpCalculator_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ExpCalc}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ExpeditionCheck" Header="Expedition Check (M)">
+				<MenuItem Name="MI_Tools_ExpeditionCheck" Header="Expedition Check" Click="MI_Tools_ExpeditionCheck_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ExpeditionCheck}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ShipProgressionList" Header="Ship Progression List">
+				<MenuItem Name="MI_Tools_ShipProgressionList" Header="Ship Progression List" Click="MI_Tools_ShipProgressionList_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Fleet}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ExtraBrowser" Header="Extra Browser">
+				<MenuItem Name="MI_Tools_ExtraBrowser" Header="Extra Browser" Click="MI_Tools_ExtraBrowser_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Browser}"/>
 					</MenuItem.Icon>
