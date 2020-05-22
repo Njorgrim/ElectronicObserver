@@ -721,5 +721,10 @@ namespace ElectronicObserver.WPFEO
 		{
 			new DialogExpChecker().Show();
 		}
+
+		private void MI_Tools_ExpeditionCheck_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogExpeditionCheck().Show();
+		}
 	}
 }

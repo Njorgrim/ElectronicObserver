@@ -223,7 +223,7 @@
 						<Image Source="{StaticResource Icon_Form_ExpCalc}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ExpeditionCheck" Header="Expedition Check (M)">
+				<MenuItem Name="MI_Tools_ExpeditionCheck" Header="Expedition Check" Click="MI_Tools_ExpeditionCheck_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ExpeditionCheck}"/>
 					</MenuItem.Icon>
