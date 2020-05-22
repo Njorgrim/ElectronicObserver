@@ -208,7 +208,7 @@
 						<Image Source="{StaticResource Icon_Form_AntiAirDefense}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_ExportFleetImage" Header="Export Fleet Image...">
+				<MenuItem Name="MI_Tools_ExportFleetImage" Header="Export Fleet Image..." Click="MI_Tools_ExportFleetImage_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_FleetImageGenerator}"/>
 					</MenuItem.Icon>

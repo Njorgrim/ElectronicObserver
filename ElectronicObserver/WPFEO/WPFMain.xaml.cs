@@ -706,5 +706,10 @@ namespace ElectronicObserver.WPFEO
 		{
 			new DialogAntiAirDefense().Show();
 		}
+
+		private void MI_Tools_ExportFleetImage_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogFleetImageGenerator(1).Show();
+		}
 	}
 }
