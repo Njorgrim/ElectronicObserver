@@ -711,5 +711,10 @@ namespace ElectronicObserver.WPFEO
 		{
 			new DialogFleetImageGenerator(1).Show();
 		}
+
+		private void MI_Tools_LBASSimulator_OnClick(object sender, RoutedEventArgs e)
+		{
+			new DialogBaseAirCorpsSimulation().Show();
+		}
 	}
 }

@@ -213,7 +213,7 @@
 						<Image Source="{StaticResource Icon_Form_FleetImageGenerator}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_Tools_LBASSimulator" Header="LBAS Simulator">
+				<MenuItem Name="MI_Tools_LBASSimulator" Header="LBAS Simulator" Click="MI_Tools_LBASSimulator_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_BaseAirCorps}"/>
 					</MenuItem.Icon>
