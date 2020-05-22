@@ -90,7 +90,7 @@
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_View_Dock" Header="Dock">
+				<MenuItem Name="MI_View_Dock" Header="Dock" Click="MI_View_Dock_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Dock}"/>
 					</MenuItem.Icon>

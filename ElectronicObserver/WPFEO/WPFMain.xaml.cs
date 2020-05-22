@@ -50,7 +50,7 @@ namespace ElectronicObserver.WPFEO
 		public List<UserControl> SubUCs { get; private set; }
 
 		public WPFFleet[] ucFleet;
-		//public FormDock ucDock;
+		public WPFDock ucDock;
 		public WPFArsenal ucArsenal;
         public WPFHQ ucHeadquarters;
 		//public FormInformation ucInformation;
@@ -157,9 +157,9 @@ namespace ElectronicObserver.WPFEO
 						"hq" => ucHeadquarters,
 						"battle" => ucBattle,
 						"arsenal" => ucArsenal,
+						"dock" => ucDock,
 						_ => lc.Content
 					};
-					;
 				}
 			}
 		}
@@ -226,7 +226,7 @@ namespace ElectronicObserver.WPFEO
 				SubUCs.Add(ucFleet[i] = new WPFFleet(this, i + 1));
 			}
 
-			//SubUCs.Add(ucDock = new FormDock(this));
+			SubUCs.Add(ucDock = new WPFDock(new FormDock()));
 			SubUCs.Add(ucHeadquarters = new WPFHQ(this));
 			SubUCs.Add(ucArsenal = new WPFArsenal(new FormArsenal()));
 			//SubUCs.Add(ucInformation = new FormInformation(this));
@@ -621,6 +621,18 @@ namespace ElectronicObserver.WPFEO
 				Title = "Arsenal",
 				Content = ucArsenal,
 				ContentId = "arsenal"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_Dock_OnClick(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Dock",
+				Content = ucDock,
+				ContentId = "dock"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();

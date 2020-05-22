@@ -175,7 +175,7 @@ namespace ElectronicObserver.WinFormsEO
 
 
 
-		public FormDock(FormMain parent)
+		public FormDock(FormMain? parent = null)
 		{
 			InitializeComponent();
 
