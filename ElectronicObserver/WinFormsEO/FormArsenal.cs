@@ -188,7 +188,7 @@ namespace ElectronicObserver.WinFormsEO
 		private TableArsenalControl[] ControlArsenal;
 		private int _buildingID;
 
-		public FormArsenal(FormMain parent)
+		public FormArsenal(FormMain? parent = null)
 		{
 			InitializeComponent();
 

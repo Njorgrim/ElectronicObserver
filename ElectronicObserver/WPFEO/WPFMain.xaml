@@ -95,7 +95,7 @@
 						<Image Source="{StaticResource Icon_Form_Dock}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_Arsenal" Header="Arsenal">
+				<MenuItem Name="MI_View_Arsenal" Header="Arsenal" Click="MI_View_Arsenal_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Arsenal}"/>
 					</MenuItem.Icon>

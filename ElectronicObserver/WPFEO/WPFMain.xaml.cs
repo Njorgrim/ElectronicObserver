@@ -51,8 +51,8 @@ namespace ElectronicObserver.WPFEO
 
 		public WPFFleet[] ucFleet;
 		//public FormDock ucDock;
-		//public FormArsenal ucArsenal;
-		public WPFHQ ucHeadquarters;
+		public WPFArsenal ucArsenal;
+        public WPFHQ ucHeadquarters;
 		//public FormInformation ucInformation;
 		//public FormCompass ucCompass;
 		public WPFLog ucLog;
@@ -146,50 +146,20 @@ namespace ElectronicObserver.WPFEO
 
 				foreach (LayoutContent lc in currentContentsList)
 				{
-					switch (lc.ContentId)
+					lc.Content = lc.ContentId switch
 					{
-						case "cefBrowser":
-							{
-								lc.Content = ucBrowser;
-								break;
-							}
-						case "log":
-							{
-								lc.Content = ucLog;
-								break;
-							}
-						case "fleet1":
-							{
-								lc.Content = ucFleet[0];
-								break;
-							}
-						case "fleet2":
-							{
-								lc.Content = ucFleet[1];
-								break;
-							}
-						case "fleet3":
-							{
-								lc.Content = ucFleet[2];
-								break;
-							}
-						case "fleet4":
-							{
-								lc.Content = ucFleet[3];
-								break;
-							}
-						case "hq":
-							{
-								lc.Content = ucHeadquarters;
-								break;
-							}
-						case "battle":
-							{
-								lc.Content = ucBattle;
-								break;
-							}
-						default: break;
+						"cefBrowser" => ucBrowser,
+						"log" => ucLog,
+						"fleet1" => ucFleet[0],
+						"fleet2" => ucFleet[1],
+						"fleet3" => ucFleet[2],
+						"fleet4" => ucFleet[3],
+						"hq" => ucHeadquarters,
+						"battle" => ucBattle,
+						"arsenal" => ucArsenal,
+						_ => lc.Content
 					};
+					;
 				}
 			}
 		}
@@ -257,8 +227,8 @@ namespace ElectronicObserver.WPFEO
 			}
 
 			//SubUCs.Add(ucDock = new FormDock(this));
-			//SubUCs.Add(ucArsenal = new FormArsenal(this));
 			SubUCs.Add(ucHeadquarters = new WPFHQ(this));
+			SubUCs.Add(ucArsenal = new WPFArsenal(new FormArsenal()));
 			//SubUCs.Add(ucInformation = new FormInformation(this));
 			//SubUCs.Add(ucCompass = new FormCompass(this));
 			SubUCs.Add(ucLog = new WPFLog(this));
@@ -644,6 +614,18 @@ namespace ElectronicObserver.WPFEO
 			anchorable.Float();
 		}
 
+		private void MI_View_Arsenal_OnClick(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Arsenal",
+				Content = ucArsenal,
+				ContentId = "arsenal"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
 		private void MI_File_Settings_OnClick(object sender, RoutedEventArgs e)
 		{
 			using var dialog = new DialogConfiguration(Configuration.Config);
@@ -653,6 +635,8 @@ namespace ElectronicObserver.WPFEO
 			dialog.ToConfiguration(Configuration.Config);
 			Configuration.Instance.OnConfigurationChanged();
 		}
+
+		#region Tools
 
 		private void MI_Tools_EquipmentList_OnClick(object sender, RoutedEventArgs e)
 		{
@@ -771,5 +755,7 @@ namespace ElectronicObserver.WPFEO
 		{
 			FormBrowserHost.Instance.Browser.OpenExtraBrowser();
 		}
+
+		#endregion
 	}
 }
