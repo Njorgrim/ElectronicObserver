@@ -47,27 +47,30 @@ namespace ElectronicObserver.WPFEO
 
 		#region Forms
 
-		public List<UserControl> SubUCs { get; private set; }
+		private List<UserControl> SubUserControls { get; set; }
 
-		public WPFFleet[] ucFleet;
-		public WPFFleetOverview ucFleetOverview;
-		public WPFShipGroup ucShipGroup;
+		private WPFFleet[] UserControlFleets { get; set; }
+		private WPFFleetOverview UserControlFleetOverview { get; set; }
 
-		public WPFDock ucDock;
-		public WPFArsenal ucArsenal;
-		public WPFBaseAirCorps ucBaseAirCorps;
+		private WPFShipGroup UserControlShipGroup { get; set; }
+		// public FormXPCalculator ucXPCalculator;
 
-        public WPFHQ ucHeadquarters;
-		public WPFQuest ucQuest;
-		public WPFInformation ucInformation;
+		private WPFDock UserControlDock { get; set; }
+		private WPFArsenal UserControlArsenal { get; set; }
+		private WPFBaseAirCorps UserControlBaseAirCorps { get; set; }
 
-		//public FormCompass ucCompass;
-		public WPFLog ucLog;
-		public WPFBattle ucBattle;
-		public WPFBrowserHost ucBrowser;
-		//public FormWindowCapture ucWindowCapture;
-		//public FormXPCalculator ucXPCalculator;
-		//public FormJson ucJson;
+		private WPFHQ UserControlHeadquarters { get; set; }
+		private WPFQuest UserControlQuest { get; set; }
+		private WPFInformation UserControlInformation { get; set; }
+
+		// public FormCompass ucCompass;
+		private WPFBattle UserControlBattle { get; set; }
+
+		public WPFBrowserHost UserControlBrowser { get; private set; }
+
+		private WPFLog UserControlLog { get; set; }
+		// public FormWindowCapture ucWindowCapture;
+		// public FormJson ucJson;
 
 		#endregion
 
@@ -82,6 +85,7 @@ namespace ElectronicObserver.WPFEO
 		}
 
 		#region TestBackground
+
 		/*
 		/// <summary>
 		/// TestBackground Dependency Property
@@ -100,9 +104,11 @@ namespace ElectronicObserver.WPFEO
 			set => SetValue(TestBackgroundProperty, value);
 		}
 		*/
+
 		#endregion
 
 		#region FocusedElement
+
 		/*
 		/// <summary>
 		/// FocusedElement Dependency Property
@@ -111,11 +117,12 @@ namespace ElectronicObserver.WPFEO
 			DependencyProperty.Register("FocusedElement", typeof(string), typeof(WPFMain),
 				new FrameworkPropertyMetadata((IInputElement)null));
 		*/
+
 		#endregion
 
 		private void OnLayoutRootPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			var activeContent = ((LayoutRoot)sender).ActiveContent;
+			var activeContent = ((LayoutRoot) sender).ActiveContent;
 			if (e.PropertyName == "ActiveContent")
 			{
 				Debug.WriteLine(string.Format("ActiveContent-> {0}", activeContent));
@@ -124,16 +131,19 @@ namespace ElectronicObserver.WPFEO
 
 		private void dockManager_DocumentClosing(object sender, DocumentClosingEventArgs e)
 		{
-			if (MessageBox.Show("Do you really want to close this tool?", "Electronic Observer (blah)", MessageBoxButton.YesNo) == MessageBoxResult.No)
+			if (MessageBox.Show("Do you really want to close this tool?", "Electronic Observer (blah)",
+				MessageBoxButton.YesNo) == MessageBoxResult.No)
 				e.Cancel = true;
 		}
 
 		#region AvalonSerialization
+
 		private void LoadLayout(string path)
 		{
 			if (File.Exists(@".\EODefaultLayout.config"))
 			{
-				var currentContentsList = dockManager.Layout.Descendents().OfType<LayoutContent>().Where(c => c.ContentId != null).ToArray();
+				var currentContentsList = dockManager.Layout.Descendents().OfType<LayoutContent>()
+					.Where(c => c.ContentId != null).ToArray();
 
 				var serializer = new XmlLayoutSerializer(dockManager);
 				serializer.LayoutSerializationCallback += (s, args) =>
@@ -145,27 +155,33 @@ namespace ElectronicObserver.WPFEO
 				using var stream = new StreamReader(@".\EODefaultLayout.config");
 				serializer.Deserialize(stream);
 
-				currentContentsList = dockManager.Layout.Descendents().OfType<LayoutContent>().Where(c => c.ContentId != null).ToArray();
+				currentContentsList = dockManager.Layout.Descendents().OfType<LayoutContent>()
+					.Where(c => c.ContentId != null).ToArray();
 
 				foreach (LayoutContent lc in currentContentsList)
 				{
 					lc.Content = lc.ContentId switch
 					{
-						"cefBrowser" => ucBrowser,
-						"log" => ucLog,
-						"fleet1" => ucFleet[0],
-						"fleet2" => ucFleet[1],
-						"fleet3" => ucFleet[2],
-						"fleet4" => ucFleet[3],
-						"fleets" => ucFleetOverview,
-						"group" => ucShipGroup,
-						"ab" => ucBaseAirCorps,
-						"hq" => ucHeadquarters,
-						"quest" => ucQuest,
-						"info" => ucInformation,
-						"battle" => ucBattle,
-						"arsenal" => ucArsenal,
-						"dock" => ucDock,
+						"fleet1" => UserControlFleets[0],
+						"fleet2" => UserControlFleets[1],
+						"fleet3" => UserControlFleets[2],
+						"fleet4" => UserControlFleets[3],
+						"fleets" => UserControlFleetOverview,
+						"group" => UserControlShipGroup,
+
+						"dock" => UserControlDock,
+						"arsenal" => UserControlArsenal,
+						"ab" => UserControlBaseAirCorps,
+
+						"hq" => UserControlHeadquarters,
+						"quest" => UserControlQuest,
+						"info" => UserControlInformation,
+
+						// todo compass
+						"battle" => UserControlBattle,
+
+						"cefBrowser" => UserControlBrowser,
+						"log" => UserControlLog,
 						_ => lc.Content
 					};
 				}
@@ -178,6 +194,7 @@ namespace ElectronicObserver.WPFEO
 			using var stream = new StreamWriter(@".\EODefaultLayout.config");
 			serializer.Serialize(stream);
 		}
+
 		#endregion
 
 		private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -214,7 +231,7 @@ namespace ElectronicObserver.WPFEO
 
 			//Utility.Configuration.Instance.ConfigurationChanged += ConfigurationChanged;
 
-			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameEnglish + " is starting...");
+			Logger.Add(2, SoftwareInformation.SoftwareNameEnglish + " is starting...");
 
 			ResourceManager.Instance.Load();
 			RecordManager.Instance.Load();
@@ -222,45 +239,48 @@ namespace ElectronicObserver.WPFEO
 			NotifierManager.Instance.Initialize(this);
 			SyncBGMPlayer.Instance.ConfigurationChanged();
 
-			APIObserver.Instance.Start(Utility.Configuration.Config.Connection.Port, this);
+			APIObserver.Instance.Start(Configuration.Config.Connection.Port, this);
 
-			SubUCs = new List<UserControl>();
+			SubUserControls = new List<UserControl>();
 
 			//form init
 			//注：一度全てshowしないとイベントを受け取れないので注意
-			ucFleet = new WPFFleet[4];
-			for (int i = 0; i < ucFleet.Length; i++)
+			UserControlFleets = new WPFFleet[4];
+			for (int i = 0; i < UserControlFleets.Length; i++)
 			{
-				SubUCs.Add(ucFleet[i] = new WPFFleet(this, i + 1));
+				SubUserControls.Add(UserControlFleets[i] = new WPFFleet(this, i + 1));
 			}
-
-			SubUCs.Add(ucDock = new WPFDock(new FormDock()));
-			SubUCs.Add(ucHeadquarters = new WPFHQ(this));
-			SubUCs.Add(ucArsenal = new WPFArsenal(new FormArsenal()));
-			SubUCs.Add(ucInformation = new WPFInformation(new FormInformation()));
-			//SubUCs.Add(ucCompass = new FormCompass(this));
-			SubUCs.Add(ucLog = new WPFLog(this));
-			SubUCs.Add(ucQuest = new WPFQuest(new FormQuest()));
-			SubUCs.Add(ucBattle = new WPFBattle(this));
-			SubUCs.Add(ucFleetOverview = new WPFFleetOverview(new FormFleetOverview()));
-			SubUCs.Add(ucShipGroup = new WPFShipGroup(new FormShipGroup()));
-			SubUCs.Add(ucBrowser = new WPFBrowserHost(this));
-			//SubUCs.Add(ucWindowCapture = new FormWindowCapture(this));
+			SubUserControls.Add(UserControlFleetOverview = new WPFFleetOverview(new FormFleetOverview()));
+			SubUserControls.Add(UserControlShipGroup = new WPFShipGroup(new FormShipGroup()));
 			//SubUCs.Add(ucXPCalculator = new FormXPCalculator(this));
-			SubUCs.Add(ucBaseAirCorps = new WPFBaseAirCorps(new FormBaseAirCorps()));
+
+			SubUserControls.Add(UserControlDock = new WPFDock(new FormDock()));
+			SubUserControls.Add(UserControlArsenal = new WPFArsenal(new FormArsenal()));
+			SubUserControls.Add(UserControlBaseAirCorps = new WPFBaseAirCorps(new FormBaseAirCorps()));
+
+			SubUserControls.Add(UserControlHeadquarters = new WPFHQ(this));
+			SubUserControls.Add(UserControlQuest = new WPFQuest(new FormQuest()));
+			SubUserControls.Add(UserControlInformation = new WPFInformation(new FormInformation()));
+
+			//SubUCs.Add(ucCompass = new FormCompass(this));
+			SubUserControls.Add(UserControlBattle = new WPFBattle(this));
+
+			SubUserControls.Add(UserControlBrowser = new WPFBrowserHost(this));
+			SubUserControls.Add(UserControlLog = new WPFLog(this));
+			//SubUCs.Add(ucWindowCapture = new FormWindowCapture(this));
 			//SubUCs.Add(ucJson = new FormJson(this));
 
-			ConfigurationChanged();     //設定から初期化
+			ConfigurationChanged(); //設定から初期化
 
 			LoadLayout(Configuration.Config.Life.LayoutFilePath);
 
 
-			#if (!DEBUG)
+#if (!DEBUG)
 			SoftwareInformation.CheckUpdate();
 			
 			CancellationTokenSource cts = new CancellationTokenSource();
 			Task.Run(async () => await SoftwareUpdater.PeriodicUpdateCheckAsync(cts.Token));
-			#endif
+#endif
 
 			// デバッグ: 開始時にAPIリストを読み込む
 			if (Configuration.Config.Debug.LoadAPIListOnLoad)
@@ -271,7 +291,7 @@ namespace ElectronicObserver.WPFEO
 
 					await Task.Factory.StartNew(() => LoadAPIList(Configuration.Config.Debug.APIListPath));
 
-					Activate();     // 上記ロードに時間がかかるとウィンドウが表示されなくなることがあるので
+					Activate(); // 上記ロードに時間がかかるとウィンドウが表示されなくなることがあるので
 				}
 				catch (Exception ex)
 				{
@@ -290,7 +310,7 @@ namespace ElectronicObserver.WPFEO
 			}
 
 			// 完了通知（ログインページを開く）
-			ucBrowser.InitializeApiCompleted();
+			UserControlBrowser.InitializeApiCompleted();
 
 			//UIUpdateTimer.Start();
 
@@ -339,7 +359,9 @@ namespace ElectronicObserver.WPFEO
 						if (isRequest ? api.IsRequestSupported : api.IsResponseSupported)
 						{
 
-							string[] files = Directory.GetFiles(parent, string.Format("*{0}@{1}.json", isRequest ? "Q" : "S", line.Replace('/', '@')), SearchOption.TopDirectoryOnly);
+							string[] files = Directory.GetFiles(parent,
+								string.Format("*{0}@{1}.json", isRequest ? "Q" : "S", line.Replace('/', '@')),
+								SearchOption.TopDirectoryOnly);
 
 							if (files.Length == 0)
 								continue;
@@ -350,14 +372,14 @@ namespace ElectronicObserver.WPFEO
 							{
 								if (isRequest)
 								{
-									Dispatcher.Invoke((Action)(() =>
+									Dispatcher.Invoke((Action) (() =>
 									{
 										APIObserver.Instance.LoadRequest("/kcsapi/" + line, sr2.ReadToEnd());
 									}));
 								}
 								else
 								{
-									Dispatcher.Invoke((Action)(() =>
+									Dispatcher.Invoke((Action) (() =>
 									{
 										APIObserver.Instance.LoadResponse("/kcsapi/" + line, sr2.ReadToEnd());
 									}));
@@ -457,10 +479,11 @@ namespace ElectronicObserver.WPFEO
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if (Utility.Configuration.Config.Life.ConfirmOnClosing)
+			if (Configuration.Config.Life.ConfirmOnClosing)
 			{
-				if (MessageBox.Show("Are you sure you want to exit?", "Electronic Observer", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No)
-					== MessageBoxResult.No)
+				if (MessageBox.Show("Are you sure you want to exit?", "Electronic Observer", MessageBoxButton.YesNo,
+					    MessageBoxImage.Question, MessageBoxResult.No)
+				    == MessageBoxResult.No)
 				{
 					e.Cancel = true;
 					return;
@@ -468,11 +491,11 @@ namespace ElectronicObserver.WPFEO
 			}
 
 
-			Utility.Logger.Add(2, SoftwareInformation.SoftwareNameEnglish + Properties.Resources.IsClosing);
+			Logger.Add(2, SoftwareInformation.SoftwareNameEnglish + Properties.Resources.IsClosing);
 
 			//UIUpdateTimer.Stop();
 
-			ucBrowser.CloseBrowser();
+			UserControlBrowser.CloseBrowser();
 
 			UpdatePlayTime();
 
@@ -487,10 +510,9 @@ namespace ElectronicObserver.WPFEO
 			{
 				try
 				{
-					uint id = (uint)System.Diagnostics.Process.GetCurrentProcess().Id;
-					Utility.Configuration.Config.Control.LastVolume = BrowserLibCore.VolumeManager.GetApplicationVolume(id);
-					Utility.Configuration.Config.Control.LastIsMute = BrowserLibCore.VolumeManager.GetApplicationMute(id);
-
+					uint id = (uint) Process.GetCurrentProcess().Id;
+					Configuration.Config.Control.LastVolume = BrowserLibCore.VolumeManager.GetApplicationVolume(id);
+					Configuration.Config.Control.LastIsMute = BrowserLibCore.VolumeManager.GetApplicationMute(id);
 				}
 				catch (Exception)
 				{
@@ -503,16 +525,16 @@ namespace ElectronicObserver.WPFEO
 		private void Window_Closed(object sender, EventArgs e)
 		{
 			//NotifierManager.Instance.ApplyToConfiguration();
-			Utility.Configuration.Instance.Save();
+			Configuration.Instance.Save();
 			RecordManager.Instance.SavePartial();
 			KCDatabase.Instance.Save();
 			APIObserver.Instance.Stop();
 
 
-			Utility.Logger.Add(2, Properties.Resources.ClosingComplete);
+			Logger.Add(2, Properties.Resources.ClosingComplete);
 
-			if (Utility.Configuration.Config.Log.SaveLogFlag)
-				Utility.Logger.Save();
+			if (Configuration.Config.Log.SaveLogFlag)
+				Logger.Save();
 
 		}
 
@@ -526,36 +548,24 @@ namespace ElectronicObserver.WPFEO
 			SaveLayout("");
 		}
 
-		private void MI_View_Browser_Click(object sender, RoutedEventArgs e)
+		private void MI_File_Settings_OnClick(object sender, RoutedEventArgs e)
 		{
-			var anchorable = new LayoutAnchorable()
-			{
-				Title = "Browser",
-				Content = ucBrowser,
-				ContentId = "cefBrowser"
-			};
-			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
-			anchorable.Float();
+			using var dialog = new DialogConfiguration(Configuration.Config);
+
+			if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+
+			dialog.ToConfiguration(Configuration.Config);
+			Configuration.Instance.OnConfigurationChanged();
 		}
 
-		private void MI_View_Log_Click(object sender, RoutedEventArgs e)
-		{
-			var anchorable = new LayoutAnchorable()
-			{
-				Title = "Log",
-				Content = ucLog,
-				ContentId = "log"
-			};
-			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
-			anchorable.Float();
-		}
+		#region View
 
 		private void MI_View_Fleet1_Click(object sender, RoutedEventArgs e)
 		{
-			var anchorable = new LayoutAnchorable()
+			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Fleet1",
-				Content = ucFleet[0],
+				Content = UserControlFleets[0],
 				ContentId = "fleet1"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
@@ -564,10 +574,10 @@ namespace ElectronicObserver.WPFEO
 
 		private void MI_View_Fleet2_Click(object sender, RoutedEventArgs e)
 		{
-			var anchorable = new LayoutAnchorable()
+			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Fleet2",
-				Content = ucFleet[1],
+				Content = UserControlFleets[1],
 				ContentId = "fleet2"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
@@ -576,10 +586,10 @@ namespace ElectronicObserver.WPFEO
 
 		private void MI_View_Fleet3_Click(object sender, RoutedEventArgs e)
 		{
-			var anchorable = new LayoutAnchorable()
+			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Fleet3",
-				Content = ucFleet[2],
+				Content = UserControlFleets[2],
 				ContentId = "fleet3"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
@@ -588,10 +598,10 @@ namespace ElectronicObserver.WPFEO
 
 		private void MI_View_Fleet4_Click(object sender, RoutedEventArgs e)
 		{
-			var anchorable = new LayoutAnchorable()
+			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Fleet4",
-				Content = ucFleet[3],
+				Content = UserControlFleets[3],
 				ContentId = "fleet4"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
@@ -600,10 +610,10 @@ namespace ElectronicObserver.WPFEO
 
 		private void MI_View_FleetList_OnClick(object sender, RoutedEventArgs e)
 		{
-			var anchorable = new LayoutAnchorable
+			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Fleets",
-				Content = ucFleetOverview,
+				Content = UserControlFleetOverview,
 				ContentId = "fleets"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
@@ -615,44 +625,8 @@ namespace ElectronicObserver.WPFEO
 			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Group",
-				Content = ucShipGroup,
+				Content = UserControlShipGroup,
 				ContentId = "group"
-			};
-			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
-			anchorable.Float();
-		}
-
-		private void MI_View_HQ_Click(object sender, RoutedEventArgs e)
-		{
-			var anchorable = new LayoutAnchorable()
-			{
-				Title = "HQ",
-				Content = ucHeadquarters,
-				ContentId = "hq"
-			};
-			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
-			anchorable.Float();
-		}
-
-		private void MI_View_Battle_Click(object sender,RoutedEventArgs e)
-		{
-			var anchorable = new LayoutAnchorable()
-			{
-				Title = "Battle",
-				Content = ucBattle,
-				ContentId = "battle"
-			};
-			anchorable.AddToLayout(dockManager,AnchorableShowStrategy.Most);
-			anchorable.Float();
-		}
-
-		private void MI_View_Arsenal_OnClick(object sender, RoutedEventArgs e)
-		{
-			LayoutAnchorable anchorable = new LayoutAnchorable
-			{
-				Title = "Arsenal",
-				Content = ucArsenal,
-				ContentId = "arsenal"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();
@@ -663,8 +637,20 @@ namespace ElectronicObserver.WPFEO
 			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Dock",
-				Content = ucDock,
+				Content = UserControlDock,
 				ContentId = "dock"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_Arsenal_OnClick(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Arsenal",
+				Content = UserControlArsenal,
+				ContentId = "arsenal"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();
@@ -675,8 +661,20 @@ namespace ElectronicObserver.WPFEO
 			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "AB",
-				Content = ucBaseAirCorps,
+				Content = UserControlBaseAirCorps,
 				ContentId = "ab"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_HQ_Click(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "HQ",
+				Content = UserControlHeadquarters,
+				ContentId = "hq"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();
@@ -687,7 +685,7 @@ namespace ElectronicObserver.WPFEO
 			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Quests",
-				Content = ucQuest,
+				Content = UserControlQuest,
 				ContentId = "quest"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
@@ -699,22 +697,52 @@ namespace ElectronicObserver.WPFEO
 			LayoutAnchorable anchorable = new LayoutAnchorable
 			{
 				Title = "Info",
-				Content = ucInformation,
+				Content = UserControlInformation,
 				ContentId = "info"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();
 		}
 
-		private void MI_File_Settings_OnClick(object sender, RoutedEventArgs e)
+		// todo compass
+
+		private void MI_View_Battle_Click(object sender, RoutedEventArgs e)
 		{
-			using var dialog = new DialogConfiguration(Configuration.Config);
-
-			if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
-
-			dialog.ToConfiguration(Configuration.Config);
-			Configuration.Instance.OnConfigurationChanged();
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Battle",
+				Content = UserControlBattle,
+				ContentId = "battle"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
 		}
+
+		private void MI_View_Browser_Click(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Browser",
+				Content = UserControlBrowser,
+				ContentId = "cefBrowser"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_Log_Click(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Log",
+				Content = UserControlLog,
+				ContentId = "log"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		#endregion
 
 		#region Tools
 
@@ -727,7 +755,8 @@ namespace ElectronicObserver.WPFEO
 		{
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK,
+					MessageBoxImage.Error);
 				return;
 			}
 
@@ -742,9 +771,10 @@ namespace ElectronicObserver.WPFEO
 
 		private void MI_Tools_DevelopmentRecord_OnClick(object sender, RoutedEventArgs e)
 		{
-			if(KCDatabase.Instance.MasterShips.Count == 0)
+			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK,
+					MessageBoxImage.Error);
 				return;
 			}
 
@@ -761,7 +791,8 @@ namespace ElectronicObserver.WPFEO
 		{
 			if (KCDatabase.Instance.MasterShips.Count == 0)
 			{
-				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(GeneralRes.KancolleMustBeLoaded, GeneralRes.NoMasterData, MessageBoxButton.OK,
+					MessageBoxImage.Error);
 				return;
 			}
 
