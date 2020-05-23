@@ -38,6 +38,7 @@ namespace ElectronicObserver.WinFormsEO
 				Number = new ImageLabel
 				{
 					Anchor = AnchorStyles.Left,
+					ForeColor = parent.ForeColor,
 					ImageAlign = ContentAlignment.MiddleCenter,
 					Padding = new Padding(0, 1, 0, 1),
 					Margin = new Padding(2, 1, 2, 1),
@@ -48,6 +49,7 @@ namespace ElectronicObserver.WinFormsEO
 				State = new FleetState
 				{
 					Anchor = AnchorStyles.Left,
+					ForeColor = parent.ForeColor,
 					Padding = new Padding(),
 					Margin = new Padding(),
 					AutoSize = true
@@ -118,7 +120,7 @@ namespace ElectronicObserver.WinFormsEO
 		private ImageLabel AnchorageRepairingTimer;
 
 
-		public FormFleetOverview(FormMain parent)
+		public FormFleetOverview(FormMain? parent = null)
 		{
 			InitializeComponent();
 

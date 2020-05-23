@@ -74,7 +74,7 @@
 						</MenuItem.Icon>
 					</MenuItem>
 				</MenuItem>
-				<MenuItem Name="MI_View_FleetList" Header="Fleet List">
+				<MenuItem Name="MI_View_FleetList" Header="Fleet List" Click="MI_View_FleetList_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Fleet}"/>
 					</MenuItem.Icon>
