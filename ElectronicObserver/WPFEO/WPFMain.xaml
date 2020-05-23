@@ -79,7 +79,7 @@
 						<Image Source="{StaticResource Icon_Form_Fleet}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_ShipGroup" Header="Ship Group">
+				<MenuItem Name="MI_View_ShipGroup" Header="Ship Group" Click="MI_View_ShipGroup_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ShipGroup}"/>
 					</MenuItem.Icon>

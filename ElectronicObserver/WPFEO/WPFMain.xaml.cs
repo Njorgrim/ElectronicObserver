@@ -51,6 +51,7 @@ namespace ElectronicObserver.WPFEO
 
 		public WPFFleet[] ucFleet;
 		public WPFFleetOverview ucFleetOverview;
+		public WPFShipGroup ucShipGroup;
 		public WPFDock ucDock;
 		public WPFArsenal ucArsenal;
         public WPFHQ ucHeadquarters;
@@ -59,7 +60,6 @@ namespace ElectronicObserver.WPFEO
 		public WPFLog ucLog;
 		//public FormQuest ucQuest;
 		public WPFBattle ucBattle;
-		//public FormShipGroup ucShipGroup;
 		public WPFBrowserHost ucBrowser;
 		//public FormWindowCapture ucWindowCapture;
 		//public FormXPCalculator ucXPCalculator;
@@ -155,6 +155,7 @@ namespace ElectronicObserver.WPFEO
 						"fleet3" => ucFleet[2],
 						"fleet4" => ucFleet[3],
 						"fleets" => ucFleetOverview,
+						"group" => ucShipGroup,
 						"hq" => ucHeadquarters,
 						"battle" => ucBattle,
 						"arsenal" => ucArsenal,
@@ -236,7 +237,7 @@ namespace ElectronicObserver.WPFEO
 			//SubUCs.Add(ucQuest = new FormQuest(this));
 			SubUCs.Add(ucBattle = new WPFBattle(this));
 			SubUCs.Add(ucFleetOverview = new WPFFleetOverview(new FormFleetOverview()));
-			//SubUCs.Add(ucShipGroup = new FormShipGroup(this));
+			SubUCs.Add(ucShipGroup = new WPFShipGroup(new FormShipGroup()));
 			SubUCs.Add(ucBrowser = new WPFBrowserHost(this));
 			//SubUCs.Add(ucWindowCapture = new FormWindowCapture(this));
 			//SubUCs.Add(ucXPCalculator = new FormXPCalculator(this));
@@ -598,6 +599,18 @@ namespace ElectronicObserver.WPFEO
 				Title = "Fleets",
 				Content = ucFleetOverview,
 				ContentId = "fleets"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_ShipGroup_OnClick(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Group",
+				Content = ucShipGroup,
+				ContentId = "group"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();
