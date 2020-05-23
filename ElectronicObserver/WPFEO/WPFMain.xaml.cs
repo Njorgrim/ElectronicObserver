@@ -59,8 +59,8 @@ namespace ElectronicObserver.WPFEO
 
         public WPFHQ ucHeadquarters;
 		public WPFQuest ucQuest;
+		public WPFInformation ucInformation;
 
-		// public FormInformation ucInformation;
 		//public FormCompass ucCompass;
 		public WPFLog ucLog;
 		public WPFBattle ucBattle;
@@ -162,6 +162,7 @@ namespace ElectronicObserver.WPFEO
 						"ab" => ucBaseAirCorps,
 						"hq" => ucHeadquarters,
 						"quest" => ucQuest,
+						"info" => ucInformation,
 						"battle" => ucBattle,
 						"arsenal" => ucArsenal,
 						"dock" => ucDock,
@@ -236,7 +237,7 @@ namespace ElectronicObserver.WPFEO
 			SubUCs.Add(ucDock = new WPFDock(new FormDock()));
 			SubUCs.Add(ucHeadquarters = new WPFHQ(this));
 			SubUCs.Add(ucArsenal = new WPFArsenal(new FormArsenal()));
-			//SubUCs.Add(ucInformation = new FormInformation(this));
+			SubUCs.Add(ucInformation = new WPFInformation(new FormInformation()));
 			//SubUCs.Add(ucCompass = new FormCompass(this));
 			SubUCs.Add(ucLog = new WPFLog(this));
 			SubUCs.Add(ucQuest = new WPFQuest(new FormQuest()));
@@ -688,6 +689,18 @@ namespace ElectronicObserver.WPFEO
 				Title = "Quests",
 				Content = ucQuest,
 				ContentId = "quest"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_Information_OnClick(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Info",
+				Content = ucInformation,
+				ContentId = "info"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();

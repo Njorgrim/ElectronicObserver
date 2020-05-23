@@ -26,7 +26,7 @@ namespace ElectronicObserver.WinFormsEO
 		private List<int> _inSortie;
 		private int[] _prevResource;
 
-		public FormInformation(FormMain parent)
+		public FormInformation(FormMain? parent = null)
 		{
 			InitializeComponent();
 
