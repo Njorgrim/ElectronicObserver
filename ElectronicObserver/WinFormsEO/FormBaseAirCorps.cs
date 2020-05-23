@@ -38,6 +38,7 @@ namespace ElectronicObserver.WinFormsEO
 				{
 					Name = "Name",
 					Text = "*",
+					ForeColor = parent.ForeColor,
 					Anchor = AnchorStyles.Left,
 					TextAlign = ContentAlignment.MiddleLeft,
 					ImageAlign = ContentAlignment.MiddleRight,
@@ -53,6 +54,7 @@ namespace ElectronicObserver.WinFormsEO
 				ActionKind = new ImageLabel
 				{
 					Text = "*",
+					ForeColor = parent.ForeColor,
 					Anchor = AnchorStyles.Left,
 					TextAlign = ContentAlignment.MiddleLeft,
 					ImageAlign = ContentAlignment.MiddleCenter,
@@ -66,6 +68,7 @@ namespace ElectronicObserver.WinFormsEO
 				AirSuperiority = new ImageLabel
 				{
 					Text = "*",
+					ForeColor = parent.ForeColor,
 					Anchor = AnchorStyles.Left,
 					TextAlign = ContentAlignment.MiddleLeft,
 					ImageAlign = ContentAlignment.MiddleLeft,
@@ -80,6 +83,7 @@ namespace ElectronicObserver.WinFormsEO
 				Distance = new ImageLabel
 				{
 					Text = "*",
+					ForeColor = parent.ForeColor,
 					Anchor = AnchorStyles.Left,
 					TextAlign = ContentAlignment.MiddleLeft,
 					ImageAlign = ContentAlignment.MiddleLeft,
@@ -351,7 +355,7 @@ namespace ElectronicObserver.WinFormsEO
 
 		private TableBaseAirCorpsControl[] ControlMember;
 
-		public FormBaseAirCorps(FormMain parent)
+		public FormBaseAirCorps(FormMain? parent = null)
 		{
 			InitializeComponent();
 

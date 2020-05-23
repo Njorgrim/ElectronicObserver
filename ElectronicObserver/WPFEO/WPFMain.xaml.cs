@@ -52,10 +52,13 @@ namespace ElectronicObserver.WPFEO
 		public WPFFleet[] ucFleet;
 		public WPFFleetOverview ucFleetOverview;
 		public WPFShipGroup ucShipGroup;
+
 		public WPFDock ucDock;
 		public WPFArsenal ucArsenal;
+		public WPFBaseAirCorps ucBaseAirCorps;
+
         public WPFHQ ucHeadquarters;
-		//public FormInformation ucInformation;
+		// public FormInformation ucInformation;
 		//public FormCompass ucCompass;
 		public WPFLog ucLog;
 		//public FormQuest ucQuest;
@@ -63,7 +66,6 @@ namespace ElectronicObserver.WPFEO
 		public WPFBrowserHost ucBrowser;
 		//public FormWindowCapture ucWindowCapture;
 		//public FormXPCalculator ucXPCalculator;
-		//public FormBaseAirCorps ucBaseAirCorps;
 		//public FormJson ucJson;
 
 		#endregion
@@ -156,6 +158,7 @@ namespace ElectronicObserver.WPFEO
 						"fleet4" => ucFleet[3],
 						"fleets" => ucFleetOverview,
 						"group" => ucShipGroup,
+						"ab" => ucBaseAirCorps,
 						"hq" => ucHeadquarters,
 						"battle" => ucBattle,
 						"arsenal" => ucArsenal,
@@ -241,7 +244,7 @@ namespace ElectronicObserver.WPFEO
 			SubUCs.Add(ucBrowser = new WPFBrowserHost(this));
 			//SubUCs.Add(ucWindowCapture = new FormWindowCapture(this));
 			//SubUCs.Add(ucXPCalculator = new FormXPCalculator(this));
-			//SubUCs.Add(ucBaseAirCorps = new FormBaseAirCorps(this));
+			SubUCs.Add(ucBaseAirCorps = new WPFBaseAirCorps(new FormBaseAirCorps()));
 			//SubUCs.Add(ucJson = new FormJson(this));
 
 			ConfigurationChanged();     //設定から初期化
@@ -659,6 +662,18 @@ namespace ElectronicObserver.WPFEO
 				Title = "Dock",
 				Content = ucDock,
 				ContentId = "dock"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
+
+		private void MI_View_LBAS_OnClick(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "AB",
+				Content = ucBaseAirCorps,
+				ContentId = "ab"
 			};
 			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
 			anchorable.Float();

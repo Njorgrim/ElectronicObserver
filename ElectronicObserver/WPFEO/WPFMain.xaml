@@ -100,7 +100,7 @@
 						<Image Source="{StaticResource Icon_Form_Arsenal}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_LBAS" Header="LBAS">
+				<MenuItem Name="MI_View_LBAS" Header="LBAS" Click="MI_View_LBAS_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_BaseAirCorps}"/>
 					</MenuItem.Icon>
