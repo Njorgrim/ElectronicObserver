@@ -111,7 +111,7 @@
 						<Image Source="{StaticResource Icon_Form_Headquarters}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_Quest" Header="Quest">
+				<MenuItem Name="MI_View_Quest" Header="Quest" Click="MI_View_Quest_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Quest}"/>
 					</MenuItem.Icon>
