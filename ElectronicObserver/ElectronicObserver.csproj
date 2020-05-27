@@ -132,6 +132,7 @@
     <ProjectReference Include="..\BrowserLibCore\BrowserLibCore.csproj" />
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\ThemeVS2012.csproj" />
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\WinFormsUI.csproj" />
+    <ProjectReference Include="..\ElectronicObserverTheme\ElectronicObserverTheme.csproj" />
     <ProjectReference Include="..\ElectronicObserverTypes\ElectronicObserverTypes.csproj" />
   </ItemGroup>
   <ItemGroup>

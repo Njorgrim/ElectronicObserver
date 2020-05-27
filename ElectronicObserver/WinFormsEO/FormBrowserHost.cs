@@ -36,7 +36,7 @@ namespace ElectronicObserver.WinFormsEO
 		private static FormBrowserHost _instance;
 		public static FormBrowserHost Instance => _instance;
 
-		public static string BrowserExeName => "EOBrowser.exe";
+		public static string BrowserExeName => "EOBrowserWPF.exe";
 
 		private string Host { get; }
 		private int Port { get; }
@@ -93,7 +93,7 @@ namespace ElectronicObserver.WinFormsEO
 			}
 		}
 
-		public FormBrowserHost(FormMain parent)
+		public FormBrowserHost(FormMain? parent = null)
 		{
 			InitializeComponent();
 
@@ -103,18 +103,6 @@ namespace ElectronicObserver.WinFormsEO
 			Port = Process.GetCurrentProcess().Id;
 
 			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBrowser]);
-		}
-
-		public FormBrowserHost(WPFBrowserHost parent)
-		{
-			InitializeComponent();
-
-			_instance = this;
-
-			Host = "localhost";
-			Port = Process.GetCurrentProcess().Id;
-
-			//Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBrowser]);
 		}
 
 		public void InitializeApiCompleted()

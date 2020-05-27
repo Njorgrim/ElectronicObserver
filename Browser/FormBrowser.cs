@@ -836,7 +836,7 @@ namespace Browser
 
         private async void SetIconResource()
         {
-	        byte[] canvas = await BrowserHost.GetIconResource();
+	        /*byte[] canvas = await BrowserHost.GetIconResource();
 
 	        string[] keys =
 	        {
@@ -875,7 +875,7 @@ namespace Browser
 	        ToolMenu_NavigateToLogInPage.Image =
 		        ToolMenu_Other_NavigateToLogInPage.Image = Icons.Images["Browser_Navigate"];
 	        ToolMenu_Other.Image = Icons.Images["Browser_Other"];
-
+			*/
 	        SetVolumeState();
         }
 

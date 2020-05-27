@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<AssemblyName>EOBrowserWPF</AssemblyName>
+		<UseWPF>true</UseWPF>
+		<Platforms>x64</Platforms>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+		<OutputPath>..\ElectronicObserver\bin\x64\Debug\</OutputPath>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+		<OutputPath>..\ElectronicObserver\bin\x64\Release\</OutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<Content Include="Assets\Browser\*.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CefSharp.Wpf" Version="81.3.100" />
+		<PackageReference Include="MaterialDesignColors" Version="1.2.4" />
+		<PackageReference Include="MaterialDesignThemes" Version="3.1.1" />
+		<PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BrowserLibCore\BrowserLibCore.csproj" />
+	  <ProjectReference Include="..\ElectronicObserverTheme\ElectronicObserverTheme.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- TODO: These updates are currently required because CefSharp.Wpf specifies
+	     <Private>false</Private>, which means these libraries will not be specified in
+	     the .deps.json file, and so the CoreCLR wouldn't load these. -->
+		<Reference Update="CefSharp">
+			<Private>true</Private>
+		</Reference>
+		<Reference Update="CefSharp.Core">
+			<Private>true</Private>
+		</Reference>
+		<Reference Update="CefSharp.Wpf">
+			<Private>true</Private>
+		</Reference>
+	</ItemGroup>
+
+	<!-- Include CefSharp.BrowserSubprocess.Core so we can selfhost the BrowserSubProcess using our exe -->
+	<ItemGroup>
+		<Reference Include="CefSharp.BrowserSubprocess.Core">
+			<HintPath>$(CefSharpBrowserProcessCore64)</HintPath>
+			<Private>true</Private>
+		</Reference>
+		<Reference Include="System.Drawing.Common">
+		  <HintPath>C:\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1\System.Drawing.Common.dll</HintPath>
+		</Reference>
+		<Reference Include="System.Windows.Forms">
+		  <HintPath>C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resources.en.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>PublicSettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+</Project>

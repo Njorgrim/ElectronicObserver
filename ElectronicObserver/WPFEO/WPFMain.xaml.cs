@@ -265,7 +265,7 @@ namespace ElectronicObserver.WPFEO
 			//SubUCs.Add(ucCompass = new FormCompass(this));
 			SubUserControls.Add(UserControlBattle = new WPFBattle(this));
 
-			SubUserControls.Add(UserControlBrowser = new WPFBrowserHost(this));
+			SubUserControls.Add(UserControlBrowser = new WPFBrowserHost());
 			SubUserControls.Add(UserControlLog = new WPFLog(this));
 			//SubUCs.Add(ucWindowCapture = new FormWindowCapture(this));
 			//SubUCs.Add(ucJson = new FormJson(this));
@@ -864,7 +864,7 @@ namespace ElectronicObserver.WPFEO
 
 		private void MI_Tools_ExtraBrowser_OnClick(object sender, RoutedEventArgs e)
 		{
-			FormBrowserHost.Instance.Browser.OpenExtraBrowser();
+			WPFBrowserHost.Instance.Browser.OpenExtraBrowser();
 		}
 
 		#endregion

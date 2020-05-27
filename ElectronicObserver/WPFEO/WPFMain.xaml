@@ -15,7 +15,10 @@
         FontFamily="{materialDesign:MaterialDesignFont}"
         Title="Electronic Observer" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Closed="Window_Closed">
 
-	<Grid x:Name="layoutRoot">
+	<Window.Resources>
+	</Window.Resources>
+
+		<Grid x:Name="layoutRoot">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
