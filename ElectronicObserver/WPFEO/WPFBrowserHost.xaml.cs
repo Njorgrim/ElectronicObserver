@@ -396,21 +396,12 @@ namespace ElectronicObserver.WPFEO
 				APIObserver.Instance.APIList["api_start2/getData"].ResponseReceived +=
 					(string apiname, dynamic data) => InitialAPIReceived(apiname, data);
 
-				// プロキシをセット
-				Browser.SetProxy(BuildDownstreamProxy());
-				// Browser.AsyncRemoteRun(() => Browser.Proxy.SetProxy(BuildDownstreamProxy()));
-				APIObserver.Instance.ProxyStarted += () =>
-				{
-					Browser.SetProxy(BuildDownstreamProxy());
-					// Browser.AsyncRemoteRun(() => Browser.Proxy.SetProxy(BuildDownstreamProxy()));
-				};
-
 				InitializationStage |= InitializationStageFlag.BrowserConnected;
 
 			}));
 		}
 
-		private string BuildDownstreamProxy()
+		public string GetDownstreamProxy()
 		{
 			var config = Utility.Configuration.Config.Connection;
 

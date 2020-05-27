@@ -338,8 +338,15 @@ namespace WPFBrowser
 			BrowserHost = StreamingHubClient.Connect<BrowserLibCore.IBrowserHost, BrowserLibCore.IBrowser>(grpChannel, this);
 		}
 
-		private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
+		// hack it gets called multiple times in wpf, call it only once
+		private bool WindowLoaded { get; set; }
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			if (WindowLoaded) return;
+
+			WindowLoaded = true;
+
 			IntPtr handle = new WindowInteropHelper(this).Handle;
 			SetWindowLong(handle, GWL_STYLE, WS_CHILD);
 
@@ -388,6 +395,9 @@ namespace WPFBrowser
 			if (!Configuration.HardwareAccelerationEnabled)
 				settings.DisableGpuAcceleration();
 
+			// this sets ProxySettings
+			SetProxy(BrowserHost.GetDownstreamProxy().Result);
+
 			settings.CefCommandLineArgs.Add("proxy-server", ProxySettings);
 			settings.CefCommandLineArgs.Add("limit-fps", "60");
 			// limit browser fps to fix canvas crash
@@ -411,8 +421,6 @@ namespace WPFBrowser
 			// if (Browser != null) return;
 			if (ProxySettings == null) return;
 
-			InitializeCef();
-
 			Browser.RequestHandler = new CefRequestHandler();
 			Browser.MenuHandler = new MenuHandler();
 			Browser.WpfKeyboardHandler = new WpfKeyboardHandler(Browser);
@@ -427,10 +435,13 @@ namespace WPFBrowser
 
 		void Exit()
 		{
-			HeartbeatTimer.Stop();
-			Task.Run(async () => await BrowserHost.DisposeAsync()).Wait();
-			Cef.Shutdown();
-			System.Windows.Application.Current.Shutdown();
+			Dispatcher.Invoke(() =>
+			{
+				HeartbeatTimer.Stop();
+				Task.Run(async () => await BrowserHost.DisposeAsync()).Wait();
+				Cef.Shutdown();
+				Application.Current.Shutdown();
+			});
 		}
 
 		void BrowserHostChannel_Faulted(Exception e)
@@ -886,6 +897,9 @@ namespace WPFBrowser
 
 		}
 
+		/// <summary>
+		/// todo make private once we delete the winforms version
+		/// </summary>
 		public void SetProxy(string proxy)
 		{
 			if (ushort.TryParse(proxy, out ushort port))
@@ -898,8 +912,6 @@ namespace WPFBrowser
 				// WinInetUtil.SetProxyInProcess(proxy, "local");
 				ProxySettings = proxy;
 			}
-
-			InitializeBrowser();
 
 			BrowserHost.SetProxyCompleted();
 		}
@@ -993,10 +1005,9 @@ namespace WPFBrowser
 		private const int WM_ERASEBKGND = 0x14;
 
 		#endregion
-
 	}
 
-    public static class CustomCommands
+	public static class CustomCommands
     {
 	    public static readonly RoutedUICommand Screenshot = new RoutedUICommand
 	    (

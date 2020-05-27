@@ -10,6 +10,7 @@ namespace BrowserLibCore
 		Task SendErrorReport(string exceptionName, string message);
 		Task AddLog(int priority, string message);
 		Task ConfigurationUpdated(BrowserConfiguration configuration);
+		Task<string> GetDownstreamProxy();
 		Task SetProxyCompleted();
 		Task RequestNavigation(string v);
 		Task ClearCache();

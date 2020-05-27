@@ -38,6 +38,11 @@ namespace BrowserHost
 			await Task.Run(() => WPFBrowserHost.Instance.ConfigurationUpdated(configuration));
 		}
 
+		public Task<string> GetDownstreamProxy()
+		{
+			return Task.Run(() => WPFBrowserHost.Instance.GetDownstreamProxy());
+		}
+
 		public async Task SetProxyCompleted()
 		{
 			await Task.Run(() => WPFBrowserHost.Instance.SetProxyCompleted());
