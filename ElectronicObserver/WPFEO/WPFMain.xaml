@@ -125,7 +125,7 @@
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_View_Compass" Header="Compass">
+				<MenuItem Name="MI_View_Compass" Header="Compass" Click="MI_View_Compass_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Compass}"/>
 					</MenuItem.Icon>

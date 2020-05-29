@@ -63,7 +63,7 @@ namespace ElectronicObserver.WPFEO
 		private WPFQuest UserControlQuest { get; set; }
 		private WPFInformation UserControlInformation { get; set; }
 
-		// public FormCompass ucCompass;
+		private WPFCompass UserControlCompass { get; set; }
 		private WPFBattle UserControlBattle { get; set; }
 
 		public WPFBrowserHost UserControlBrowser { get; private set; }
@@ -177,7 +177,7 @@ namespace ElectronicObserver.WPFEO
 						"quest" => UserControlQuest,
 						"info" => UserControlInformation,
 
-						// todo compass
+						"compass" => UserControlCompass,
 						"battle" => UserControlBattle,
 
 						"cefBrowser" => UserControlBrowser,
@@ -262,7 +262,7 @@ namespace ElectronicObserver.WPFEO
 			SubUserControls.Add(UserControlQuest = new WPFQuest(new FormQuest()));
 			SubUserControls.Add(UserControlInformation = new WPFInformation(new FormInformation()));
 
-			//SubUCs.Add(ucCompass = new FormCompass(this));
+			SubUserControls.Add(UserControlCompass = new WPFCompass(new FormCompass()));
 			SubUserControls.Add(UserControlBattle = new WPFBattle(this));
 
 			SubUserControls.Add(UserControlBrowser = new WPFBrowserHost());
@@ -704,7 +704,17 @@ namespace ElectronicObserver.WPFEO
 			anchorable.Float();
 		}
 
-		// todo compass
+		private void MI_View_Compass_OnClick(object sender, RoutedEventArgs e)
+		{
+			LayoutAnchorable anchorable = new LayoutAnchorable
+			{
+				Title = "Compass",
+				Content = UserControlCompass,
+				ContentId = "compass"
+			};
+			anchorable.AddToLayout(dockManager, AnchorableShowStrategy.Most);
+			anchorable.Float();
+		}
 
 		private void MI_View_Battle_Click(object sender, RoutedEventArgs e)
 		{

@@ -556,7 +556,7 @@ namespace ElectronicObserver.WinFormsEO
 
 
 
-		public FormCompass(FormMain parent)
+		public FormCompass(FormMain? parent = null)
 		{
 			InitializeComponent();
 
@@ -1224,6 +1224,11 @@ namespace ElectronicObserver.WinFormsEO
 			TextDestination.Font =
 			TextEventKind.Font =
 			TextEventDetail.Font = Font;
+
+			TextMapArea.ForeColor =
+			TextDestination.ForeColor =
+			TextEventKind.ForeColor =
+			TextEventDetail.ForeColor = Color.Black;
 
 			BasePanel.AutoScroll = Utility.Configuration.Config.FormCompass.IsScrollable;
 
