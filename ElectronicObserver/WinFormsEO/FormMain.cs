@@ -68,7 +68,7 @@ namespace ElectronicObserver.WinFormsEO
 		public FormBattle fBattle;
 		public FormFleetOverview fFleetOverview;
 		public FormShipGroup fShipGroup;
-		public FormBrowserHost fBrowser;
+		//public FormBrowserHost fBrowser;
 		public FormWindowCapture fWindowCapture;
 		public FormXPCalculator fXPCalculator;
 		public FormBaseAirCorps fBaseAirCorps;
@@ -205,7 +205,7 @@ namespace ElectronicObserver.WinFormsEO
 			SubForms.Add(fBattle = new FormBattle(this));
 			SubForms.Add(fFleetOverview = new FormFleetOverview(this));
 			SubForms.Add(fShipGroup = new FormShipGroup(this));
-			SubForms.Add(fBrowser = new FormBrowserHost(this));
+			//SubForms.Add(fBrowser = new FormBrowserHost(this));
 			SubForms.Add(fWindowCapture = new FormWindowCapture(this));
 			SubForms.Add(fXPCalculator = new FormXPCalculator(this));
 			SubForms.Add(fBaseAirCorps = new FormBaseAirCorps(this));
@@ -520,7 +520,7 @@ namespace ElectronicObserver.WinFormsEO
 
 			UIUpdateTimer.Stop();
 
-			fBrowser.CloseBrowser();
+			//fBrowser.CloseBrowser();
 
 			UpdatePlayTime();
 
@@ -600,8 +600,7 @@ namespace ElectronicObserver.WinFormsEO
 					return fFleetOverview;
 				//case "ShipGroup":
 				//	return fShipGroup;
-				case "Browser":
-					return fBrowser;
+				//case "Browser": return fBrowser;
 				case "WindowCapture":
 					return fWindowCapture;
 				case "BaseAirCorps":
@@ -714,7 +713,7 @@ namespace ElectronicObserver.WinFormsEO
 				MessageBox.Show(Resources.InitLayout, Resources.NoLayoutFound,
 					MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-				fBrowser.Show(MainDockPanel);
+				//fBrowser.Show(MainDockPanel);
 
 			}
 			catch (DirectoryNotFoundException)
@@ -724,7 +723,7 @@ namespace ElectronicObserver.WinFormsEO
 				MessageBox.Show(Resources.InitLayout, Resources.NoLayoutFound,
 					MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-				fBrowser.Show(MainDockPanel);
+				//fBrowser.Show(MainDockPanel);
 
 			}
 			catch (Exception ex)
@@ -1547,7 +1546,7 @@ namespace ElectronicObserver.WinFormsEO
 
         private void StripMenu_Tool_ExtraBrowser_Click(object sender, EventArgs e)
         {
-			FormBrowserHost.Instance.Browser.OpenExtraBrowser();
+			//FormBrowserHost.Instance.Browser.OpenExtraBrowser();
         }
 
 		private void CallPumpkinHead(string apiname, dynamic data)
@@ -1674,7 +1673,7 @@ namespace ElectronicObserver.WinFormsEO
 
 		private void StripMenu_View_Browser_Click(object sender, EventArgs e)
 		{
-			ShowForm(fBrowser);
+			//ShowForm(fBrowser);
 		}
 
 		private void StripMenu_WindowCapture_SubWindow_Click(object sender, EventArgs e)

@@ -1,6 +1,6 @@
 ﻿using CefSharp;
 
-namespace BrowserWPF.CefOp
+namespace ElectronicObserver.WPFEO.Browser.CefOp
 {
 	/// <summary>
 	/// コンテキストメニューを無効化します。

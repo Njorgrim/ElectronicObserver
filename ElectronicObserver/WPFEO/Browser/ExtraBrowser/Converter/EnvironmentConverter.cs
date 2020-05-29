@@ -2,13 +2,13 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace BrowserWPF.ExtraBrowser.Converter
+namespace ElectronicObserver.WPFEO.Browser.ExtraBrowser.Converter
 {
-    public class TitleConverter : IValueConverter
+    public class EnvironmentConverter : IValueConverter
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "CefSharp.MinimalExample.Wpf - " + (value ?? "No Title Specified");
+            return Environment.Is64BitProcess ? "x64" : "x86";
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

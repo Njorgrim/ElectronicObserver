@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace WPFBrowser.ExtraBrowser.Converter
+namespace BrowserWPF.ExtraBrowser.Converter
 {
     public class EnvironmentConverter : IValueConverter
     {

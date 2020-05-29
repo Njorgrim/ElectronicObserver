@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using CefSharp;
 
-namespace BrowserWPF.CefOp
+namespace ElectronicObserver.WPFEO.Browser.CefOp
 {
 	/// <summary>
 	/// スクリーンショット撮影に必要なデータを挿入します。

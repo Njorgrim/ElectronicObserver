@@ -15,13 +15,13 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using BrowserLibCore;
+using BrowserWPF.CefOp;
+using BrowserWPF.ExtraBrowser;
 using CefSharp;
 using CefSharp.Wpf;
 using CefSharp.Wpf.Internals;
 using Grpc.Core;
 using MagicOnion.Client;
-using WPFBrowser.CefOp;
-using WPFBrowser.ExtraBrowser;
 using Clipboard = System.Windows.Clipboard;
 using Color = System.Drawing.Color;
 using MessageBox = System.Windows.MessageBox;
@@ -29,12 +29,12 @@ using Orientation = System.Windows.Controls.Orientation;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Size = System.Windows.Size;
 
-namespace WPFBrowser
+namespace BrowserWPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, BrowserLibCore.IBrowser
+    public partial class WPFBrowser : Window, BrowserLibCore.IBrowser
 	{
 		private Size KanColleSize { get; } = new Size(1200, 720);
 		private string BrowserCachePath => BrowserConstants.CachePath;
@@ -77,7 +77,7 @@ namespace WPFBrowser
 
 		private string? LastScreenShotPath { get; set; }
 
-		public MainWindow(string host, int port)
+		public WPFBrowser(string host, int port)
 		{
 			// Debugger.Launch();
 

@@ -309,9 +309,6 @@ namespace ElectronicObserver.WPFEO
 				APIObserver.Instance.APIList["api_port/port"].ResponseReceived += CallPumpkinHead;
 			}
 
-			// 完了通知（ログインページを開く）
-			UserControlBrowser.InitializeApiCompleted();
-
 			//UIUpdateTimer.Start();
 
 
@@ -321,7 +318,6 @@ namespace ElectronicObserver.WPFEO
 
 		private void LoadAPIList(string path)
 		{
-
 			string parent = Path.GetDirectoryName(path);
 
 			using (StreamReader sr = new StreamReader(path))

@@ -1,7 +1,7 @@
 ﻿using CefSharp;
 using CefSharp.Handler;
 
-namespace BrowserWPF.CefOp
+namespace ElectronicObserver.WPFEO.Browser.CefOp
 {
 	internal class GadgetUrlHandler : ResourceRequestHandler
 	{

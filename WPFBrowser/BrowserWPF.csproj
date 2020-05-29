@@ -59,10 +59,10 @@
 		</Reference>
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Update="Properties\Resources.Designer.cs">
+	  <Compile Update="Properties\BrowserResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resources.resx</DependentUpon>
+	    <DependentUpon>BrowserResources.resx</DependentUpon>
 	  </Compile>
 	  <Compile Update="Properties\Settings.Designer.cs">
 	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -71,12 +71,12 @@
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
-	  <EmbeddedResource Update="Properties\Resources.en.resx">
+	  <EmbeddedResource Update="Properties\BrowserResources.en.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="Properties\Resources.resx">
+	  <EmbeddedResource Update="Properties\BrowserResources.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	    <LastGenOutput>BrowserResources.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	</ItemGroup>
 	<ItemGroup>

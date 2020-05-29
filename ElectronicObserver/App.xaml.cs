@@ -45,7 +45,7 @@ namespace ElectronicObserver
 					WPFMain mainWindow = new WPFMain();
 					mainWindow.ShowDialog();
 				}
-				catch (System.Runtime.InteropServices.SEHException ex)
+				catch (Exception ex)
 				{
 
 				}
