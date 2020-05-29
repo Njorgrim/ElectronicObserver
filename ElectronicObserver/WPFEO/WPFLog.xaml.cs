@@ -23,8 +23,14 @@ namespace ElectronicObserver.WPFEO
 			InitializeComponent();
 		}
 
+		private bool IsLoaded { get; set; }
+
 		private void WPFLog_Loaded(object sender, RoutedEventArgs e)
 		{
+			if (IsLoaded) return;
+
+			IsLoaded = true;
+
 			foreach (var log in Utility.Logger.Log)
 			{
 				if (log.Priority >= Utility.Configuration.Config.Log.LogLevel)
