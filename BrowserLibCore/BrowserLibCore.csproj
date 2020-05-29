@@ -5,8 +5,4 @@
 		<Platforms>x86;x64</Platforms>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="MagicOnion" Version="3.0.11" />
-	</ItemGroup>
-
 </Project>
