@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="ElectronicObserver.WPFEO.Fleet.WPFEquipmentData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:misc="clr-namespace:ElectronicObserver.WPFEO.MiscControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{materialDesign:MaterialDesignFont}"
+             mc:Ignorable="d" 
+             d:DesignHeight="22" d:DesignWidth="33">
+
+	<UserControl.Resources>
+		<Style TargetType="misc:OutlinedTextBlock">
+			<Setter Property="FontSize" Value="9"/>
+			<Setter Property="StrokeThickness" Value="1"/>
+			<Setter Property="Fill" Value="White"/>
+		</Style>
+	</UserControl.Resources>
+	<Grid Margin="2 0 0 0">
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<!-- size is kinda hacky here -->
+		<Border Grid.RowSpan="2" Height="22" Width="22" Padding="2">
+			<Image Name="Image" Source="{StaticResource Icon_Equipment_MainGunL}" />
+		</Border>
+
+		<misc:OutlinedTextBlock x:Name="Level" Text="+★" Fill="Turquoise" Grid.Column="1" />
+
+		<Image Name="PlaneRank" Source="{StaticResource Icon_Level_AircraftLevel7}" Grid.Column="1" />
+		<misc:OutlinedTextBlock x:Name="PlaneCount" Text="47" Grid.Column="1" Grid.Row="1" />
+	
+		
+	</Grid>
+</UserControl>

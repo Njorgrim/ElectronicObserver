@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ElectronicObserver.Utility.Data;
 
 namespace ElectronicObserver.WPFEO.Fleet
 {
@@ -44,11 +45,16 @@ namespace ElectronicObserver.WPFEO.Fleet
 		public int equipSlotAmount;
 		public bool hasOpenRE, isEscaped;
 		public int repairID;
+
+		private WPFEquipmentData[] EquipmentSlots { get; }
+
 		public WPFShipData(WPFFleet parent)
 		{
 			InitializeComponent();
 
 			this.parent = parent;
+
+			EquipmentSlots = new[] {Grid_Equip1, Grid_Equip2, Grid_Equip3, Grid_Equip4, Grid_Equip5};
 		}
 
 		public void Update(ShipData ship)
@@ -132,49 +138,55 @@ namespace ElectronicObserver.WPFEO.Fleet
 			{
 				OTB_HP.Text = "Repairing => " + hpCurrent + "/" + hpMax;
 				Grid_HP.Background = Brushes.DarkBlue;
-				Grid_HP.Width = 192;
 			}
 			else if (isEscaped)
 			{
 				OTB_HP.Text = "Retreated => " + hpCurrent + "/" + hpMax;
 				Grid_HP.Background = Brushes.Gray;
-				Grid_HP.Width = 192;
 			}
 			else
 			{
-				OTB_HP.Text = hpCurrent + "/" + hpMax;
-
-				switch (hpp)
+				OTB_HP.Text = hpp switch
 				{
-					case int n when (n == 100): Grid_HP.Background = Brushes.CornflowerBlue; break;
-					case int n when (n < 100 && n > 75): Grid_HP.Background = Brushes.ForestGreen; break;
-					case int n when (n <= 75 && n > 50): Grid_HP.Background = Brushes.Gold; break;
-					case int n when (n <= 50 && n > 25): Grid_HP.Background = Brushes.Orange; break;
-					case int n when (n <= 25 && n > 0): Grid_HP.Background = Brushes.Red; break;
-					case int n when (n == 0): Grid_HP.Background = Brushes.Gray; OTB_HP.Text = "Sunk"; break;
-				}
-				Grid_HP.Width = ((double)192 * hpp/100);
+					int i when i > 0 => hpCurrent + "/" + hpMax,
+					_ => "Sunk"
+				};
+
+				Grid_HP.Foreground = PercentegeBarColor(hpp);
+				Grid_HP.Value = hpp;
 			}
 		}
 
 		private void UpdateSupply(int fuelp, int ammop)
 		{
-			OTB_Fuel.Text = fuelp.ToString() + "%";
-			Grid_Fuel.Width = ((double)46 * fuelp/100);
-			OTB_Ammo.Text = ammop.ToString() + "%";
-			Grid_Ammo.Width = ((double)45 * ammop/100);
+			ProgressBarFuel.Foreground = PercentegeBarColor(fuelp);
+			ProgressBarFuel.Value = fuelp;
+
+			ProgressBarAmmo.Foreground = PercentegeBarColor(ammop);
+			ProgressBarAmmo.Value = ammop;
 		}
+
+		private Brush PercentegeBarColor(int percentage) => percentage switch
+		{
+			int n when n == 100 => Brushes.CornflowerBlue,
+			int n when n > 75 => Grid_HP.Foreground = Brushes.ForestGreen,
+			int n when n > 50 => Grid_HP.Foreground = Brushes.Gold,
+			int n when n > 25 => Grid_HP.Foreground = Brushes.Orange,
+			int n when n > 0 => Grid_HP.Foreground = Brushes.Red,
+			_ => Grid_HP.Foreground = Brushes.Gray,
+		};
 
 		private void UpdateMorale()
 		{
 			OTB_Morale.Text = morale.ToString();
-			switch (morale)
+			MoraleIcon.Source = (ImageSource?) (morale switch
 			{
-				case int n when (n > 49): Grid_Morale.Background = Brushes.Gold; break;
-				case int n when (n >= 30): Grid_Morale.Background = Brushes.White; break;
-				case int n when (n >= 20): Grid_Morale.Background = Brushes.Orange; break;
-				case int n when (n >= 0): Grid_Morale.Background = Brushes.Red; break;
-			}
+				int n when (n > 49) => FindResource("Icon_Condition_Sparkle"),
+				int n when (n > 39) => null,
+				int n when (n > 29) => FindResource("Icon_Condition_LittleTired"),
+				int n when (n > 19) => FindResource("Icon_Condition_Tired"),
+				_ => FindResource("Icon_Condition_VeryTired")
+			});
 		}
 
 		private void UpdateEquipment()
@@ -187,41 +199,40 @@ namespace ElectronicObserver.WPFEO.Fleet
 			}
 			*/
 			//Hide all equip slots
-			Grid_Equip1.Visibility = Visibility.Hidden;
-			Grid_Equip2.Visibility = Visibility.Hidden;
-			Grid_Equip3.Visibility = Visibility.Hidden;
-			Grid_Equip4.Visibility = Visibility.Hidden;
-			Grid_Equip5.Visibility = Visibility.Hidden;
-			Grid_EquipRE.Visibility = Visibility.Hidden;
-			Img_Equip1_PlaneRank.Visibility = Visibility.Collapsed;
-			Img_Equip2_PlaneRank.Visibility = Visibility.Collapsed;
-			Img_Equip3_PlaneRank.Visibility = Visibility.Collapsed;
-			Img_Equip4_PlaneRank.Visibility = Visibility.Collapsed;
-			Img_Equip5_PlaneRank.Visibility = Visibility.Collapsed;
-			Img_EquipRE_PlaneRank.Visibility = Visibility.Collapsed;
-			OTB_Equip1_Level.Visibility = Visibility.Collapsed;
-			OTB_Equip2_Level.Visibility = Visibility.Collapsed;
-			OTB_Equip3_Level.Visibility = Visibility.Collapsed;
-			OTB_Equip4_Level.Visibility = Visibility.Collapsed;
-			OTB_Equip5_Level.Visibility = Visibility.Collapsed;
-			OTB_EquipRE_Level.Visibility = Visibility.Collapsed;
-			OTB_Equip1_PlaneCount.Visibility = Visibility.Collapsed;
-			OTB_Equip2_PlaneCount.Visibility = Visibility.Collapsed;
-			OTB_Equip3_PlaneCount.Visibility = Visibility.Collapsed;
-			OTB_Equip4_PlaneCount.Visibility = Visibility.Collapsed;
-			OTB_Equip5_PlaneCount.Visibility = Visibility.Collapsed;
-			OTB_EquipRE_PlaneCount.Visibility = Visibility.Collapsed;
 
-			//Show available equip slots (including RE, if applicable)
-			switch (equipSlotAmount)
+			foreach (WPFEquipmentData equip in EquipmentSlots)
 			{
-				case 5: Grid_Equip5.Visibility = Visibility.Visible; goto case 4;
-				case 4: Grid_Equip4.Visibility = Visibility.Visible; goto case 3;
-				case 3: Grid_Equip3.Visibility = Visibility.Visible; goto case 2;
-				case 2: Grid_Equip2.Visibility = Visibility.Visible; goto case 1;
-				case 1: Grid_Equip1.Visibility = Visibility.Visible; goto case 0;
-				case 0: break;
-				default: break;
+				equip.Visibility = Visibility.Collapsed;
+				equip.PlaneRank.Visibility = Visibility.Collapsed;
+				equip.Level.Visibility = Visibility.Collapsed;
+				equip.PlaneRank.Visibility = Visibility.Collapsed;
+			}
+
+			Grid_EquipRE.Visibility = Visibility.Hidden;
+			Grid_EquipRE.PlaneRank.Visibility = Visibility.Collapsed;
+			Grid_EquipRE.Level.Visibility = Visibility.Collapsed;
+			Grid_EquipRE.PlaneCount.Visibility = Visibility.Collapsed;
+
+			// Show available equip slots (including RE, if applicable)
+			for (int i = 0; i < equipSlotAmount; i++)
+			{
+				EquipmentSlots[i].Visibility = Visibility.Visible;
+			}
+
+			int equippedSlotAmount = ship.SlotInstance.Count(eq => eq != null);
+
+			// Get Planecounts
+			for (int i = 0; i < 5; i++)
+			{
+				WritePlaneCount(EquipmentSlots[i].PlaneCount, ship.Aircraft[i]);
+			}
+
+			for (int i = 0; i < equippedSlotAmount; i++)
+			{
+				WriteImprovementLevel(EquipmentSlots[i].Level, ship.SlotInstance[i].Level);
+				EquipmentSlots[i].PlaneRank.Visibility = Visibility.Visible;
+				WritePlaneRank(EquipmentSlots[i].PlaneRank, ship.SlotInstance[i].AircraftLevel);
+				EquipmentSlots[i].Image.Source = GetEquipIcon(ship.SlotInstance[i].MasterEquipment.IconType);
 			}
 
 			if (hasOpenRE)
@@ -229,133 +240,65 @@ namespace ElectronicObserver.WPFEO.Fleet
 				Grid_EquipRE.Visibility = Visibility.Visible;
 			}
 
-			int equippedSlotAmount = 0;
-			foreach (EquipmentData eq in ship.SlotInstance)
+			if (hasOpenRE && ship.ExpansionSlotInstance != null)
 			{
-				if (eq != null)
-					equippedSlotAmount++;
-			}
-			//Get Planecounts
-			WritePlaneCount(OTB_Equip1_PlaneCount, ship.Aircraft[0]);
-			WritePlaneCount(OTB_Equip2_PlaneCount, ship.Aircraft[1]);
-			WritePlaneCount(OTB_Equip3_PlaneCount, ship.Aircraft[2]);
-			WritePlaneCount(OTB_Equip4_PlaneCount, ship.Aircraft[3]);
-			WritePlaneCount(OTB_Equip5_PlaneCount, ship.Aircraft[4]);
-
-			//Get Equip Improvement Levels
-			switch (equippedSlotAmount)
-			{
-				case 5: WriteImprovementLevel(OTB_Equip5_Level, ship.SlotInstance[4].Level); goto case 4;
-				case 4: WriteImprovementLevel(OTB_Equip4_Level, ship.SlotInstance[3].Level); goto case 3;
-				case 3: WriteImprovementLevel(OTB_Equip3_Level, ship.SlotInstance[2].Level); goto case 2;
-				case 2: WriteImprovementLevel(OTB_Equip2_Level, ship.SlotInstance[1].Level); goto case 1;
-				case 1: WriteImprovementLevel(OTB_Equip1_Level, ship.SlotInstance[0].Level); goto case 0;
-				case 0: break;
-				default: break;
-			}
-
-			if (hasOpenRE)
-			{
-				WriteImprovementLevel(OTB_EquipRE_Level, ship.ExpansionSlotInstance.Level);
-			}
-
-			//Get Plane Rank
-			switch (equippedSlotAmount)
-			{
-				case 5: Img_Equip5_PlaneRank.Visibility = Visibility.Visible; goto case 4;
-				case 4: Img_Equip4_PlaneRank.Visibility = Visibility.Visible; goto case 3;
-				case 3: Img_Equip3_PlaneRank.Visibility = Visibility.Visible; goto case 2;
-				case 2: Img_Equip2_PlaneRank.Visibility = Visibility.Visible; goto case 1;
-				case 1: Img_Equip1_PlaneRank.Visibility = Visibility.Visible; goto case 0;
-				case 0: break;
-				default: break;
-			}
-
-			switch (equippedSlotAmount)
-			{
-				case 5: WritePlaneRank(Img_Equip5_PlaneRank, ship.SlotInstance[4].AircraftLevel); goto case 4;
-				case 4: WritePlaneRank(Img_Equip4_PlaneRank, ship.SlotInstance[3].AircraftLevel); goto case 3;
-				case 3: WritePlaneRank(Img_Equip3_PlaneRank, ship.SlotInstance[2].AircraftLevel); goto case 2;
-				case 2: WritePlaneRank(Img_Equip2_PlaneRank, ship.SlotInstance[1].AircraftLevel); goto case 1;
-				case 1: WritePlaneRank(Img_Equip1_PlaneRank, ship.SlotInstance[0].AircraftLevel); goto case 0;
-				case 0: break;
-				default: break;
-			}
-
-			switch (equippedSlotAmount)
-			{
-				case 5: SetEquipIcon(Img_Equip5, ship.SlotInstance[4].MasterEquipment.IconType); goto case 4;
-				case 4: SetEquipIcon(Img_Equip4, ship.SlotInstance[3].MasterEquipment.IconType); goto case 3;
-				case 3: SetEquipIcon(Img_Equip3, ship.SlotInstance[2].MasterEquipment.IconType); goto case 2;
-				case 2: SetEquipIcon(Img_Equip2, ship.SlotInstance[1].MasterEquipment.IconType); goto case 1;
-				case 1: SetEquipIcon(Img_Equip1, ship.SlotInstance[0].MasterEquipment.IconType); goto case 0;
-				case 0: break;
-				default: break;
-			}
-
-			if (hasOpenRE)
-			{
-				SetEquipIcon(Img_EquipRE, ship.ExpansionSlotInstance.MasterEquipment.IconType);
+				WriteImprovementLevel(Grid_EquipRE.Level, ship.ExpansionSlotInstance.Level);
+				Grid_EquipRE.Image.Source = GetEquipIcon(ship.ExpansionSlotInstance.MasterEquipment.IconType);
 			}
 
 		}
 
-		public void SetEquipIcon(Image img, int type)
+		private ImageSource GetEquipIcon(int type) => (ImageSource) (type switch
 		{
-			var icon = type switch
-			{
-				1 => Application.Current.Resources["Icon_Equipment_MainGunS"],
-				2 => Application.Current.Resources["Icon_Equipment_MainGunM"],
-				3 => Application.Current.Resources["Icon_Equipment_MainGunL"],
-				4 => Application.Current.Resources["Icon_Equipment_SecondaryGun"],
-				5 => Application.Current.Resources["Icon_Equipment_Torpedo"],
-				6 => Application.Current.Resources["Icon_Equipment_CarrierBasedFighter"],
-				7 => Application.Current.Resources["Icon_Equipment_CarrierBasedBomber"],
-				8 => Application.Current.Resources["Icon_Equipment_CarrierBasedTorpedo"],
-				9 => Application.Current.Resources["Icon_Equipment_CarrierBasedRecon"],
-				10 => Application.Current.Resources["Icon_Equipment_Seaplane"],
-				11 => Application.Current.Resources["Icon_Equipment_RADAR"],
-				12 => Application.Current.Resources["Icon_Equipment_AAShell"],
-				13 => Application.Current.Resources["Icon_Equipment_APShell"],
-				14 => Application.Current.Resources["Icon_Equipment_DamageControl"],
-				15 => Application.Current.Resources["Icon_Equipment_AAGun"],
-				16 => Application.Current.Resources["Icon_Equipment_HighAngleGun"],
-				17 => Application.Current.Resources["Icon_Equipment_DepthCharge"],
-				18 => Application.Current.Resources["Icon_Equipment_SONAR"],
-				19 => Application.Current.Resources["Icon_Equipment_Engine"],
-				20 => Application.Current.Resources["Icon_Equipment_LandingCraft"],
-				21 => Application.Current.Resources["Icon_Equipment_Autogyro"],
-				22 => Application.Current.Resources["Icon_Equipment_ASWPatrol"],
-				23 => Application.Current.Resources["Icon_Equipment_Bulge"],
-				24 => Application.Current.Resources["Icon_Equipment_Searchlight"],
-				25 => Application.Current.Resources["Icon_Equipment_DrumCanister"],
-				26 => Application.Current.Resources["Icon_Equipment_RepairFacility"],
-				27 => Application.Current.Resources["Icon_Equipment_Flare"],
-				28 => Application.Current.Resources["Icon_Equipment_CommandFacility"],
-				29 => Application.Current.Resources["Icon_Equipment_MaintenanceTeam"],
-				30 => Application.Current.Resources["Icon_Equipment_AADirector"],
-				31 => Application.Current.Resources["Icon_Equipment_RocketArtillery"],
-				32 => Application.Current.Resources["Icon_Equipment_PicketCrew"],
-				33 => Application.Current.Resources["Icon_Equipment_FlyingBoat"],
-				34 => Application.Current.Resources["Icon_Equipment_Ration"],
-				35 => Application.Current.Resources["Icon_Equipment_Supplies"],
-				36 => Application.Current.Resources["Icon_Equipment_AmpibiousVehicle"],
-				37 => Application.Current.Resources["Icon_Equipment_LandAttacker"],
-				38 => Application.Current.Resources["Icon_Equipment_Interceptor"],
-				39 => Application.Current.Resources["Icon_Equipment_JetFightingBomberKeiun"],
-				40 => Application.Current.Resources["Icon_Equipment_JetFightingBomberKikka"],
-				41 => Application.Current.Resources["Icon_Equipment_TransportMaterial"],
-				42 => Application.Current.Resources["Icon_Equipment_SubmarineEquipment"],
-				43 => Application.Current.Resources["Icon_Equipment_SeaplaneFighter"],
-				44 => Application.Current.Resources["Icon_Equipment_ArmyInterceptor"],
-				45 => Application.Current.Resources["Icon_Equipment_NightFighter"],
-				46 => Application.Current.Resources["Icon_Equipment_NightAttacker"],
-				47 => Application.Current.Resources["Icon_Equipment_LandASPatrol"],
-				_ => Application.Current.Resources["Icon_Equipment_Unknown"],
-			};
-
-			img.Source = (ImageSource)icon;
-		}
+			1 => Application.Current.Resources["Icon_Equipment_MainGunS"],
+			2 => Application.Current.Resources["Icon_Equipment_MainGunM"],
+			3 => Application.Current.Resources["Icon_Equipment_MainGunL"],
+			4 => Application.Current.Resources["Icon_Equipment_SecondaryGun"],
+			5 => Application.Current.Resources["Icon_Equipment_Torpedo"],
+			6 => Application.Current.Resources["Icon_Equipment_CarrierBasedFighter"],
+			7 => Application.Current.Resources["Icon_Equipment_CarrierBasedBomber"],
+			8 => Application.Current.Resources["Icon_Equipment_CarrierBasedTorpedo"],
+			9 => Application.Current.Resources["Icon_Equipment_CarrierBasedRecon"],
+			10 => Application.Current.Resources["Icon_Equipment_Seaplane"],
+			11 => Application.Current.Resources["Icon_Equipment_RADAR"],
+			12 => Application.Current.Resources["Icon_Equipment_AAShell"],
+			13 => Application.Current.Resources["Icon_Equipment_APShell"],
+			14 => Application.Current.Resources["Icon_Equipment_DamageControl"],
+			15 => Application.Current.Resources["Icon_Equipment_AAGun"],
+			16 => Application.Current.Resources["Icon_Equipment_HighAngleGun"],
+			17 => Application.Current.Resources["Icon_Equipment_DepthCharge"],
+			18 => Application.Current.Resources["Icon_Equipment_SONAR"],
+			19 => Application.Current.Resources["Icon_Equipment_Engine"],
+			20 => Application.Current.Resources["Icon_Equipment_LandingCraft"],
+			21 => Application.Current.Resources["Icon_Equipment_Autogyro"],
+			22 => Application.Current.Resources["Icon_Equipment_ASWPatrol"],
+			23 => Application.Current.Resources["Icon_Equipment_Bulge"],
+			24 => Application.Current.Resources["Icon_Equipment_Searchlight"],
+			25 => Application.Current.Resources["Icon_Equipment_DrumCanister"],
+			26 => Application.Current.Resources["Icon_Equipment_RepairFacility"],
+			27 => Application.Current.Resources["Icon_Equipment_Flare"],
+			28 => Application.Current.Resources["Icon_Equipment_CommandFacility"],
+			29 => Application.Current.Resources["Icon_Equipment_MaintenanceTeam"],
+			30 => Application.Current.Resources["Icon_Equipment_AADirector"],
+			31 => Application.Current.Resources["Icon_Equipment_RocketArtillery"],
+			32 => Application.Current.Resources["Icon_Equipment_PicketCrew"],
+			33 => Application.Current.Resources["Icon_Equipment_FlyingBoat"],
+			34 => Application.Current.Resources["Icon_Equipment_Ration"],
+			35 => Application.Current.Resources["Icon_Equipment_Supplies"],
+			36 => Application.Current.Resources["Icon_Equipment_AmpibiousVehicle"],
+			37 => Application.Current.Resources["Icon_Equipment_LandAttacker"],
+			38 => Application.Current.Resources["Icon_Equipment_Interceptor"],
+			39 => Application.Current.Resources["Icon_Equipment_JetFightingBomberKeiun"],
+			40 => Application.Current.Resources["Icon_Equipment_JetFightingBomberKikka"],
+			41 => Application.Current.Resources["Icon_Equipment_TransportMaterial"],
+			42 => Application.Current.Resources["Icon_Equipment_SubmarineEquipment"],
+			43 => Application.Current.Resources["Icon_Equipment_SeaplaneFighter"],
+			44 => Application.Current.Resources["Icon_Equipment_ArmyInterceptor"],
+			45 => Application.Current.Resources["Icon_Equipment_NightFighter"],
+			46 => Application.Current.Resources["Icon_Equipment_NightAttacker"],
+			47 => Application.Current.Resources["Icon_Equipment_LandASPatrol"],
+			_ => Application.Current.Resources["Icon_Equipment_Unknown"],
+		});
 
 		private void WritePlaneCount(OutlinedTextBlock otb, int count)
 		{
@@ -369,7 +312,7 @@ namespace ElectronicObserver.WPFEO.Fleet
 		{
 			if (level != 0 && level != 10)
 			{
-				otb.Text = level.ToString();
+				otb.Text = otb.Text = "+" + level;
 				otb.Visibility = Visibility.Visible;
 			}
 			else if (level == 10)
@@ -399,6 +342,10 @@ namespace ElectronicObserver.WPFEO.Fleet
 		private void UpdateExperience()
 		{
 			OTB_ExpNext.Text = expNext.ToString();
+
+			ProgressBarExp.Minimum = ExpTable.ShipExp[ship.Level].Total;
+			ProgressBarExp.Maximum = ExpTable.ShipExp[ship.Level].Total + ExpTable.ShipExp[ship.Level].Next;
+			ProgressBarExp.Value = ExpTable.ShipExp[ship.Level].Total + ship.ExpNext;
 		}
 
 		private void UpdateShipName()
