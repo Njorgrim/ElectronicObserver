@@ -13,6 +13,7 @@ using System.IO;
 using AvalonDock.Layout.Serialization;
 using AvalonDock;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using ElectronicObserver.WinFormsEO;
 using ElectronicObserver.WinFormsEO.Dialog;
@@ -275,7 +276,8 @@ namespace ElectronicObserver.WPFEO
 			LoadLayout(Configuration.Config.Life.LayoutFilePath);
 
 
-#if (!DEBUG)
+#if false
+			// todo reenable auto updates
 			SoftwareInformation.CheckUpdate();
 			
 			CancellationTokenSource cts = new CancellationTokenSource();
