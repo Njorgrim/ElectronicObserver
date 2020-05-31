@@ -6,19 +6,19 @@
              xmlns:misc="clr-namespace:ElectronicObserver.WPFEO.MiscControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             Background="{DynamicResource MaterialDesignPaper}"
+             Background="{StaticResource EOBackground}"
              FontFamily="{materialDesign:MaterialDesignFont}"
              mc:Ignorable="d" 
              d:DesignHeight="22" d:DesignWidth="33">
 
 	<UserControl.Resources>
 		<Style TargetType="misc:OutlinedTextBlock">
-			<Setter Property="FontSize" Value="9"/>
-			<Setter Property="StrokeThickness" Value="1"/>
-			<Setter Property="Fill" Value="White"/>
+			<Setter Property="FontSize" Value="10"/>
+			<Setter Property="StrokeThickness" Value="0"/>
+			<Setter Property="Fill" Value="Gray"/>
 		</Style>
 	</UserControl.Resources>
-	<Grid Margin="2 0 0 0">
+	<Grid Height="22" Margin="2 0 0 0">
 		<Grid.RowDefinitions>
 			<RowDefinition />
 			<RowDefinition />
@@ -33,10 +33,10 @@
 			<Image Name="Image" Source="{StaticResource Icon_Equipment_MainGunL}" />
 		</Border>
 
-		<misc:OutlinedTextBlock x:Name="Level" Text="+★" Fill="Turquoise" Grid.Column="1" />
+		<misc:OutlinedTextBlock x:Name="Level" Text="+★" Fill="Turquoise" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top" />
 
-		<Image Name="PlaneRank" Source="{StaticResource Icon_Level_AircraftLevel7}" Grid.Column="1" />
-		<misc:OutlinedTextBlock x:Name="PlaneCount" Text="47" Grid.Column="1" Grid.Row="1" />
+		<Image Name="PlaneRank" Source="{StaticResource Icon_Level_AircraftLevel7}" Grid.RowSpan="2" Height="16"/>
+		<misc:OutlinedTextBlock x:Name="PlaneCount" Text="47" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Bottom" />
 	
 		
 	</Grid>

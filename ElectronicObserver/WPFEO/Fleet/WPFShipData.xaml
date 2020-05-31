@@ -7,17 +7,17 @@
 			 xmlns:misc="clr-namespace:ElectronicObserver.WPFEO.MiscControls"
 			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             Background="{DynamicResource MaterialDesignPaper}"
+             Background="{StaticResource EOBackground}"
              FontFamily="{materialDesign:MaterialDesignFont}"
 			 mc:Ignorable="d" 
              d:DesignHeight="22" d:DesignWidth="570">
 
 	<UserControl.Resources>
 		<Style TargetType="misc:OutlinedTextBlock">
-			<Setter Property="Fill" Value="White"/>
+			<Setter Property="Fill" Value="Gray"/>
 			<Setter Property="Stroke" Value="Black"/>
 			<Setter Property="FontSize" Value="13"/>
-			<Setter Property="StrokeThickness" Value="2"/>
+			<Setter Property="StrokeThickness" Value="0"/>
 			<Setter Property="TextAlignment" Value="Center"/>
 			<Setter Property="HorizontalAlignment" Value="Center"/>
 			<Setter Property="VerticalAlignment" Value="Center"/>
@@ -57,15 +57,17 @@
 
 
 			<Border Grid.Column="0">
-				<misc:OutlinedTextBlock x:Name="OTB_ShipName" Text="神風" />
+				<misc:OutlinedTextBlock x:Name="OTB_ShipName" Text="神風" HorizontalAlignment="Left" />
 			</Border>
 			<Border Grid.Column="1">
-				<misc:OutlinedTextBlock x:Name="OTB_Level" Text="Lv. 175" />
+				<misc:OutlinedTextBlock x:Name="OTB_Level" Text="Lv. 175" HorizontalAlignment="Left" />
 			</Border>
 
 			<StackPanel Grid.Column="2" Orientation="Vertical" Margin="2 0">
 				<StackPanel Orientation="Horizontal" Margin="2 0">
+					<!--
 					<misc:OutlinedTextBlock Text="next:" Margin="0 0 4 0"/>
+					-->
 					<misc:OutlinedTextBlock x:Name="OTB_ExpNext" Text="293848"/>
 				</StackPanel>
 				<ProgressBar Name="ProgressBarExp" Value="60" BorderThickness="0" Background="Gray"/>
@@ -82,7 +84,7 @@
 				<misc:OutlinedTextBlock x:Name="OTB_Morale" Text="100" />
 			</Border>
 
-			<Grid Grid.Column="6" Width="40">
+			<Grid Grid.Column="6" Width="30">
 				<Grid.RowDefinitions>
 					<RowDefinition />
 					<RowDefinition />

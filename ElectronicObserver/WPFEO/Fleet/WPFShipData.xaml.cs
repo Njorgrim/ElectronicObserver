@@ -128,7 +128,7 @@ namespace ElectronicObserver.WPFEO.Fleet
 
 		private void UpdateMeta()
 		{
-			OTB_Level.Text = level.ToString();
+			OTB_Level.Text = "Lv. " + level;
 			OTB_ExpNext.Text = expNext.ToString();
 		}
 
@@ -168,12 +168,12 @@ namespace ElectronicObserver.WPFEO.Fleet
 
 		private Brush PercentegeBarColor(int percentage) => percentage switch
 		{
-			int n when n == 100 => Brushes.CornflowerBlue,
-			int n when n > 75 => Grid_HP.Foreground = Brushes.ForestGreen,
-			int n when n > 50 => Grid_HP.Foreground = Brushes.Gold,
-			int n when n > 25 => Grid_HP.Foreground = Brushes.Orange,
-			int n when n > 0 => Grid_HP.Foreground = Brushes.Red,
-			_ => Grid_HP.Foreground = Brushes.Gray,
+			int n when n == 100 => (Brush) FindResource("EOBlue"),
+			int n when n > 75 => Brushes.ForestGreen,
+			int n when n > 50 => Brushes.Gold,
+			int n when n > 25 => Brushes.Orange,
+			int n when n > 0 => Brushes.Red,
+			_ => Brushes.Gray,
 		};
 
 		private void UpdateMorale()
