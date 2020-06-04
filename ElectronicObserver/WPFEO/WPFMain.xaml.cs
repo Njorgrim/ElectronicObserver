@@ -19,6 +19,7 @@ using ElectronicObserver.WinFormsEO;
 using ElectronicObserver.WinFormsEO.Dialog;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Threading;
 using ElectronicObserver.WinFormsEO.Dialog.KancolleProgress;
 
 namespace ElectronicObserver.WPFEO
@@ -45,6 +46,7 @@ namespace ElectronicObserver.WPFEO
 		//Singleton
 		public static WPFMain Instance;
 
+		private DispatcherTimer UIUpdateTimer { get; }
 
 		#region Forms
 
@@ -83,7 +85,147 @@ namespace ElectronicObserver.WPFEO
 			Instance = this;
 
 			this.DataContext = this;
+
+			UIUpdateTimer = new DispatcherTimer
+			{
+				Interval = TimeSpan.FromSeconds(1)
+			};
+
+			UIUpdateTimer.Tick += Timer_Tick;
 		}
+
+		private void Timer_Tick(object? sender, EventArgs e)
+		{
+			SystemEvents.OnUpdateTimerTick();
+		}
+
+		/* todo 
+		private void UIUpdateTimer_Tick(object sender, EventArgs e)
+		{
+
+			SystemEvents.OnUpdateTimerTick();
+
+			// 東京標準時
+			DateTime now = Utility.Mathematics.DateTimeHelper.GetJapanStandardTimeNow();
+
+			switch (ClockFormat)
+			{
+				case 0: //時計表示
+					var pvpReset = now.Date.AddHours(3);
+					while (pvpReset < now)
+						pvpReset = pvpReset.AddHours(12);
+					var pvpTimer = pvpReset - now;
+
+					var questReset = now.Date.AddHours(5);
+					if (questReset < now)
+						questReset = questReset.AddHours(24);
+					var questTimer = questReset - now;
+
+					DateTime maintDate = now;
+					TimeSpan maintTimer = now - now;
+					if (SoftwareUpdater.MaintState != 0)
+					{
+						maintDate = DateTimeHelper.CSVStringToTime(SoftwareUpdater.MaintDate);
+						if (maintDate < now)
+							maintDate = now;
+						maintTimer = maintDate - now;
+					}
+
+					string maintState, message;
+					switch (SoftwareUpdater.MaintState)
+					{
+						case 1:
+							message = maintDate > now ? "Event starts in" : "Event has started!";
+							break;
+						case 2:
+							message = maintDate > now ? "Event ends in" : "Event period has ended.";
+							break;
+						case 3:
+							message = maintDate > now ? "Maintenance starts in" : "Maintenance has started.";
+							break;
+						default:
+							message = string.Empty;
+							break;
+					}
+
+					if (maintDate > now)
+					{
+						var hours = $"{maintTimer.Days}d {maintTimer.Hours}h";
+						if ((int)maintTimer.TotalHours < 24)
+							hours = $"{maintTimer.Hours}h";
+						maintState = $"{message} {hours} {maintTimer.Minutes}m {maintTimer.Seconds}s";
+					}
+					else
+						maintState = message;
+
+					var resetMsg =
+						$"Next PVP reset: {(int)pvpTimer.TotalHours:D2}:{pvpTimer.Minutes:D2}:{pvpTimer.Seconds:D2}\r\n" +
+						$"Next Quest reset: {(int)questTimer.TotalHours:D2}:{questTimer.Minutes:D2}:{questTimer.Seconds:D2}\r\n" +
+						$"{maintState}";
+
+					StripStatus_Clock.Text = now.ToString("HH\\:mm\\:ss");
+					StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd)\r\n") + resetMsg;
+
+					break;
+
+				case 1: //演習更新まで
+					{
+						var border = now.Date.AddHours(3);
+						while (border < now)
+							border = border.AddHours(12);
+
+						var ts = border - now;
+						StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
+						StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss");
+
+					}
+					break;
+
+				case 2: //任務更新まで
+					{
+						var border = now.Date.AddHours(5);
+						if (border < now)
+							border = border.AddHours(24);
+
+						var ts = border - now;
+						StripStatus_Clock.Text = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)ts.TotalHours, ts.Minutes, ts.Seconds);
+						StripStatus_Clock.ToolTipText = now.ToString("yyyy\\/MM\\/dd (ddd) HH\\:mm\\:ss");
+
+					}
+					break;
+			}
+
+
+			// WMP コントロールによって音量が勝手に変えられてしまうため、前回終了時の音量の再設定を試みる。
+			// 10回試行してダメなら諦める(例外によるラグを防ぐため)
+			// 起動直後にやらないのはちょっと待たないと音量設定が有効にならないから
+			if (_volumeUpdateState != -1 && _volumeUpdateState < 10 && Utility.Configuration.Config.Control.UseSystemVolume)
+			{
+
+				try
+				{
+					uint id = (uint)System.Diagnostics.Process.GetCurrentProcess().Id;
+					float volume = Utility.Configuration.Config.Control.LastVolume;
+					bool mute = Utility.Configuration.Config.Control.LastIsMute;
+
+					BrowserLibCore.VolumeManager.SetApplicationVolume(id, volume);
+					BrowserLibCore.VolumeManager.SetApplicationMute(id, mute);
+
+					SyncBGMPlayer.Instance.SetInitialVolume((int)(volume * 100));
+					foreach (var not in NotifierManager.Instance.GetNotifiers())
+						not.SetInitialVolume((int)(volume * 100));
+
+					_volumeUpdateState = -1;
+
+				}
+				catch (Exception)
+				{
+
+					_volumeUpdateState++;
+				}
+			}
+
+		}*/
 
 		#region TestBackground
 
@@ -311,7 +453,7 @@ namespace ElectronicObserver.WPFEO
 				APIObserver.Instance.APIList["api_port/port"].ResponseReceived += CallPumpkinHead;
 			}
 
-			//UIUpdateTimer.Start();
+			UIUpdateTimer.Start();
 
 
 			Utility.Logger.Add(3, Properties.Resources.StartupComplete);
@@ -491,7 +633,7 @@ namespace ElectronicObserver.WPFEO
 
 			Logger.Add(2, SoftwareInformation.SoftwareNameEnglish + Properties.Resources.IsClosing);
 
-			//UIUpdateTimer.Stop();
+			UIUpdateTimer.Stop();
 
 			UserControlBrowser.CloseBrowser();
 
