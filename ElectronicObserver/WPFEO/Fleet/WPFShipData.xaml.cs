@@ -345,7 +345,7 @@ namespace ElectronicObserver.WPFEO.Fleet
 
 			ProgressBarExp.Minimum = ExpTable.ShipExp[ship.Level].Total;
 			ProgressBarExp.Maximum = ExpTable.ShipExp[ship.Level].Total + ExpTable.ShipExp[ship.Level].Next;
-			ProgressBarExp.Value = ExpTable.ShipExp[ship.Level].Total + ship.ExpNext;
+			ProgressBarExp.Value = ProgressBarExp.Maximum - ship.ExpNext;
 		}
 
 		private void UpdateShipName()
