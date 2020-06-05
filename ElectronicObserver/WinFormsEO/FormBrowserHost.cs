@@ -1,40 +1,57 @@
-﻿using System;
+﻿using BrowserLibCore;
+using ElectronicObserver.Observer;
+using ElectronicObserver.Resource;
+using ElectronicObserver.Properties;
+using ElectronicObserver.Utility.Mathematics;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.ServiceModel;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Forms.Integration;
-using System.Windows.Interop;
 using BrowserHost;
-using BrowserLibCore;
-using ElectronicObserver.Observer;
-using ElectronicObserver.Resource;
 using Grpc.Core;
 using MagicOnion.Hosting;
 using Microsoft.Extensions.Hosting;
-using Brushes = System.Drawing.Brushes;
-using MessageBox = System.Windows.MessageBox;
-using UserControl = System.Windows.Controls.UserControl;
+using WeifenLuo.WinFormsUI.Docking;
+using ElectronicObserver.WPFEO;
 
-namespace ElectronicObserver.WPFEO
+namespace ElectronicObserver.WinFormsEO
 {
-	public partial class WPFBrowserHost : UserControl
+
+	/// <summary>
+	/// ブラウザのホスト側フォーム
+	/// </summary>
+	// [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+	public partial class FormBrowserHost : DockContent
 	{
+		private static FormBrowserHost _instance;
+		public static FormBrowserHost Instance => _instance;
 
-		private static WPFBrowserHost _instance;
-		public static WPFBrowserHost Instance => _instance;
-
-		private static string BrowserExeName => "EOBrowserWPF.exe";
+		public static string BrowserExeName => "EOBrowserWPF.exe";
 
 		private string Host { get; }
 		private int Port { get; }
 
-		private List<BrowserHostHub> Hubs { get; } = new List<BrowserHostHub>();
+		/// <summary>
+		/// FormBrowserHostの通信サーバ
+		/// </summary>
+		private string ServerUri => "net.pipe://localhost/" + Process.GetCurrentProcess().Id + "/ElectronicObserver";
+
+		/// <summary>
+		/// FormBrowserとの通信インターフェース
+		/// </summary>
+		// private PipeCommunicator<IBrowser> Browser { get; set; }
+
+		public List<BrowserHostHub> Hubs { get; } = new List<BrowserHostHub>();
 
 		public IBrowser Browser => Hubs.FirstOrDefault()?.Browser ?? throw new Exception();
 
@@ -76,9 +93,7 @@ namespace ElectronicObserver.WPFEO
 			}
 		}
 
-		private Panel Panel { get; }
-
-		public WPFBrowserHost()
+		public FormBrowserHost(FormMain? parent = null)
 		{
 			InitializeComponent();
 
@@ -87,13 +102,7 @@ namespace ElectronicObserver.WPFEO
 			Host = "localhost";
 			Port = Process.GetCurrentProcess().Id;
 
-			Panel = new Panel();
-			BrowserDock.Child = Panel;
-
-			// without wait you get:
-			// Invoke or BeginInvoke cannot be called on a control until the window handle has been created
-			Task.Run(MakeHost).Wait();
-			LaunchBrowserProcess();
+			Icon = ResourceManager.ImageToIcon(ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBrowser]);
 		}
 
 		public void InitializeApiCompleted()
@@ -101,9 +110,12 @@ namespace ElectronicObserver.WPFEO
 			InitializationStage |= InitializationStageFlag.InitialAPILoaded;
 		}
 
-		private void UserControl_Loaded(object sender, RoutedEventArgs e)
+		private void FormBrowser_Load(object sender, EventArgs e)
 		{
-			// this can get called multiple times...
+			// without wait you get:
+			// Invoke or BeginInvoke cannot be called on a control until the window handle has been created
+			Task.Run(MakeHost).Wait();
+			LaunchBrowserProcess();
 		}
 
 		public void Connect(BrowserHostHub hub)
@@ -144,15 +156,15 @@ namespace ElectronicObserver.WPFEO
 			}
 			catch (Exception ex)
 			{
-				Utility.ErrorReporter.SendErrorReport(ex, Properties.Resources.FailedBrowserStart);
-				MessageBox.Show(Properties.Resources.FailedBrowserStart + ex.Message,
-					"Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				Utility.ErrorReporter.SendErrorReport(ex, Resources.FailedBrowserStart);
+				MessageBox.Show(Resources.FailedBrowserStart + ex.Message,
+					"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
 		internal void ConfigurationChanged()
 		{
-			// FontFamily = Utility.Configuration.Config.UI.MainFont;
+			Font = Utility.Configuration.Config.UI.MainFont;
 			Browser.ConfigurationChanged();
 		}
 
@@ -215,12 +227,12 @@ namespace ElectronicObserver.WPFEO
 					AppliesStyleSheet = c.AppliesStyleSheet,
 					IsDMMreloadDialogDestroyable = c.IsDMMreloadDialogDestroyable,
 					AvoidTwitterDeterioration = c.AvoidTwitterDeterioration,
-					ToolMenuDockStyle = (int)c.ToolMenuDockStyle,
+					ToolMenuDockStyle = (int) c.ToolMenuDockStyle,
 					IsToolMenuVisible = c.IsToolMenuVisible,
 					ConfirmAtRefresh = c.ConfirmAtRefresh,
 					HardwareAccelerationEnabled = c.HardwareAccelerationEnabled,
 					PreserveDrawingBuffer = c.PreserveDrawingBuffer,
-					// BackColor = ((SolidColorBrush)Background).Color.ToArgb(),
+					BackColor = BackColor.ToArgb(),
 					ForceColorProfile = c.ForceColorProfile,
 					SavesBrowserLog = c.SavesBrowserLog,
 					EnableDebugMenu = Utility.Configuration.Config.Debug.EnableDebugMenu
@@ -260,17 +272,54 @@ namespace ElectronicObserver.WPFEO
 			}
 		}
 
+		public byte[] GetIconResource()
+		{
+
+			string[] keys = 
+			{
+				"Browser_ScreenShot",
+				"Browser_Zoom",
+				"Browser_ZoomIn",
+				"Browser_ZoomOut",
+				"Browser_Unmute",
+				"Browser_Mute",
+				"Browser_Refresh",
+				"Browser_Navigate",
+				"Browser_Other",
+			};
+			int unitsize = 16 * 16 * 4;
+
+			byte[] canvas = new byte[unitsize * keys.Length];
+
+			for (int i = 0; i < keys.Length; i++)
+			{
+				Image img = ResourceManager.Instance.Icons.Images[keys[i]];
+				if (img == null) continue;
+
+				using (Bitmap bmp = new Bitmap(img))
+				{
+
+					BitmapData bmpdata = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+					Marshal.Copy(bmpdata.Scan0, canvas, unitsize * i, unitsize);
+					bmp.UnlockBits(bmpdata);
+
+				}
+			}
+
+			return canvas;
+		}
+
+
 		public void RequestNavigation(string baseurl)
 		{
-			using var dialog =
-				new WinFormsEO.Dialog.DialogTextInput(Properties.Resources.AskNavTitle, Properties.Resources.AskNavText)
-				{
-					InputtedText = baseurl
-				};
-
-			if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			using (var dialog = new Dialog.DialogTextInput(Resources.AskNavTitle, Resources.AskNavText))
 			{
-				Navigate(dialog.InputtedText);
+				dialog.InputtedText = baseurl;
+
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					Navigate(dialog.InputtedText);
+				}
 			}
 		}
 
@@ -294,7 +343,7 @@ namespace ElectronicObserver.WPFEO
 			catch (Exception ex)
 			{
 				Utility.ErrorReporter.SendErrorReport(ex, "ブラウザの再起動に失敗しました。");
-				MessageBox.Show("ブラウザプロセスの再起動に失敗しました。\r\n申し訳ありませんが本ツールを一旦終了してください。", ":(", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show("ブラウザプロセスの再起動に失敗しました。\r\n申し訳ありませんが本ツールを一旦終了してください。", ":(", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -343,46 +392,22 @@ namespace ElectronicObserver.WPFEO
 
 		public void ConnectToBrowser(IntPtr hwnd)
 		{
-			Dispatcher.Invoke(() => ConnectToBrowserInternal(hwnd));
+			Invoke((Action)(() => ConnectToBrowserInternal(hwnd)));
 		}
-
-		[DllImport("user32.dll")]
-		private static extern bool PostMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
 
 		private void ConnectToBrowserInternal(IntPtr hwnd)
 		{
 			BrowserWnd = hwnd;
-			IntPtr handle = Panel.Handle;
-				// new WindowInteropHelper(this).Handle;
-				// ((HwndSource)PresentationSource.FromVisual(BrowserDock)).Handle;
 
 			// 子ウィンドウに設定
-			SetParent(BrowserWnd, handle);
-			MoveWindow(BrowserWnd, 0, 0, (int)RenderSize.Width, (int)RenderSize.Height, true);
+			SetParent(BrowserWnd, Handle);
+			MoveWindow(BrowserWnd, 0, 0, this.Width, this.Height, true);
 
-			// todo
 			//キー入力をブラウザに投げる
-			// Application.AddMessageFilter(new KeyMessageGrabber(BrowserWnd));
-			ComponentDispatcher.ThreadFilterMessage += (ref MSG msg, ref bool handled) =>
-			{
-				const int WM_KEYDOWN = 0x100;
-				const int WM_KEYUP = 0x101;
-				const int WM_SYSKEYDOWN = 0x0104;
-				const int WM_SYSKEYUP = 0x0105;
-
-				switch (msg.message)
-				{
-					case WM_KEYDOWN:
-					case WM_KEYUP:
-					case WM_SYSKEYDOWN:
-					case WM_SYSKEYUP:
-						PostMessage(BrowserWnd, msg.message, msg.wParam, msg.lParam);
-						break;
-				}
-			};
+			Application.AddMessageFilter(new KeyMessageGrabber(BrowserWnd));
 
 			// デッドロックするので非同期で処理
-			Dispatcher.BeginInvoke((Action)(() =>
+			BeginInvoke((Action)(() =>
 			{
 				// ブラウザプロセスに接続
 				// todo: need browser connect?
@@ -396,12 +421,21 @@ namespace ElectronicObserver.WPFEO
 				APIObserver.Instance.APIList["api_start2/getData"].ResponseReceived +=
 					(string apiname, dynamic data) => InitialAPIReceived(apiname, data);
 
+				// プロキシをセット
+				Browser.SetProxy(BuildDownstreamProxy());
+				// Browser.AsyncRemoteRun(() => Browser.Proxy.SetProxy(BuildDownstreamProxy()));
+				APIObserver.Instance.ProxyStarted += () =>
+				{
+					Browser.SetProxy(BuildDownstreamProxy());
+					// Browser.AsyncRemoteRun(() => Browser.Proxy.SetProxy(BuildDownstreamProxy()));
+				};
+
 				InitializationStage |= InitializationStageFlag.BrowserConnected;
 
 			}));
 		}
 
-		public string GetDownstreamProxy()
+		private string BuildDownstreamProxy()
 		{
 			var config = Utility.Configuration.Config.Connection;
 
@@ -435,7 +469,7 @@ namespace ElectronicObserver.WPFEO
 		}
 
 
-		void Browser_Faulted(Exception e)
+		void Browser_Faulted( Exception e ) 
 		{
 			/*if ( Browser.Proxy == null ) 
 			{
@@ -483,9 +517,17 @@ namespace ElectronicObserver.WPFEO
 			catch (Exception ex)
 			{
 				//ブラウザプロセスが既に終了していた場合など
-				Utility.ErrorReporter.SendErrorReport(ex, Properties.Resources.BrowserCloseError);
+				Utility.ErrorReporter.SendErrorReport( ex, Resources.BrowserCloseError );
 			}
 
+		}
+
+		private void FormBrowserHost_Resize(object sender, EventArgs e)
+		{
+			if (BrowserWnd != IntPtr.Zero)
+			{
+				MoveWindow(BrowserWnd, 0, 0, this.Width, this.Height, true);
+			}
 		}
 
 		private void FormBrowserHost_Paint(object sender, PaintEventArgs e)
@@ -502,7 +544,7 @@ namespace ElectronicObserver.WPFEO
 
 		private void FormBrowserHost_Click(object sender, EventArgs e)
 		{
-			InvalidateVisual();
+			Refresh();
 
 			if (InitializationStage == InitializationStageFlag.Completed && (BrowserProcess?.HasExited ?? false))
 			{
@@ -511,13 +553,12 @@ namespace ElectronicObserver.WPFEO
 			}
 		}
 
-		private void BrowserDock_OnSizeChanged(object sender, SizeChangedEventArgs e)
-		{
-			if (!(sender is WindowsFormsHost host)) return;
-			if (BrowserWnd == IntPtr.Zero) return;
 
-			MoveWindow(BrowserWnd, 0, 0, (int)host.RenderSize.Width, (int)host.RenderSize.Height, true);
+		protected override string GetPersistString()
+		{
+			return "Browser";
 		}
+
 
 		#region 呪文
 
@@ -528,6 +569,7 @@ namespace ElectronicObserver.WPFEO
 		private static extern bool MoveWindow(IntPtr hwnd, int x, int y, int cx, int cy, bool repaint);
 
 		#endregion
+
 	}
 
 

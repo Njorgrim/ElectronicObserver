@@ -3,7 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace BrowserWPF.CefOp
+namespace WPFBrowser.CefOp
 {
 	public class ScreenShotPacket
 	{

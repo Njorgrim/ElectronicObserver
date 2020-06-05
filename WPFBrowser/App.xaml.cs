@@ -11,7 +11,7 @@ using System.Windows;
 using CefSharp;
 using CefSharp.Wpf;
 
-namespace BrowserWPF
+namespace WPFBrowser
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -35,7 +35,7 @@ namespace BrowserWPF
 			    return;
 		    }
 
-		    new WPFBrowser(e.Args[0], port).Show();
+		    new MainWindow(e.Args[0], port).Show();
 		}
 
 	    private static Assembly? CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)

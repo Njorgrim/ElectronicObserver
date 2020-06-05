@@ -6,7 +6,7 @@ using ElectronicObserver.WPFEO;
 
 namespace BrowserHost
 {
-	/*public class BrowserHostHub : StreamingHubBase<IBrowserHost, IBrowser>, IBrowserHost
+	public class BrowserHostHub : StreamingHubBase<IBrowserHost, IBrowser>, IBrowserHost
 	{
 		private IGroup Browsers { get; set; }
 		public IBrowser Browser => Broadcast(Browsers);
@@ -62,5 +62,5 @@ namespace BrowserHost
 		{
 			return Task.Run(() => true);
 		}
-	}*/
+	}
 }

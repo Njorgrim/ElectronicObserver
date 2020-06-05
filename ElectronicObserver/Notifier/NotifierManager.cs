@@ -78,7 +78,8 @@ namespace ElectronicObserver.Notifier
 
 				Point p = ParentForm switch
 				{
-					// FormMain parentForm => parentForm.fBrowser.PointToScreen(new Point(parentForm.fBrowser.ClientSize.Width / 2, parentForm.fBrowser.ClientSize.Height / 2)),
+					FormMain parentForm => parentForm.fBrowser.PointToScreen(
+						new Point(parentForm.fBrowser.ClientSize.Width / 2, parentForm.fBrowser.ClientSize.Height / 2)),
 
 					WPFMain parentForm => ToWinformsPoint(parentForm.PointToScreen(
 						new System.Windows.Point(parentForm.UserControlBrowser.RenderSize.Width / 2,

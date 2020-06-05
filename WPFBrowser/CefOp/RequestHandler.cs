@@ -1,7 +1,7 @@
 ﻿using CefSharp;
 using CefSharp.Handler;
 
-namespace BrowserWPF.CefOp
+namespace WPFBrowser.CefOp
 {
 	public class CefRequestHandler : RequestHandler
 	{

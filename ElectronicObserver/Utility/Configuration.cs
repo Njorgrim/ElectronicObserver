@@ -2728,11 +2728,11 @@ namespace ElectronicObserver.Utility
 
 			try
 			{
-				/*using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathBrowserVersion, true))
+				using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathBrowserVersion, true))
 					reg.DeleteValue(WinFormsEO.FormBrowserHost.BrowserExeName);
 
 				using (var reg = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(RegistryPathMaster + RegistryPathGPURendering, true))
-					reg.DeleteValue(WinFormsEO.FormBrowserHost.BrowserExeName);*/
+					reg.DeleteValue(WinFormsEO.FormBrowserHost.BrowserExeName);
 
 			}
 			catch (Exception ex)

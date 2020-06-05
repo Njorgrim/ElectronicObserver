@@ -6,8 +6,9 @@
              xmlns:local="clr-namespace:ElectronicObserver.WPFEO"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="WPFLog_Loaded">
-
-	<ScrollViewer>
-		<TextBlock Name="TB_Log" TextWrapping="Wrap"/>
-	</ScrollViewer>
+	<Grid>
+		<ScrollViewer>
+			<TextBlock Name="TB_Log" TextWrapping="Wrap"/>
+		</ScrollViewer>
+	</Grid>
 </UserControl>

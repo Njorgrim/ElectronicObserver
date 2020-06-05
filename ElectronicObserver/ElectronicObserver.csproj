@@ -57,11 +57,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>LoggerRes.resx</DependentUpon>
     </Compile>
-    <Compile Update="Properties\BrowserResources.Designer.cs">
-      <DependentUpon>BrowserResources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -128,8 +123,6 @@
     <ProjectReference Include="..\ElectronicObserverTypes\ElectronicObserverTypes.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CefSharp.Common" Version="81.3.100" />
-    <PackageReference Include="CefSharp.Wpf" Version="81.3.100" />
     <PackageReference Include="Dirkster.AvalonDock" Version="4.10.0" />
     <PackageReference Include="MaterialDesignColors" Version="1.2.4" />
     <PackageReference Include="MaterialDesignThemes" Version="3.1.1" />
@@ -188,7 +181,6 @@
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.3" />
     <PackageReference Include="System.Threading.Tasks.Parallel" Version="4.3.0" />
     <PackageReference Include="System.Windows.Forms.DataVisualization" Version="1.0.0-prerelease.20110.1" />
-    <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
     <PackageReference Include="Titanium.Web.Proxy" Version="3.1.1288" />
   </ItemGroup>
   <ItemGroup>
@@ -215,14 +207,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LoggerRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Properties\BrowserResources.en.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\BrowserResources.resx">
-      <SubType>Designer</SubType>
-      <LastGenOutput>BrowserResources.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -239,21 +223,28 @@
 		<Reference Update="CefSharp.Core">
 			<Private>true</Private>
 		</Reference>
-		<Reference Update="CefSharp.Wpf">
+		<Reference Update="CefSharp.WinForms">
 			<Private>true</Private>
 		</Reference>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Page Update="WPFEO\Browser\WPFBrowser.xaml">
-	    <SubType>Designer</SubType>
-	  </Page>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Reference Include="CefSharp.BrowserSubprocess.Core">
-			<HintPath>$(CefSharpBrowserProcessCore64)</HintPath>
-			<Private>true</Private>
-		</Reference>
-	</ItemGroup>
+	<Choose>
+		<When Condition="'$(PlatformTarget)' == 'x64'">
+			<ItemGroup>
+				<Reference Include="CefSharp.BrowserSubprocess.Core">
+					<HintPath>$(CefSharpBrowserProcessCore64)</HintPath>
+					<Private>true</Private>
+				</Reference>
+			</ItemGroup>
+		</When>
+		<!-- x86, Win32 and AnyCPU -->
+		<Otherwise>
+			<ItemGroup>
+				<Reference Include="CefSharp.BrowserSubprocess.Core">
+					<HintPath>$(CefSharpBrowserProcessCore32)</HintPath>
+					<Private>true</Private>
+				</Reference>
+			</ItemGroup>
+		</Otherwise>
+	</Choose>
 </Project>
