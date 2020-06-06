@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.Integration;
 using System.Windows.Interop;
 using BrowserHost;
-using BrowserLibCore;
+using BrowserLib;
 using ElectronicObserver.Observer;
 using ElectronicObserver.Resource;
 using Grpc.Core;

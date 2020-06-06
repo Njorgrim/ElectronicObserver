@@ -655,8 +655,8 @@ namespace ElectronicObserver.WPFEO
 				try
 				{
 					uint id = (uint) Process.GetCurrentProcess().Id;
-					Configuration.Config.Control.LastVolume = BrowserLibCore.VolumeManager.GetApplicationVolume(id);
-					Configuration.Config.Control.LastIsMute = BrowserLibCore.VolumeManager.GetApplicationMute(id);
+					Configuration.Config.Control.LastVolume = BrowserLib.VolumeManager.GetApplicationVolume(id);
+					Configuration.Config.Control.LastIsMute = BrowserLib.VolumeManager.GetApplicationMute(id);
 				}
 				catch (Exception)
 				{

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace BrowserLibCore
+namespace BrowserLib
 {
 	public static class BrowserConstants
 	{

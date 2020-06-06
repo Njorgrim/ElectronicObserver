@@ -1,4 +1,4 @@
-﻿using BrowserLibCore;
+﻿using BrowserLib;
 using MagicOnion.Server.Hubs;
 using System.Threading.Tasks;
 using System;

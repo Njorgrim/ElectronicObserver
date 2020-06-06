@@ -1,4 +1,4 @@
-﻿using BrowserLibCore;
+﻿using BrowserLib;
 using ElectronicObserver.Observer;
 using ElectronicObserver.Resource;
 using ElectronicObserver.Properties;

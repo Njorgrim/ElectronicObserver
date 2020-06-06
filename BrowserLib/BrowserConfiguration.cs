@@ -1,6 +1,6 @@
 ﻿using MessagePack;
 
-namespace BrowserLibCore
+namespace BrowserLib
 {
 	[MessagePackObject]
 	public class BrowserConfiguration

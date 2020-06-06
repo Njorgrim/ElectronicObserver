@@ -116,7 +116,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BrowserLibCore\BrowserLib.csproj" />
+    <ProjectReference Include="..\BrowserLib\BrowserLib.csproj" />
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\ThemeVS2012.csproj" />
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\WinFormsUI.csproj" />
     <ProjectReference Include="..\ElectronicObserverTheme\ElectronicObserverTheme.csproj" />

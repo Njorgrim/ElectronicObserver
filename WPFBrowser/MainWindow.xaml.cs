@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Browser.CefOp;
 using Browser.ExtraBrowser;
-using BrowserLibCore;
+using BrowserLib;
 using CefSharp;
 using CefSharp.Wpf;
 using CefSharp.Wpf.Internals;
@@ -34,7 +34,7 @@ namespace Browser
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, BrowserLibCore.IBrowser
+    public partial class MainWindow : Window, BrowserLib.IBrowser
 	{
 		private Size KanColleSize { get; } = new Size(1200, 720);
 		private string BrowserCachePath => BrowserConstants.CachePath;
@@ -45,7 +45,7 @@ namespace Browser
 		private string Host { get; }
 		private int Port { get; }
 		
-		private BrowserLibCore.IBrowserHost BrowserHost { get; set; }
+		private BrowserLib.IBrowserHost BrowserHost { get; set; }
 
 		private BrowserConfiguration Configuration { get; set; }
 
@@ -335,7 +335,7 @@ namespace Browser
 		{
 			// ホストプロセスに接続
 			Channel grpChannel = new Channel(Host, Port, ChannelCredentials.Insecure);
-			BrowserHost = StreamingHubClient.Connect<BrowserLibCore.IBrowserHost, BrowserLibCore.IBrowser>(grpChannel, this);
+			BrowserHost = StreamingHubClient.Connect<BrowserLib.IBrowserHost, BrowserLib.IBrowser>(grpChannel, this);
 		}
 
 		// hack it gets called multiple times in wpf, call it only once

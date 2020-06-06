@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\BrowserLibCore\BrowserLib.csproj" />
+	  <ProjectReference Include="..\BrowserLib\BrowserLib.csproj" />
 	  <ProjectReference Include="..\ElectronicObserverTheme\ElectronicObserverTheme.csproj" />
 	</ItemGroup>
 

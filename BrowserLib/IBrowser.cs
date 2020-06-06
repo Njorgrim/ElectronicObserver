@@ -1,4 +1,4 @@
-﻿namespace BrowserLibCore
+﻿namespace BrowserLib
 {
 	public interface IBrowser
 	{

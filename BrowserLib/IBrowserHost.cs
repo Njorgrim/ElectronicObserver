@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MagicOnion;
 
-namespace BrowserLibCore
+namespace BrowserLib
 {
 	public interface IBrowserHost : IStreamingHub<IBrowserHost, IBrowser>
 	{
