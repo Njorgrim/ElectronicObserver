@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace WPFBrowser.ExtraBrowser.Converter
+namespace Browser.ExtraBrowser.Converter
 {
     public class TitleConverter : IValueConverter
     {

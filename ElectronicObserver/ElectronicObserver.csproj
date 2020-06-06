@@ -89,7 +89,7 @@
     <Content Include="74eo.ico">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\**\*.png" >
+    <Content Include="Assets\**\*.png">
 		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Other\Information\apilist.txt" />
@@ -116,7 +116,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BrowserLibCore\BrowserLibCore.csproj" />
+    <ProjectReference Include="..\BrowserLibCore\BrowserLib.csproj" />
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\ThemeVS2012.csproj" />
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\WinFormsUI.csproj" />
     <ProjectReference Include="..\ElectronicObserverTheme\ElectronicObserverTheme.csproj" />

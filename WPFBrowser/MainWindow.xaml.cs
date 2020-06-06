@@ -14,14 +14,14 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Browser.CefOp;
+using Browser.ExtraBrowser;
 using BrowserLibCore;
 using CefSharp;
 using CefSharp.Wpf;
 using CefSharp.Wpf.Internals;
 using Grpc.Core;
 using MagicOnion.Client;
-using WPFBrowser.CefOp;
-using WPFBrowser.ExtraBrowser;
 using Clipboard = System.Windows.Clipboard;
 using Color = System.Drawing.Color;
 using MessageBox = System.Windows.MessageBox;
@@ -29,7 +29,7 @@ using Orientation = System.Windows.Controls.Orientation;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Size = System.Windows.Size;
 
-namespace WPFBrowser
+namespace Browser
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

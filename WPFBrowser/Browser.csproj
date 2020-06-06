@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
-		<AssemblyName>EOBrowserWPF</AssemblyName>
+		<AssemblyName>EOBrowser</AssemblyName>
 		<UseWPF>true</UseWPF>
 		<Platforms>x64</Platforms>
 		<Nullable>enable</Nullable>
@@ -26,7 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\BrowserLibCore\BrowserLibCore.csproj" />
+	  <ProjectReference Include="..\BrowserLibCore\BrowserLib.csproj" />
 	  <ProjectReference Include="..\ElectronicObserverTheme\ElectronicObserverTheme.csproj" />
 	</ItemGroup>
 

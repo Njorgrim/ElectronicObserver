@@ -1,6 +1,6 @@
 ﻿using CefSharp;
 
-namespace WPFBrowser.CefOp
+namespace Browser.CefOp
 {
 	/// <summary>
 	/// コンテキストメニューを無効化します。

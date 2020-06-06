@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using CefSharp;
 
-namespace WPFBrowser.CefOp
+namespace Browser.CefOp
 {
 
 	public class GadgetReplaceFilter : IResponseFilter

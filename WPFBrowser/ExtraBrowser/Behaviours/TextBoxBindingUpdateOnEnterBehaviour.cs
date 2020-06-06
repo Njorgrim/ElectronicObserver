@@ -1,8 +1,8 @@
-﻿using System.Windows.Interactivity;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interactivity;
 
-namespace CefSharp.MinimalExample.Wpf.Behaviours
+namespace Browser.ExtraBrowser.Behaviours
 {
     public class TextBoxBindingUpdateOnEnterBehaviour : Behavior<TextBox>
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPFBrowser.ExtraBrowser
+namespace Browser.ExtraBrowser
 {
     public partial class WPFExtraBrowser : Window
     {

@@ -29,7 +29,7 @@ namespace ElectronicObserver.WPFEO
 		private static WPFBrowserHost _instance;
 		public static WPFBrowserHost Instance => _instance;
 
-		private static string BrowserExeName => "EOBrowserWPF.exe";
+		private static string BrowserExeName => "EOBrowser.exe";
 
 		private string Host { get; }
 		private int Port { get; }

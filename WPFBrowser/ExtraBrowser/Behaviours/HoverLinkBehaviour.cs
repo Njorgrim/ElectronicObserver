@@ -1,9 +1,10 @@
-﻿using CefSharp.Wpf;
+﻿using System;
 using System.Windows;
 using System.Windows.Interactivity;
-using System;
+using CefSharp;
+using CefSharp.Wpf;
 
-namespace CefSharp.MinimalExample.Wpf.Behaviours
+namespace Browser.ExtraBrowser.Behaviours
 {
     public class HoverLinkBehaviour : Behavior<ChromiumWebBrowser>
     {

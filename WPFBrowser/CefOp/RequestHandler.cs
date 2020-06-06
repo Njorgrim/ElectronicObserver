@@ -1,7 +1,7 @@
 ﻿using CefSharp;
 using CefSharp.Handler;
 
-namespace WPFBrowser.CefOp
+namespace Browser.CefOp
 {
 	public class CefRequestHandler : RequestHandler
 	{

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CefSharp;
 using CefSharp.Enums;
 
-namespace WPFBrowser.CefOp
+namespace Browser.CefOp
 {
 	/// <summary>
 	/// (たぶん)ドラッグ&ドロップを無効化します。
