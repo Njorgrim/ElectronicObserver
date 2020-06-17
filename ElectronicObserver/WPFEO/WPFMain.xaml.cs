@@ -21,6 +21,7 @@ using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using ElectronicObserver.WinFormsEO.Dialog.KancolleProgress;
+using ElectronicObserver.WPFEO.Fleet;
 
 namespace ElectronicObserver.WPFEO
 {

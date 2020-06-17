@@ -30,13 +30,16 @@
 
 		<!-- size is kinda hacky here -->
 		<Border Grid.RowSpan="2" Height="22" Width="22" Padding="2">
-			<Image Name="Image" Source="{StaticResource Icon_Equipment_MainGunL}" />
+			<!--  Source="{StaticResource Icon_Equipment_MainGunL}" -->
+			<Image Name="Image" />
 		</Border>
 
-		<misc:OutlinedTextBlock x:Name="Level" Text="+★" Fill="Turquoise" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top" />
+		<!-- Text="★" -->
+		<misc:OutlinedTextBlock x:Name="Level" Fill="Turquoise" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top" />
 
-		<Image Name="PlaneRank" Source="{StaticResource Icon_Level_AircraftLevel7}" Grid.RowSpan="2" Height="16"/>
-		<misc:OutlinedTextBlock x:Name="PlaneCount" Text="47" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Bottom" />
+		<!-- Source="{StaticResource Icon_Level_AircraftLevelTop7}" -->
+		<Image Name="PlaneRank"  Grid.RowSpan="2" Height="16"/>
+		<misc:OutlinedTextBlock x:Name="PlaneCount" Text="" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Bottom" />
 	
 		
 	</Grid>

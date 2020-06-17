@@ -12,95 +12,130 @@
 			 mc:Ignorable="d" 
              d:DesignHeight="22" d:DesignWidth="570">
 
+	<UserControl.CommandBindings>
+		<CommandBinding Command="local:CustomCommands.OpenShipEncyclopedia" Executed="ShipName_RightClick" />
+		<CommandBinding Command="local:CustomCommands.OpenExpCalculator" Executed="ShipLevel_RightClick" />
+	</UserControl.CommandBindings>
+
 	<UserControl.Resources>
-		<Style TargetType="misc:OutlinedTextBlock">
-			<Setter Property="Fill" Value="Gray"/>
-			<Setter Property="Stroke" Value="Black"/>
-			<Setter Property="FontSize" Value="13"/>
-			<Setter Property="StrokeThickness" Value="0"/>
-			<Setter Property="TextAlignment" Value="Center"/>
-			<Setter Property="HorizontalAlignment" Value="Center"/>
-			<Setter Property="VerticalAlignment" Value="Center"/>
-		</Style>
+        <Style TargetType="Border">
+            <Setter Property="Padding" Value="2 0"/>
+            <Setter Property="Margin" Value="0 0 2 0"/>
+        </Style>
 
-		<Style TargetType="Border">
-			<Setter Property="Padding" Value="2 0"/>
-			<Setter Property="Margin" Value="0 0 2 0"/>
-		</Style>
-
-		<Style x:Key="PercentageBar" TargetType="ProgressBar" BasedOn="{StaticResource MaterialDesignLinearProgressBar}">
-			<Setter Property="Minimum" Value="0"/>
-			<Setter Property="Maximum" Value="100"/>
-			<Setter Property="Background" Value="Gray"/>
-			<Setter Property="BorderThickness" Value="0"/>
-		</Style>
-	</UserControl.Resources>
+        <Style x:Key="PercentageBar" TargetType="ProgressBar" BasedOn="{StaticResource MaterialDesignLinearProgressBar}">
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </UserControl.Resources>
 
 
 	<Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource MaterialDesignShadowBrush}">
 		<Grid Height="22">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipName"/>
-				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipLevel"/>
 				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipExp"/>
 				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipHp"/>
-				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipMoraleIcon"/>
 				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipMorale"/>
 				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipFuelAmmo"/>
-				<ColumnDefinition Width="Auto" SharedSizeGroup="Equip1"/>
-				<ColumnDefinition Width="Auto" SharedSizeGroup="Equip2"/>
-				<ColumnDefinition Width="Auto" SharedSizeGroup="Equip3"/>
-				<ColumnDefinition Width="Auto" SharedSizeGroup="Equip4"/>
-				<ColumnDefinition Width="Auto" SharedSizeGroup="Equip5"/>
-				<ColumnDefinition Width="Auto" SharedSizeGroup="Equip6"/>
+				<ColumnDefinition Width="Auto" SharedSizeGroup="Equip"/>
 			</Grid.ColumnDefinitions>
 
 
-			<Border Grid.Column="0">
+			<Border Grid.Column="0" Background="Transparent" MouseEnter="HelpOnHover" MouseLeave="ResetCursor">
+				<Border.InputBindings>
+					<MouseBinding Command="local:CustomCommands.OpenShipEncyclopedia" MouseAction="RightClick" />
+				</Border.InputBindings>
+				<Border.ToolTip>
+					<TextBlock x:Name="ShipNameToolTip" />
+				</Border.ToolTip>
 				<misc:OutlinedTextBlock x:Name="OTB_ShipName" Text="神風" HorizontalAlignment="Left" />
 			</Border>
-			<Border Grid.Column="1">
-				<misc:OutlinedTextBlock x:Name="OTB_Level" Text="Lv. 175" HorizontalAlignment="Left" />
-			</Border>
 
-			<StackPanel Grid.Column="2" Orientation="Vertical" Margin="2 0">
-				<StackPanel Orientation="Horizontal" Margin="2 0">
-					<!--
-					<misc:OutlinedTextBlock Text="next:" Margin="0 0 4 0"/>
-					-->
-					<misc:OutlinedTextBlock x:Name="OTB_ExpNext" Text="293848"/>
+			<Border Grid.Column="1" Background="Transparent" MouseEnter="HelpOnHover" MouseLeave="ResetCursor">
+				<Border.InputBindings>
+					<MouseBinding Command="local:CustomCommands.OpenExpCalculator" MouseAction="RightClick" />
+				</Border.InputBindings>
+				<Border.ToolTip>
+					<TextBlock x:Name="ExpToolTip" />
+				</Border.ToolTip>
+
+				<StackPanel Orientation="Horizontal">
+					<misc:OutlinedTextBlock x:Name="OTB_Level" Text="Lv. 175" HorizontalAlignment="Left" />
+
+					<StackPanel Orientation="Vertical" Margin="5 0">
+						<StackPanel Orientation="Horizontal" Margin="2 0">
+							<!--
+							<misc:OutlinedTextBlock Text="next:" Margin="0 0 4 0"/>
+							-->
+							<misc:OutlinedTextBlock x:Name="OTB_ExpNext" Text="293848"/>
+						</StackPanel>
+						<ProgressBar Name="ProgressBarExp" Value="60" BorderThickness="0" Background="Gray"/>
+					</StackPanel>
 				</StackPanel>
-				<ProgressBar Name="ProgressBarExp" Value="60" BorderThickness="0" Background="Gray"/>
-			</StackPanel>
-
-			<StackPanel Grid.Column="3" Orientation="Vertical" Width="70" Margin="2 0">
-				<misc:OutlinedTextBlock x:Name="OTB_HP" Text="16/16" />
-				<ProgressBar Name="Grid_HP" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" />
-			</StackPanel>
-
-			<Image x:Name="MoraleIcon" Grid.Column="4" Margin="3 0" Width="16" Source="{StaticResource Icon_Condition_Sparkle}"/>
-
-			<Border Grid.Column="5">
-				<misc:OutlinedTextBlock x:Name="OTB_Morale" Text="100" />
 			</Border>
 
-			<Grid Grid.Column="6" Width="30">
-				<Grid.RowDefinitions>
-					<RowDefinition />
-					<RowDefinition />
-				</Grid.RowDefinitions>
+			<Border Grid.Column="2" Background="Transparent">
+				<Border.ToolTip>
+					<TextBlock x:Name="HPToolTip" />
+				</Border.ToolTip>
+				<StackPanel Orientation="Vertical" Width="70" Margin="2 0">
+					<misc:OutlinedTextBlock x:Name="OTB_HP" Text="16/16" />
+					<ProgressBar Name="Grid_HP" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" />
+				</StackPanel>
+			</Border>
 
-				<ProgressBar x:Name="ProgressBarFuel" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" Grid.Row="0"/>
-				<ProgressBar x:Name="ProgressBarAmmo" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" Grid.Row="1"/>
-			</Grid>
+			<Border Grid.Column="3" Background="Transparent">
+				<Border.ToolTip>
+					<TextBlock x:Name="MoraleToolTip" />
+				</Border.ToolTip>
+				<StackPanel Orientation="Horizontal">
+					<Image x:Name="MoraleIcon"  Margin="3 0" Width="16" Source="{StaticResource Icon_Condition_Sparkle}"/>
+					<misc:OutlinedTextBlock x:Name="OTB_Morale" Text="100" />
+				</StackPanel>
+			</Border>
 
-			<local:WPFEquipmentData x:Name="Grid_Equip1" Grid.Column="7"/>
-			<local:WPFEquipmentData x:Name="Grid_Equip2" Grid.Column="8"/>
-			<local:WPFEquipmentData x:Name="Grid_Equip3" Grid.Column="9"/>
-			<local:WPFEquipmentData x:Name="Grid_Equip4" Grid.Column="10"/>
-			<local:WPFEquipmentData x:Name="Grid_Equip5" Grid.Column="11"/>
-			<local:WPFEquipmentData x:Name="Grid_EquipRE" Grid.Column="12"/>
+			<Border Grid.Column="4" Background="Transparent">
+				<Border.ToolTip>
+					<TextBlock x:Name="FuelAmmoToolTip" />
+				</Border.ToolTip>
+				<Grid Width="30">
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
 
+					<ProgressBar x:Name="ProgressBarFuel" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" Grid.Row="0"/>
+					<ProgressBar x:Name="ProgressBarAmmo" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" Grid.Row="1"/>
+				</Grid>
+			</Border>
+
+			<Border Grid.Column="5" Background="Transparent">
+				<Border.ToolTip>
+					<ToolTip Placement="Mouse">
+						<TextBlock x:Name="EquipmentToolTip"/>
+					</ToolTip>
+				</Border.ToolTip>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip1"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip2"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip3"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip4"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip5"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip6"/>
+					</Grid.ColumnDefinitions>
+
+					<local:WPFEquipmentData x:Name="Equip1" Grid.Column="0"/>
+					<local:WPFEquipmentData x:Name="Equip2" Grid.Column="1"/>
+					<local:WPFEquipmentData x:Name="Equip3" Grid.Column="2"/>
+					<local:WPFEquipmentData x:Name="Equip4" Grid.Column="3"/>
+					<local:WPFEquipmentData x:Name="Equip5" Grid.Column="4"/>
+					<local:WPFEquipmentData x:Name="EquipRE" Grid.Column="5"/>
+				</Grid>
+			</Border>
 		</Grid>
 	</Border>
 </UserControl>
