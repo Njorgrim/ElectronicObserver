@@ -622,7 +622,7 @@ namespace ElectronicObserver.Data
         /// <summary>
         /// 補強装備スロット(装備データ)
         /// </summary>
-        public EquipmentData ExpansionSlotInstance => KCDatabase.Instance.Equipments[ExpansionSlot];
+        public EquipmentData? ExpansionSlotInstance => KCDatabase.Instance.Equipments[ExpansionSlot];
 
         /// <summary>
         /// 補強装備スロット(装備マスターデータ)

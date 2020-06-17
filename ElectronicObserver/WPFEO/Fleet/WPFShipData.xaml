@@ -7,75 +7,135 @@
 			 xmlns:misc="clr-namespace:ElectronicObserver.WPFEO.MiscControls"
 			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-             Background="{DynamicResource MaterialDesignPaper}"
+             Background="{StaticResource EOBackground}"
              FontFamily="{materialDesign:MaterialDesignFont}"
 			 mc:Ignorable="d" 
-			 MinHeight="75" MinWidth="266"
-			 MaxHeight="75" MaxWidth="266"
-             d:DesignHeight="75" d:DesignWidth="265">
+             d:DesignHeight="22" d:DesignWidth="570">
 
-	<Grid>
-		<Grid Background="PaleVioletRed" Width="74" HorizontalAlignment="Left"/>
-		<misc:OutlinedTextBlock x:Name="OTB_Level" Text="175" Fill="Gold" Stroke="Black" FontSize="25" StrokeThickness="4" Width="50" Height="34" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,-3" TextAlignment="Right"/>
-		<Grid Name="Grid_HP" Background="CornflowerBlue" Width="192" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="74,0,0,0"/>
-		<misc:OutlinedTextBlock x:Name="OTB_HP" Text="43/43" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="74,0,0,0" Width="190" Fill="White" Stroke="Black" FontSize="16" StrokeThickness="3" Height="20" TextAlignment="Center"/>
-		<Grid Background="Gray" Width="192" HorizontalAlignment="Left" VerticalAlignment="Top" Height="20" Margin="74,0,0,0" Panel.ZIndex="-1"/>
-		<StackPanel Orientation="Horizontal"  Margin="74,21,0,0">
-			<Grid Name="Grid_Equip1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="30" Margin="1,0">
-				<Ellipse Name="Ell_Equip1" Width="30" Height="30" Fill="Gray" Visibility="Visible" VerticalAlignment="Top"/>
-				<Image Name="Img_Equip1" Source="{x:Null}" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3"/>
-				<misc:OutlinedTextBlock x:Name="OTB_Equip1_Level" Text="+★" Fill="White" Stroke="Black" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="-1,-2" StrokeThickness="3" />
-				<misc:OutlinedTextBlock x:Name="OTB_Equip1_PlaneCount" Text="47" Fill="White" Stroke="Black" FontSize="12" StrokeThickness="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,-2"/>
-				<Image Name="Img_Equip1_PlaneRank" Source="{StaticResource Icon_Level_AircraftLevelTop7}" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-4,-10"/>
-			</Grid>
-			<Grid Name="Grid_Equip2" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="30" Margin="1,0">
-				<Ellipse Name="Ell_Equip2" Width="30" Height="30" Fill="Gray" Visibility="Visible" VerticalAlignment="Top"/>
-				<Image Name="Img_Equip2"  Source="{x:Null}" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3"/>
-				<misc:OutlinedTextBlock x:Name="OTB_Equip2_Level" Text="+★" Fill="White" Stroke="Black" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="-1,-2" StrokeThickness="3" />
-				<misc:OutlinedTextBlock x:Name="OTB_Equip2_PlaneCount" Text="47" Fill="White" Stroke="Black" FontSize="12" StrokeThickness="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,-2"/>
-				<Image Name="Img_Equip2_PlaneRank" Source="{StaticResource Icon_Level_AircraftLevelTop7}" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-4,-10"/>
-			</Grid>
-			<Grid Name="Grid_Equip3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="30" Margin="1,0">
-				<Ellipse Name="Ell_Equip3" Width="30" Height="30" Fill="Gray" Visibility="Visible" VerticalAlignment="Top"/>
-				<Image Name="Img_Equip3" Source="{x:Null}" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3"/>
-				<misc:OutlinedTextBlock x:Name="OTB_Equip3_Level" Text="+★" Fill="White" Stroke="Black" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="-1,-2" StrokeThickness="3" />
-				<misc:OutlinedTextBlock x:Name="OTB_Equip3_PlaneCount" Text="47" Fill="White" Stroke="Black" FontSize="12" StrokeThickness="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,-2"/>
-				<Image Name="Img_Equip3_PlaneRank" Source="{StaticResource Icon_Level_AircraftLevelTop7}" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-4,-10"/>
-			</Grid>
-			<Grid Name="Grid_Equip4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="30" Margin="1,0">
-				<Ellipse Name="Ell_Equip4" Width="30" Height="30" Fill="Gray" Visibility="Visible" VerticalAlignment="Top"/>
-				<Image Name="Img_Equip4" Source="{x:Null}" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3"/>
-				<misc:OutlinedTextBlock x:Name="OTB_Equip4_Level" Text="+★" Fill="White" Stroke="Black" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="-1,-2" StrokeThickness="3" />
-				<misc:OutlinedTextBlock x:Name="OTB_Equip4_PlaneCount" Text="47" Fill="White" Stroke="Black" FontSize="12" StrokeThickness="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,-2"/>
-				<Image Name="Img_Equip4_PlaneRank" Source="{StaticResource Icon_Level_AircraftLevelTop7}" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-4,-10"/>
-			</Grid>
-			<Grid Name="Grid_Equip5" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="30" Margin="1,0">
-				<Ellipse Name="Ell_Equip5" Width="30" Height="30" Fill="Gray" Visibility="Visible" VerticalAlignment="Top"/>
-				<Image Name="Img_Equip5" Source="{x:Null}" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3"/>
-				<misc:OutlinedTextBlock x:Name="OTB_Equip5_Level" Text="+★" Fill="White" Stroke="Black" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="-1,-2" StrokeThickness="3" />
-				<misc:OutlinedTextBlock x:Name="OTB_Equip5_PlaneCount" Text="47" Fill="White" Stroke="Black" FontSize="12" StrokeThickness="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,-2"/>
-				<Image Name="Img_Equip5_PlaneRank" Source="{StaticResource Icon_Level_AircraftLevelTop7}" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-4,-10"/>
-			</Grid>
-			<Grid Name="Grid_EquipRE" HorizontalAlignment="Left" VerticalAlignment="Top" Height="36" Width="30" Margin="1,0">
-				<Ellipse Name="Ell_EquipRE" Width="30" Height="30" Fill="Gray" Visibility="Visible" VerticalAlignment="Top"/>
-				<Image Name="Img_EquipRE" Source="{x:Null}" Height="25" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="3"/>
-				<misc:OutlinedTextBlock x:Name="OTB_EquipRE_Level" Text="+★" Fill="White" Stroke="Black" FontSize="12" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="-1,-2" StrokeThickness="3" />
-				<misc:OutlinedTextBlock x:Name="OTB_EquipRE_PlaneCount" Text="47" Fill="White" Stroke="Black" FontSize="12" StrokeThickness="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,-2"/>
-				<Image Name="Img_EquipRE_PlaneRank" Source="{StaticResource Icon_Level_AircraftLevelTop7}" Height="20" Width="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="-4,-10"/>
-			</Grid>
-		</StackPanel>
-		<Grid Name="Grid_Morale" Background="Gold" Width="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="18" Margin="165,0,0,0">
-			<misc:OutlinedTextBlock x:Name="OTB_Morale" Text="85" Fill="White" Stroke="Black" FontSize="13" StrokeThickness="3" Height="18" TextAlignment="Center"/>
+	<UserControl.CommandBindings>
+		<CommandBinding Command="local:CustomCommands.OpenShipEncyclopedia" Executed="ShipName_RightClick" />
+		<CommandBinding Command="local:CustomCommands.OpenExpCalculator" Executed="ShipLevel_RightClick" />
+	</UserControl.CommandBindings>
+
+	<UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="Padding" Value="2 0"/>
+            <Setter Property="Margin" Value="0 0 2 0"/>
+        </Style>
+
+        <Style x:Key="PercentageBar" TargetType="ProgressBar" BasedOn="{StaticResource MaterialDesignLinearProgressBar}">
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+    </UserControl.Resources>
+
+
+	<Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource MaterialDesignShadowBrush}">
+		<Grid Height="22">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipName"/>
+				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipExp"/>
+				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipHp"/>
+				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipMorale"/>
+				<ColumnDefinition Width="Auto" SharedSizeGroup="ShipFuelAmmo"/>
+				<ColumnDefinition Width="Auto" SharedSizeGroup="Equip"/>
+			</Grid.ColumnDefinitions>
+
+
+			<Border Grid.Column="0" Background="Transparent" MouseEnter="HelpOnHover" MouseLeave="ResetCursor">
+				<Border.InputBindings>
+					<MouseBinding Command="local:CustomCommands.OpenShipEncyclopedia" MouseAction="RightClick" />
+				</Border.InputBindings>
+				<Border.ToolTip>
+					<TextBlock x:Name="ShipNameToolTip" />
+				</Border.ToolTip>
+				<misc:OutlinedTextBlock x:Name="OTB_ShipName" Text="神風" HorizontalAlignment="Left" />
+			</Border>
+
+			<Border Grid.Column="1" Background="Transparent" MouseEnter="HelpOnHover" MouseLeave="ResetCursor">
+				<Border.InputBindings>
+					<MouseBinding Command="local:CustomCommands.OpenExpCalculator" MouseAction="RightClick" />
+				</Border.InputBindings>
+				<Border.ToolTip>
+					<TextBlock x:Name="ExpToolTip" />
+				</Border.ToolTip>
+
+				<StackPanel Orientation="Horizontal">
+					<misc:OutlinedTextBlock x:Name="OTB_Level" Text="Lv. 175" HorizontalAlignment="Left" />
+
+					<StackPanel Orientation="Vertical" Margin="5 0">
+						<StackPanel Orientation="Horizontal" Margin="2 0">
+							<!--
+							<misc:OutlinedTextBlock Text="next:" Margin="0 0 4 0"/>
+							-->
+							<misc:OutlinedTextBlock x:Name="OTB_ExpNext" Text="293848"/>
+						</StackPanel>
+						<ProgressBar Name="ProgressBarExp" Value="60" BorderThickness="0" Background="Gray"/>
+					</StackPanel>
+				</StackPanel>
+			</Border>
+
+			<Border Grid.Column="2" Background="Transparent">
+				<Border.ToolTip>
+					<TextBlock x:Name="HPToolTip" />
+				</Border.ToolTip>
+				<StackPanel Orientation="Vertical" Width="70" Margin="2 0">
+					<misc:OutlinedTextBlock x:Name="OTB_HP" Text="16/16" />
+					<ProgressBar Name="Grid_HP" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" />
+				</StackPanel>
+			</Border>
+
+			<Border Grid.Column="3" Background="Transparent">
+				<Border.ToolTip>
+					<TextBlock x:Name="MoraleToolTip" />
+				</Border.ToolTip>
+				<StackPanel Orientation="Horizontal">
+					<Image x:Name="MoraleIcon"  Margin="3 0" Width="16" Source="{StaticResource Icon_Condition_Sparkle}"/>
+					<misc:OutlinedTextBlock x:Name="OTB_Morale" Text="100" />
+				</StackPanel>
+			</Border>
+
+			<Border Grid.Column="4" Background="Transparent">
+				<Border.ToolTip>
+					<TextBlock x:Name="FuelAmmoToolTip" />
+				</Border.ToolTip>
+				<Grid Width="30">
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+
+					<ProgressBar x:Name="ProgressBarFuel" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" Grid.Row="0"/>
+					<ProgressBar x:Name="ProgressBarAmmo" Style="{StaticResource PercentageBar}" Value="100" Foreground="CornflowerBlue" Grid.Row="1"/>
+				</Grid>
+			</Border>
+
+			<Border Grid.Column="5" Background="Transparent">
+				<Border.ToolTip>
+					<ToolTip Placement="Mouse">
+						<TextBlock x:Name="EquipmentToolTip"/>
+					</ToolTip>
+				</Border.ToolTip>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip1"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip2"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip3"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip4"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip5"/>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="Equip6"/>
+					</Grid.ColumnDefinitions>
+
+					<local:WPFEquipmentData x:Name="Equip1" Grid.Column="0"/>
+					<local:WPFEquipmentData x:Name="Equip2" Grid.Column="1"/>
+					<local:WPFEquipmentData x:Name="Equip3" Grid.Column="2"/>
+					<local:WPFEquipmentData x:Name="Equip4" Grid.Column="3"/>
+					<local:WPFEquipmentData x:Name="Equip5" Grid.Column="4"/>
+					<local:WPFEquipmentData x:Name="EquipRE" Grid.Column="5"/>
+				</Grid>
+			</Border>
 		</Grid>
-		<Grid Name="Grid_Fuel" Background="DarkOliveGreen" Width="46" Height="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="74,0,0,0"/>
-		<misc:OutlinedTextBlock x:Name="OTB_Fuel" Text="100%" Width="46" Height="18" Margin="74,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Fill="White" Stroke="Black" FontSize="13" TextAlignment="Center" StrokeThickness="3"/>
-		<Grid Background="Gray" Width="46" Height="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="74,0,0,0" Panel.ZIndex="-1"/>
-		<Grid Name="Grid_Ammo" Background="SaddleBrown" Width="45" Height="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="120,0,0,0"/>
-		<misc:OutlinedTextBlock x:Name="OTB_Ammo" Text="100%" Width="45" Height="18" Margin="120,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Fill="White" Stroke="Black" FontSize="13" TextAlignment="Center" StrokeThickness="3"/>
-		<Grid Background="Gray" Width="45" Height="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="120,0,0,0" Panel.ZIndex="-1"/>
-		<misc:OutlinedTextBlock x:Name="OTB_ExpNext" Width="71" Height="18" Text="293848" TextAlignment="Center" Fill="LightGray" FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Bottom" StrokeThickness="2" Panel.ZIndex="1"/>
-		<Grid Name="Grid_ExpNext" Background="Blue" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="18" Width="71"/>
-		<Grid Background="Gray" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="18" Width="71" Panel.ZIndex="-1"/>
-		<misc:OutlinedTextBlock x:Name="OTB_ShipName" Text="" HorizontalAlignment="Left" VerticalAlignment="Bottom" Fill="White" Stroke="Black" StrokeThickness="2" TextWrapping="Wrap" Width="74" TextAlignment="Center" FontSize="12"/>
-	</Grid>
+	</Border>
 </UserControl>

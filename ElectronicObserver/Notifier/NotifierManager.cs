@@ -82,11 +82,12 @@ namespace ElectronicObserver.Notifier
 						new Point(parentForm.fBrowser.ClientSize.Width / 2, parentForm.fBrowser.ClientSize.Height / 2)),
 
 					WPFMain parentForm => ToWinformsPoint(parentForm.PointToScreen(
-						new System.Windows.Point(parentForm.ucBrowser.RenderSize.Width / 2,
-							parentForm.ucBrowser.RenderSize.Height / 2))),
+						new System.Windows.Point(parentForm.UserControlBrowser.RenderSize.Width / 2,
+							parentForm.UserControlBrowser.RenderSize.Height / 2))),
 
 					_ => new Point()
-				}; p.Offset(new Point(-form.Width / 2, -form.Height / 2));
+				}; 
+				p.Offset(new Point(-form.Width / 2, -form.Height / 2));
 				p.Offset(form.DialogData.Location);
 
 				form.DialogData.Location = p;

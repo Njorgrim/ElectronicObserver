@@ -24,10 +24,7 @@
 	<Nullable>enable</Nullable>
 	<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup>
+	<PropertyGroup>
     <ApplicationIcon>74eo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
@@ -89,26 +86,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="74eo.ico" />
-    <Content Include="Assets\*.png" />
-    <Content Include="Assets\Battle\*.png" />
-    <Content Include="Assets\Browser\*.png" />
-    <Content Include="Assets\Condition\*.png" />
-    <Content Include="Assets\Equipment\*.png" />
-    <Content Include="Assets\Fairy\*.png" />
-    <Content Include="Assets\Fleet\*.png" />
-    <Content Include="Assets\Form\*.png" />
-    <Content Include="Assets\Headquarters\*.png" />
-    <Content Include="Assets\Item\*.png" />
-    <Content Include="Assets\Level\*.png" />
-    <Content Include="Assets\Parameter\*.png" />
-    <Content Include="Assets\Rarity\*.png" />
-    <Content Include="Assets\Resource\*.png" />
-    <Content Include="Assets\Unused\*.png" />
+    <Content Include="74eo.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\**\*.png">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Other\Information\apilist.txt" />
     <Content Include="Other\Information\todo.txt" />
   </ItemGroup>
-  <ItemGroup>
+	<ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
@@ -129,9 +116,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BrowserLibCore\BrowserLibCore.csproj" />
+    <ProjectReference Include="..\BrowserLib\BrowserLib.csproj" />
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\ThemeVS2012.csproj" />
     <ProjectReference Include="..\DockPanelSuite\WinFormsUI\WinFormsUI.csproj" />
+    <ProjectReference Include="..\ElectronicObserverTheme\ElectronicObserverTheme.csproj" />
     <ProjectReference Include="..\ElectronicObserverTypes\ElectronicObserverTypes.csproj" />
   </ItemGroup>
   <ItemGroup>

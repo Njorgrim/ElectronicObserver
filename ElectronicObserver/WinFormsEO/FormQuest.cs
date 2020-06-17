@@ -25,7 +25,7 @@ namespace ElectronicObserver.WinFormsEO
 		private DataGridViewCellStyle[] CSCategories;
 		private bool IsLoaded = false;
 
-		public FormQuest(FormMain parent)
+		public FormQuest(FormMain? parent = null)
 		{
 			InitializeComponent();
 

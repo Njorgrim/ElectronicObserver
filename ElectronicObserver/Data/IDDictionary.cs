@@ -74,7 +74,7 @@ namespace ElectronicObserver.Data
 
 		public IEnumerable<TData> Values => dict.Values;
 
-		public TData this[int key] => dict.ContainsKey(key) ? dict[key] : null;
+		public TData? this[int key] => dict.ContainsKey(key) ? dict[key] : null;
 
 		public int Count => dict.Count;
 

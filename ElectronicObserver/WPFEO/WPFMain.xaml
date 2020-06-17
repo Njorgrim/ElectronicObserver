@@ -15,7 +15,10 @@
         FontFamily="{materialDesign:MaterialDesignFont}"
         Title="Electronic Observer" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing" Closed="Window_Closed">
 
-	<Grid x:Name="layoutRoot">
+	<Window.Resources>
+	</Window.Resources>
+
+		<Grid x:Name="layoutRoot">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
@@ -74,12 +77,12 @@
 						</MenuItem.Icon>
 					</MenuItem>
 				</MenuItem>
-				<MenuItem Name="MI_View_FleetList" Header="Fleet List">
+				<MenuItem Name="MI_View_FleetList" Header="Fleet List" Click="MI_View_FleetList_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Fleet}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_ShipGroup" Header="Ship Group">
+				<MenuItem Name="MI_View_ShipGroup" Header="Ship Group" Click="MI_View_ShipGroup_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_ShipGroup}"/>
 					</MenuItem.Icon>
@@ -90,17 +93,17 @@
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_View_Dock" Header="Dock">
+				<MenuItem Name="MI_View_Dock" Header="Dock" Click="MI_View_Dock_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Dock}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_Arsenal" Header="Arsenal">
+				<MenuItem Name="MI_View_Arsenal" Header="Arsenal" Click="MI_View_Arsenal_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Arsenal}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_LBAS" Header="LBAS">
+				<MenuItem Name="MI_View_LBAS" Header="LBAS" Click="MI_View_LBAS_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_BaseAirCorps}"/>
 					</MenuItem.Icon>
@@ -111,18 +114,18 @@
 						<Image Source="{StaticResource Icon_Form_Headquarters}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_Quest" Header="Quest">
+				<MenuItem Name="MI_View_Quest" Header="Quest" Click="MI_View_Quest_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Quest}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Name="MI_View_Information" Header="Information">
+				<MenuItem Name="MI_View_Information" Header="Information" Click="MI_View_Information_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Information}"/>
 					</MenuItem.Icon>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Name="MI_View_Compass" Header="Compass">
+				<MenuItem Name="MI_View_Compass" Header="Compass" Click="MI_View_Compass_OnClick">
 					<MenuItem.Icon>
 						<Image Source="{StaticResource Icon_Form_Compass}"/>
 					</MenuItem.Icon>

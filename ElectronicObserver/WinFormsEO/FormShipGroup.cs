@@ -61,7 +61,7 @@ namespace ElectronicObserver.WinFormsEO
         private int _shipNameSortMethod;
 
 
-        public FormShipGroup(FormMain parent)
+        public FormShipGroup(FormMain? parent = null)
         {
             InitializeComponent();
 
@@ -96,7 +96,7 @@ namespace ElectronicObserver.WinFormsEO
 
             CSDefaultRight = new DataGridViewCellStyle(CSDefaultLeft)
             {
-                Alignment = DataGridViewContentAlignment.MiddleRight
+				Alignment = DataGridViewContentAlignment.MiddleRight
             };
 
             CSRedRight = new DataGridViewCellStyle(CSDefaultRight);
@@ -139,9 +139,11 @@ namespace ElectronicObserver.WinFormsEO
 			CSIsLocked.ForeColor =
 			CSIsLocked.SelectionForeColor = Color.FromArgb(0xFF, 0x88, 0x88);
 
+			ShipView.EnableHeadersVisualStyles = false;
 
-            ShipView.DefaultCellStyle = CSDefaultRight;
-            ShipView_Name.DefaultCellStyle = CSDefaultLeft;
+			ShipView.DefaultCellStyle = CSDefaultRight;
+			ShipView.DefaultCellStyle.ForeColor = Color.Black;
+			ShipView_Name.DefaultCellStyle = CSDefaultLeft;
             ShipView_Slot1.DefaultCellStyle = CSDefaultLeft;
             ShipView_Slot2.DefaultCellStyle = CSDefaultLeft;
             ShipView_Slot3.DefaultCellStyle = CSDefaultLeft;
@@ -305,7 +307,8 @@ namespace ElectronicObserver.WinFormsEO
                 Text = KCDatabase.Instance.ShipGroup[id].Name,
                 Anchor = AnchorStyles.Left,
                 Font = ShipView.Font,
-                BackColor = TabInactiveColor,
+				ForeColor = SystemColors.ControlText,
+				BackColor = TabInactiveColor,
                 BorderStyle = BorderStyle.FixedSingle,
                 Padding = new Padding(4, 4, 4, 4),
                 Margin = new Padding(0, 0, 0, 0),

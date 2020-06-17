@@ -1,34 +1,65 @@
-﻿<UserControl x:Class="ElectronicObserver.WPFEO.WPFFleet"
+﻿<UserControl x:Class="ElectronicObserver.WPFEO.Fleet.WPFFleet"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ElectronicObserver.WPFEO"
-			 xmlns:data="clr-namespace:ElectronicObserver.Data"
-			 xmlns:misc="clr-namespace:ElectronicObserver.WPFEO.MiscControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 mc:Ignorable="d" 
+			 xmlns:self="clr-namespace:ElectronicObserver.WPFEO.Fleet"
+			 xmlns:misc="clr-namespace:ElectronicObserver.WPFEO.MiscControls"
 			 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-		     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+			 TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{materialDesign:MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
 
-	<Grid>
-		<StackPanel Orientation="Vertical">
-			<Grid Background="{DynamicResource MaterialDesignShadowBrush}" Height="30" Width="266" HorizontalAlignment="Left" VerticalAlignment="Top">
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-					<Image Name="Img_FleetCondition" Source="{x:Null}" Margin="2,0" Width="20" Height="20"/>
-					<misc:OutlinedTextBlock x:Name="OTB_FleetCondition" Text="" Fill="White" Stroke="Black" StrokeThickness="2" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-					<!--misc:OutlinedTextBlock x:Name="OTB_FleetName" Text="Fleet1" Fill="White" Stroke="Black" StrokeThickness="2" VerticalAlignment="Center" FontSize="15" Margin="5"/-->
-					<Image Name="Img_FleetAirPower" Source="{StaticResource Icon_Equipment_CarrierBasedFighter}" Width="20" Height="20"/>
-					<misc:OutlinedTextBlock x:Name="OTB_FleetAirPower" Text="" Fill="White" Stroke="Black" StrokeThickness="2" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-					<Image Name="Img_FleetLOS" Source="{StaticResource Icon_Equipment_CarrierBasedRecon}" Width="20" Height="20"/>
-					<misc:OutlinedTextBlock x:Name="OTB_FleetLOS" Text="" Fill="White" Stroke="Black" StrokeThickness="2" VerticalAlignment="Center" FontSize="15" Margin="5"/>
-				</StackPanel>
-			</Grid>
-			<StackPanel Name="SP_ShipList" VerticalAlignment="Top" HorizontalAlignment="Left" Height="Auto" Orientation="Vertical"/>
+	<UserControl.CommandBindings>
+		<CommandBinding Command="self:CustomCommands.ChangeBranchWeight" Executed="ChangeBranchWeight" />
+	</UserControl.CommandBindings>
+
+
+	<Grid IsSharedSizeScope="True">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Orientation="Horizontal" Background="{DynamicResource MaterialDesignDarkBackground}">
+			<StackPanel.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Copy" Click="ContextMenuFleet_CopyFleet_Click"/>
+					<MenuItem Header="Copy (deck-builder)" Click="ContextMenuFleet_CopyFleetDeckBuilder_Click" />
+					<MenuItem Header="Copy Ship List (kancolle calc)" Click="ContextMenuFleet_CopyKanmusuList_Click" />
+					<MenuItem Header="Copy Ship List (kancolle-fleetanalysis)" Click="ContextMenuFleet_CopyFleetAnalysis_Click" />
+					<MenuItem Header="Copy Locked Equip (kancolle-fleetanalysis)" Click="ContextMenuFleet_CopyFleetAnalysisLockedEquip_Click" />
+					<MenuItem Header="Copy All Equip (kancolle-fleetanalysis)" Click="ContextMenuFleet_CopyFleetAnalysisAllEquip_Click" />
+					<Separator />
+					<MenuItem Header="AA Defense" Click="ContextMenuFleet_AntiAirDetails_Click" />
+					<MenuItem Header="Save as Image..." Click="ContextMenuFleet_OutputFleetImage_Click" />
+				</ContextMenu>
+			</StackPanel.ContextMenu>
+
+			<misc:OutlinedTextBlock x:Name="FleetName" Text="Fleet Name" >
+				<misc:OutlinedTextBlock.ToolTip>
+					<TextBlock x:Name="FleetNameToolTip" />
+				</misc:OutlinedTextBlock.ToolTip>
+			</misc:OutlinedTextBlock>
+
+			<!-- Source="{StaticResource Icon_Fleet_NotReplenished}" Text="Condition" -->
+			<misc:ImageLabel x:Name="FleetCondition"  />
+			<!-- Source="{StaticResource Icon_Equipment_CarrierBasedFighter}" Text="Air" -->
+			<misc:ImageLabel x:Name="FleetAirPower"  />
+
+			<misc:ImageLabel x:Name="FleetLoS" Source="{StaticResource Icon_Equipment_CarrierBasedRecon}" Text="LoS">
+				<misc:ImageLabel.InputBindings>
+					<MouseBinding Command="self:CustomCommands.ChangeBranchWeight" MouseAction="LeftClick" />
+				</misc:ImageLabel.InputBindings>
+			</misc:ImageLabel>
+
+			<misc:ImageLabel x:Name="FleetAA" Source="{StaticResource Icon_Equipment_HighAngleGun}" Text="AA" />
 		</StackPanel>
+
+		<ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+			<StackPanel Name="SP_ShipList" />
+		</ScrollViewer>
 	</Grid>
 </UserControl>
